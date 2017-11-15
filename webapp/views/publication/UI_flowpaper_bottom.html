@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    jQuery('#documentViewer').bind('onCursorModeChanged',function(e,cursor){
+        jQuery(".flowpaper_tbbutton_cursormode_selected").removeClass("flowpaper_tbbutton_cursormode_selected");
+
+        if(cursor == "StrikeoutCursor"){
+            jQuery(".flowpaper_bttnStrikeout").addClass("flowpaper_tbbutton_cursormode_selected");
+        }else if(cursor == "AnnotationsCursor"){
+            $(".flowpaper_bttnHighlight").addClass("flowpaper_tbbutton_cursormode_selected");
+        }else if(cursor == "NoteCursor"){
+            jQuery(".flowpaper_bttnComment").addClass("flowpaper_tbbutton_cursormode_selected");
+        }else if(cursor == "DrawCursor"){
+            jQuery(".flowpaper_bttnDraw").addClass("flowpaper_tbbutton_cursormode_selected");
+        }
+    });
+
+</script>
+
+<div id="annotationsToolbar" class="flowpaper_toolbarstd_bottom flowpaper_bottomToolbar">
+</div>

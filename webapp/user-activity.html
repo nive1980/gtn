@@ -1,0 +1,27 @@
+<div class="panel-grid-cell dashboard-rt">
+	<div class="container" ng-app="restControllers" ng-init="init()" ng-controller="activityCtlr">
+		<div class="row">
+			<div class="col-sm-12 col-md-12 text-left margin-top20">
+				<div class="wel_tt">
+					<span class="head wel_colo strong">Activities </span>
+					<hr>
+					
+				</div>
+				  <div class="col-md-4">
+				         <div class="panel panel-default">
+				             <div class="panel-heading ">Cases By Status</div>
+                					<div class="col-sm-12 col-md-12 text-right">
+									<a href="javascript:void(0)" gtn-click="/CaseMgt"><i class="fa fa-envelope font_22px" aria-hidden="true"></i>
+                						<span class="badge--darkYellow jsCount bounce" data-type="activity" data-count="messageCountForCases">{{messageCountForCases}}</span>
+                					</a>              			
+				             </div>
+				                <div class="panel-body">
+				                      <nvd3 options="optionsCases" data="dataForCases"></nvd3>
+				                </div>
+				          </div>
+				    </div>	
+			</div>
+		</div>
+		<div class="row margin-top30 clearfix"></div>
+	</div>
+</div>

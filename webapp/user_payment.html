@@ -1,0 +1,291 @@
+
+ <!-- Content area -->
+    <div class="content-area"  ng-init="loadPaymentMethod()" ng-app="restControllers">
+
+
+
+        <!-- PAGE ABOUT -->
+
+
+<div class="panel-grid-cell dashboard-rt">
+    <div class="container">
+        <div class="row">
+
+
+
+            <div class="col-sm-12 col-md-12 text-left margin-top20" >
+                <div class="wel_tt">
+                    <span class="head wel_colo strong">Payment Method </span>
+                    <hr>
+
+
+                    <div class="col-sm-12 col-md-12 text-left" >
+			        	 <!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">
+							<div class="col-xs-12">
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-warning"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+			        </div>
+
+                    <div class="col-sm-12 col-md-12 yello-div  user_information bill_info" >
+
+                        <div class="col-sm-12 col-md-12 yello-div" >
+                        <!-- user form -->
+                        <form name="user-form" id="user-form" method="post" class="af-user">
+							<input type="hidden"
+								name="${_csrf.parameterName}"
+								value="${_csrf.token}"/>
+                        	<div class="col-sm-6 col-md-6 payment_bor">
+                            <span class="bill_head strong">Payment Information</span>
+                            <div id="payment-errors"></div>
+
+                                    <div class=" af-outer af-required clearfix" style="margin-top: 20px">
+                                        <div class="form-group">
+									   		<div class="col-sm-5 enti_tt_alig">
+                                                <label for="Amount1" ng-if="fromReq != 'editPayment' && fromReq != 'addPayment'">Amount:</label>
+                                          	</div>
+
+                                            <div class="col-sm-7">
+												<input type="text" name="amount" size="10" ng-model="billingamount" ng-if="fromReq != 'editPayment' && fromReq != 'addPayment'"
+													class="form-control placeholder" id="amount" readonly />
+							 					<!--<label id="amount" for="amount" name="amount">{{billingamount}} </label>      -->
+                                            </div>
+                                      </div>
+                                    </div>
+
+
+
+
+                                    <div class=" af-outer af-required clearfix" >
+                                        <div class="form-group">
+
+											<div class="col-sm-5 enti_tt_alig">
+                                                <label for="billingname">Billing Name:</label>
+                                          </div>
+                                                <div class="col-sm-7">
+                                                <input
+                                                    type="text" name="billingname" ng-model="userBilling.firstName" id="billingname" placeholder="Full name as it appears on card" value="" size="30"
+                                                    data-toggle="tooltip" title="Billing name is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+                                      </div>
+                                    </div>
+
+
+
+                                    <div class=" af-outer af-required clearfix">
+                                        <div class="form-group">
+                                                <div class="col-sm-5 enti_tt_alig">
+                                                <label for="card_num">Credit Card No.:</label>
+                                                </div>
+                                                <div class="col-sm-7">
+                                                <input
+                                                    type="text" name="cc" id="card_num" ng-model="userBilling.cardNo" placeholder="Credit Card Number" value="" size="30"  onchange="SetDefault($(this).val());"
+                                                    data-toggle="tooltip" title="Credit card number is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" af-outer af-required clearfix card_exp">
+                                        <div class="form-group">
+                                                <div class="col-sm-5 enti_tt_alig">
+                                                <label for="phonenum">Expiration Date(MM/YY): </label>
+                                                </div>
+                                                <div class="col-sm-7 ">
+                                                    <div class="col-sm-3 no_pad">
+
+                                                <input
+                                                    type="text" name="expiry" id="card_expiry" ng-model="userBilling.exp_date" placeholder="expiry" value="" size="30"
+                                                    data-toggle="tooltip" title="Expiry is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+
+                                                    <div class="col-sm-4 no_pad">
+                                                        <input
+                                                    type="text" name="cvv" id="card_cvv" ng-model="userBilling.cvv"  placeholder="CVV" value="" size="30"
+                                                    data-toggle="tooltip" title="CVV number is required"
+                                                    class="form-control placeholder"/>
+                                                    </div>
+
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-11 col-md-12 margin-20b text-right " >
+                                    <img src="img/pay_cards_img.png" >
+                                    </div>
+
+                                    <div class="col-sm-11 col-md-12 margin-20b text-right no_pad" >
+                                    	<div class="col-sm-6 text-left">
+                                    	<span class="bill_head strong">Billing Address</span>
+                                        </div>
+                                        <div class="col-sm-6 enti_tt_alig">
+                                    		<label>
+                                    			<input type="checkbox"  ng-disabled="is_disabled" id="same_as_primary" name ="same_as_primary" ng-model="same_as_primary">
+                                    				Same as Primary
+                                    		</label>
+                                        </div>
+                                    </div>
+
+                                    <div class=" af-outer af-required clearfix">
+                                        <div class="form-group ">
+                                            <div class="col-sm-5 enti_tt_alig">
+                                                <label for="add_1">Address 1:</label>
+                                          </div>
+                                                <div class="col-sm-7">
+                                                <input
+                                                    type="text" name="add_1" ng-model="userBilling.add_1" id="add_1" placeholder="Address 1" value="" size="30"
+                                                    data-toggle="tooltip" title="Address 1 is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+                                      </div>
+                                    </div>
+
+                                    <div class=" af-outer af-required clearfix">
+                                        <div class="form-group ">
+                                            <div class="col-sm-5 enti_tt_alig">
+                                                <label for="add_2">Address 2:</label>
+                                          </div>
+                                                <div class="col-sm-7">
+                                                <input
+                                                    type="text" name="add_2" ng-model="userBilling.add_2" id="add_2" placeholder="Address 2" value="" size="30"
+                                                    data-toggle="tooltip" title="Address 2 is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+                                      </div>
+                                    </div>
+                                    <div class=" af-outer af-required clearfix">
+                                        <div class="form-group ">
+                                            <div class="col-sm-5 enti_tt_alig">
+                                                <label for="card_city">City:</label>
+                                          </div>
+                                                <div class="col-sm-7">
+                                                <input
+                                                    type="text" name="card_city" ng-model ="userBilling.city" id="card_city" placeholder="City" value="" size="30"
+                                                    data-toggle="tooltip" title="City is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+                                      </div>
+                                    </div>
+                                    <div class=" af-outer af-required clearfix">
+                                        <div class="form-group ">
+                                            <div class="col-sm-5 enti_tt_alig">
+                                                <label for="card_state">State:</label>
+                                          </div>
+                                                <div class="col-sm-5">
+                                                <input
+                                                    type="text" name="card_state" ng-model="userBilling.state" id="card_state" placeholder="State" value="" size="30"
+                                                    data-toggle="tooltip" title="State is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+                                      </div>
+                                    </div>
+                                    <div class=" af-outer af-required clearfix">
+                                        <div class="form-group ">
+                                            <div class="col-sm-5 enti_tt_alig">
+                                                <label for="card_zip">Zip:</label>
+                                          </div>
+                                                <div class="col-sm-4">
+                                                <input
+                                                    type="text" name="card_zip" ng-model="userBilling.zipcode" id="card_zip" placeholder="Zip" value="" size="30"
+                                                    data-toggle="tooltip" title="Last name is required"
+                                                    class="form-control placeholder"/>
+                                            </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                                <div class="col-sm-5 enti_tt_alig">
+                                                <label for="card_country">Country: </label>
+                                                </div>
+                                                <div class="col-sm-7 ">
+                                                        <div class="form-group selectpicker-wrapper">
+                                                            <select class="ng-view form-control" name="country" ng-model="userBilling.country_code" id="card_country" data-live-search="false" data-width="100%" data-toggle="tooltip">
+                                                            	<option value="">Select Country</option>
+                                                            	<option ng-repeat="item in countries track by item.countryCode" value="{{item.countryCode}}">
+																    {{item.countryName}}
+															    </option>
+                                                            </select>
+                                                        </div>
+                                                </div>
+                                      </div>
+
+
+
+				                    <div class="col-sm-11 col-md-12 margin-20b text-right" >
+				                        <div class=" margin-20tb text-right" >
+				                          <button type="button" name="Submit" value="Submit"  ng-click="stripeCallback()" id="submitBtn	" class="btn-license">Submit</button>
+				                          <button type="button" ng-if="fromReq != 'editPayment' && fromReq != 'addPayment'" name="Back" value="Back" gtn-click="/subscriptionDetails" class="btn-license">Back</button>
+				                          <button type="button" ng-if="fromReq == 'editPayment' || fromReq == 'addPayment'" name="Back" value="Back" gtn-click="/billing" class="btn-license">Back</button>
+				                        </div>
+				                    </div>
+
+                        <!-- /User form Left part -->
+                        </div>
+
+                            <div class="col-sm-6 col-md-6">
+                                    	<div class="col-sm-12 col-md-12 no_pad">
+                                        <span class="bill_head strong">Update your Billing</span>
+                                        </div>
+
+                                        <p class="col-sm-6 col-md-6">All Information submitted through this form is sent through a 256 bit SSL encryption, ensuring security and  privacy.</p>
+                                </div>
+
+                        </form>
+                        <!-- /user form -->
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top30 clearfix">
+    </div>
+</div>
+
+
+            </div>
+</div>
+        </section><!-- -->
+        <!-- /PAGE ABOUT -->
+
+
+
+
+    </div>
+    <!-- /Content area -->

@@ -1,0 +1,23 @@
+<div ng-init="initShipmentValidationPopup()" ng-controller="lsResultPopCtrl">
+	<div class="modal-dialog modal-lg">	
+		<div class="modal-content">
+			<div class="modal-header">
+		            <h3 class="modal-title" id="modal-title">Shipment Validation</h3>
+		        </div>
+		        <div class="modal-body" id="modal-body">
+		            
+		            <div class="row" ng-repeat="validation in validations track by $index">
+		            	<div class="col-xs-12">
+		            		{{ validation }}
+		            	</div>
+		            </div>
+		            
+		        </div>
+		        <div class="modal-footer">
+		            <!-- <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button> -->
+		            <button class="btn btn-warning" type="button" ng-click="closePopup()">Close</button>
+		        </div>
+		
+		</div>
+	</div>
+</div>	

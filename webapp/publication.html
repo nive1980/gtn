@@ -1,0 +1,123 @@
+
+
+                <div ng-app="restControllers" ng-controller="PublicationCtrl" ng-init="loadPublications()" class="panel-grid-cell dashboard-response">
+
+            <div class="row">
+
+                   <div class="col-sm-12 col-md-12 text-left wel_div" >
+                   <div class="col-sm-6 col-md-6 wel_tt wel_colo margin-top10">
+                   	<span class="head strong">Publications </span>
+                   </div>
+
+                   <hr>
+
+
+                   <div class="container-fluid no_pad">
+                    	<div class="col-sm-12 col-md-12 row response_icon">
+                       </div>
+
+                       <div class="row">
+                       <div class="col-sm-3 col-md-3 clearfix">
+    	                       <div class="pub_icon">
+        	                        &nbsp;
+            	               </div>
+                          </div>
+
+                       <div class="col-sm-6 col-md-6 response_icon no_pad text-center">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control empty" ng-model="pdfDescription" id="iconified" placeholder="&#xF002;">
+                                <span class="input-group-addon">
+                                 <button type="button" name="Submit" value="Submit"  class="wid_100 btn-blue margin-10tb strong" ng-click="searchPdfs()" id="submitBtn">Submit</button> </span>
+                            </div>
+                       </div>
+
+                       </div>
+
+                       <div class="clearfix margin-20tb"></div>
+
+                       <div ng-repeat="publication in publicationsData" class="clearfix margin-30b ">
+			<hr>
+	                       <div class="col-sm-3 col-md-3 clearfix">
+    	                       <div class="pub_icon">
+        	                        <a href="javascript:void(0)"><span class="pub_big pub_icn_img flt_l" ></span></a>
+            	               </div>
+                          </div>
+
+                          <div class="col-sm-9 col-md-9 pub_bor">
+    	                       <div class="pub_detail">
+                                   <div class="head">Title : {{publication.title}}</div>
+                                   <div class="head">Price : {{publication.price}}</div>
+
+                                   <div class="head">Description</div>
+                                   <p>{{publication.description}}</p>
+
+<a ng-if="publication.unlimitedAccess==true || publication.hasBeenIndividuallyPurchased==true"
+ ng-click="openPdf(publication.pubUrl)" class="wid_100 btn-blue margin-10tb strong">Open</a> &nbsp;<a ng-if="publication.annotation==true || publication.hasBeenIndividuallyPurchased==true" ng-click="annotatePdf(publication.pubUrl)"  class="wid_100 btn-blue margin-10tb strong">Annotate</a>
+&nbsp;<a ng-if="publication.buyNow=='true'" ng-click="buyNow(publication.pubUrl)"  class="wid_100 btn-blue margin-10tb strong">Buy Now</a>
+<a ng-if="publication.hasBeenMarkedForPurchase=='true'" ng-click=""  class="wid_100 btn-blue margin-10tb strong">Payment pending</a>
+                               </div>
+                          </div>
+                          </div>
+
+                       </div>
+
+
+                        	</div>
+
+
+
+                   </div>
+                </div>
+            </div>
+            </div>
+                <div class="row margin-top30 clearfix">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- /Content area -->
+
+    <!-- FOOTER -->
+<input id="registrationCityValue" type="hidden" value= "Select Your City"/>
+
+
+
+
+<!--  <script>
+    window.pageParams = {
+        'locale': 'en',
+        'universalCode': 'GTM-WRBD5L',
+        'yandexMetrikaAccount': '18776650',
+    };
+    window.strings = {
+        EN: {
+            goto: 'Go to the English version of the site?',
+            no: 'Close',
+            yes: 'Yes',
+            cookie: 'This website uses cookies: by&nbsp;continuing to&nbsp;browse this site you accept this <a href="privacy/">policy</a>',
+            url: '/'
+        }
+    }
+</script>-->
+
+<script src="js/web-grid.js"></script>
+
+<script>
+	var isSafari = navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') == -1;
+	if(isSafari) {
+		document.addEventListener("DOMContentLoaded", function () {
+			if ('classList' in document.createElement('div') &&
+					'querySelector' in document &&
+					'addEventListener' in window && Array.prototype.forEach) {
+				document.documentElement.classList.add('mdl-js');
+				componentHandler.upgradeAllRegistered();
+			} else {
+				componentHandler.upgradeElement = function() {};
+				componentHandler.register = function() {};
+			}
+			WG.initAllRegistered();
+			window.svg4everybody();
+		})
+	}
+</script>

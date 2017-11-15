@@ -1,0 +1,212 @@
+<div ng-init="parentInit('listItemsCartons');initAddCarton()" ng-controller="itemCartonController" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		   <div ng-include src="'views/export/menu.html'"></div>
+			   
+		   <div class="hidden_fields">
+				<input type="hidden" name="cartonId" ng-model="carton.id" />
+				<input type="hidden" name="shipmentId" ng-model="carton.shipmentId" />
+			</div>
+			   
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad response_info yello-div">
+            	      	
+            	 <!-- user form -->
+           	                    <form name="cartonForm" class="af-user row">
+										<div class="col-sm-12 col-md-12 clearfix " >
+					                        <h4 class="margin10-top strong">Packaging</h4>
+				                        </div>
+				                        <div class="col-sm-6 col-md-6">
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                            <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="pay_term">Number of Packages:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7">
+				                                            <input
+				                                                type="number" step="any" name="pay_term" id="pay_term" placeholder="" value="" size="30"
+				                                                data-toggle="tooltip" title="Number of Packages is required"
+				                                                class="form-control placeholder" ng-model="carton.packageNo" required/>                            
+				                                             </div>
+				                                    </div>
+				                                </div>
+				                                            
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                        <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="inco_term">Carton Number:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7">
+				                                            <input
+				                                                type="text" name="inco_term" id="inco_term" placeholder="" value="" size="30"
+				                                                data-toggle="tooltip" title="Carton Number is required"
+				                                                class="form-control placeholder" ng-model="carton.cartonNo" readonly="true"/>                            
+				                                             </div>
+				                                     </div>
+				                                </div>
+				                                
+				                        </div>
+				                                                    
+				                        <div class="col-sm-6 col-md-6 ">
+				                                        
+				                            <div class=" af-outer af-required clearfix">
+				                                <div class="form-group">                
+				                                        <div class="col-sm-5 enti_tt_alig">
+				                                        <label for="mode_trans">Hazmat: </label> 
+				                                        </div>
+				                                        <div class="col-sm-7 ">                                                    
+				                                        <div class="form-group selectpicker-wrapper">
+				                                            <select class="form-control input-shipped" ng-model="carton.haszmat" id="export_city" data-live-search="false" data-width="100%"
+				                                                data-toggle="tooltip" title="Day">
+				                                                <option value="">Select</option>
+				                                                <option value="Y">Yes</option>
+				                                                <option value="N">No</option>
+				                                            </select>
+				                                        </div>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                            
+				                        <!-- /User form Left part -->
+				                        </div>
+				
+				                        <div class="col-sm-12 col-md-12 clearfix " >
+					                        <h4 class="margin10-top strong">Dimensions</h4>
+				                        </div>
+				
+				                        <div class="col-sm-6 col-md-6">
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                            <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="fc_paid">Dimension UOM:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7 ">                                                    
+				                                        <div class="form-group selectpicker-wrapper">
+				                                            <select class="form-control input-shipped" name="dimesion_uom" ng-model="carton.dimUom" id="dimesion_uom" data-live-search="false" data-width="100%"
+				                                                data-toggle="tooltip" title="Day" required>
+				                                                <option value="">Select</option>
+				                                                <option value="IN">Inches</option>
+				                                                <option value="CM">Centimeters</option>
+				                                                <option value="MT">Meters</option>
+				                                            </select>
+				                                        </div>
+				                                    </div>
+				                                    </div>
+				                                </div>
+				                                            
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                        <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="fv_paid">Length:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7">
+				                                            <input
+				                                                type="number" step="any" name="carton_length" id="cd_paid" placeholder="" value="" size="30"
+				                                                data-toggle="tooltip" title="Length is required"
+				                                                class="form-control placeholder" ng-model="carton.length" required/>                            
+				                                             </div>
+				                                     </div>
+				                                </div> 
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                        <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="cd_paid">Width:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7">
+				                                            <input
+				                                                type="number" step="any" name="carton_width" id="cd_paid" placeholder="" value="" size="30"
+				                                                data-toggle="tooltip" title="Width is required"
+				                                                class="form-control placeholder" ng-model="carton.width" required/>                            
+				                                             </div>
+				                                     </div>
+				                                </div>
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                        <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="cd_paid">Height:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7">
+				                                            <input
+				                                                type="number" step="any" name="carton_height" id="cd_paid" placeholder="" value="" size="30"
+				                                                data-toggle="tooltip" title="Height is required"
+				                                                class="form-control placeholder" ng-model="carton.height" required/>                            
+				                                             </div>
+				                                     </div>
+				                                </div>                                
+				                        </div>
+				                                                    
+				                        <div class="col-sm-6 col-md-6">
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                            <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="fc_paid">Weight UOM:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7 ">                                                    
+				                                        <div class="form-group selectpicker-wrapper">
+				                                            <select class="form-control input-shipped" name="weight_uom" ng-model="carton.weightUom" id="weight_uom" data-live-search="false" data-width="100%"
+				                                                data-toggle="tooltip" title="Day" required>
+				                                                <option value="">Select</option>
+				                                                <option value="KG">Kilogram </option>
+				                                                <option value="LB">Pound</option>
+				                                            </select>
+				                                        </div>
+				                                    </div>
+				                                    </div>
+				                                </div>
+				                                            
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                        <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="fv_paid">Gross Weight:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7">
+				                                            <input
+				                                                type="number" step="any" name="fv_paid" id="fv_paid" placeholder="" value="" size="30"
+				                                                data-toggle="tooltip" title="Gross weight is required"
+				                                                class="form-control placeholder" ng-model="carton.grossWeight" required/>                            
+				                                          </div>
+				                                     </div>
+				                                </div> 
+				                                <div class=" af-outer af-required clearfix">
+				                                    <div class="form-group">
+				                                        <div class="col-sm-5 enti_tt_alig">
+				                                            <label for="cd_paid">Net Weight:</label>&nbsp;<span class="required">*</span>
+				                                            </div>
+				                                            <div class="col-sm-7">
+				                                            <input
+				                                                type="number" step="any" name="cd_paid" id="cd_paid" placeholder="" value="" size="30"
+				                                                data-toggle="tooltip" title="Net weight is required"
+				                                                class="form-control placeholder" ng-model="carton.netWeight" required/>                            
+				                                             </div>
+				                                     </div>
+				                                </div>
+				                        </div>
+				
+				
+										<div class="col-sm-12 col-md-12 margin-20tb text-right clearfix">
+											<a href="javascript:void(0);" ng-click="saveCarton('continue')" class="btn btn-entity  strong">add carton  <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+										</div>
+				
+				                        <div class="col-sm-6 col-md-6 margin-10tb clearfix" >
+				                            <div>				                            	
+				                            	<input type="button" name="Next" value="Next" ng-click="saveCarton('continue')" id=" " class="btn-license">
+				                                <input type="submit" name="Save Shipment" value="Save shipment" ng-click="saveCarton('save')" id="btn-license" class="btn-license">
+				                                <input type="button" name="Cancel" value="Cancel" ng-click="cancelShipment(shipment.id, 'listItemCartons')" id=" " class="btn-black">
+				                           	
+				                            </div>
+				                        </div>                             
+                                </form>
+                   <!-- /user form -->
+            	
+            </div>
+       			   
+			   <!-- <div>
+			   		<div ng-view></div>
+			   </div> -->
+			                        
+         </div>         
+       </div>
+     </div>
+</div>

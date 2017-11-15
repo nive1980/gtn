@@ -1,0 +1,100 @@
+<div ng-init="scheduledJobSearchResultInit()" ng-controller="adminController" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+				
+					<div class="col-sm-12 col-md-12 blue-div" >
+		                <div class="" >
+		                     <h1>Result Scheduled Job</h1>
+		                </div>
+		                <hr>
+		            </div>
+		        <form class="af-entity">	
+		            
+		            <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button type="button" class="btn btn-black" gtn-click="/createSearchScheduledJob">Back</button>
+		            	</div>
+		            </div>
+		            
+		            <div class="row">
+		            	<div class="col-xs-12">
+		            	
+		            		<mdt-table animate-sort-icon="true" ripple-effect="true"
+		            				selectable-rows = "false"
+		            				table-card="{visible: true, title: 'Scheduled Jobs', columnSelector: true}"	
+							        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+							        mdt-row="{
+							        	 data: scheduledJobsList,
+							            'table-row-id-key': 'jobCode',
+							            'column-keys': jobSchedularColumns
+							        }">
+						        <mdt-header-row>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Job Code"><span>Job Code</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Job Name"><span>Job Name</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Cron Expression"><span>Cron Expression</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Job Description"><span>Job Description</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Created On"><span>Created On</span></mdt-column>
+						        </mdt-header-row>
+						        
+						        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+						        <mdt-custom-cell column-key="createdOn">
+						        	{{ value | date:'dd/MM/yyyy' }}
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="jobCode">
+						        	<a href="javascript:void(0);" ng-click="clientScope.editScheduledJob(value)" style="text-decoration: underline">{{ value }}</a>
+						        </mdt-custom-cell>
+        
+					    </mdt-table>
+		            	
+		            		<!-- <table class="table table-striped table-bordered table-hover table-condensed">
+								<thead>
+									<tr>
+										<th >Sr.</th>
+										<th >Job Code</th>
+										<th >Job Name</th>
+										<th >Cron Expression</th>
+										<th >Job Description</th>
+										<th >Created On</th>
+										<th >Delete</th>
+									</tr>
+								</thead>		  
+								
+								<tbody>
+									<tr ng-repeat="job in jobList track by $index">
+										<td>{{ $index + 1 }}</td>
+										<td><a ng-click="editScheduledJob(job.jobCode)" style="color: blue">{{ job.jobCode }}</a></td>
+										<td>{{ job.jobName }}</td>
+										<td>{{ job.cron }}</td>
+										<td>{{ job.jobDesc }}</td>
+										<td>{{ job.createdOn | date:'dd/MM/yyyy' }}</td>
+										<td><a href="javascript:void(0)" ng-click='deleteSbuConfig(sbuConfig.id)'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+									</tr>								
+								</tbody>          		
+		            		</table> -->
+		            	</div>
+		            </div>
+		           
+		            
+		            <div class="row btn-row-bottom">
+		            	<div class="col-xs-6">
+		            		<button type="button" class="btn btn-black" gtn-click="/createSearchScheduledJob">Back</button>
+		            	</div>
+		            </div>
+            </form>
+         </div>
+       </div>
+     </div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '15%'}, {index: 2, width: '20%'}, {index: 3, width: '15%'}, {index: 4, width: '40%'}, 
+		                {index: 5, width: '10%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>

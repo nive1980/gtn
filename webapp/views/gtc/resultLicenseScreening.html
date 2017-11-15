@@ -1,0 +1,126 @@
+<div ng-init="init()" ng-controller="licenseScreeningResultCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>License Screening Results</h1>
+                </div>
+                <hr>
+            </div>
+            
+            <div class="col-sm-12 col-md-12 margin-10tb">
+            	<table class="shop_table odd_col_bold">
+            		<tbody>
+            			<tr>
+            				<td>Country</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].expCtry }}</td>
+            				<td>Category</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].category }}</td>
+            				<td>License Exceptions</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].licExcep }}</td>
+            				<td>LVS Value Given</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].lvsLimit }}</td>
+            			</tr>
+            			<tr>
+            				<td>Sales Order No</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].salesOrderNo }}</td>
+            				<td>Prod No</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].prodNo }}</td>
+            				<td>Sub Prod No.</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].subProd }}</td>
+            				<td>Ctrl Country</td>
+            				<td>{{ licenseScreeningResponse.eldsHostedServiceView[0].ctrlCtry }}</td>
+            			</tr>
+            		</tbody>
+            	</table>
+            </div>
+            
+            <div class="col-sm-12 col-md-12 margin-10tb well" style="width: 97%; margin-left: 15px;">
+            	1. A license is <span ng-if="licenseScreeningResponse.eldsHostedServiceView[0].licReq == 'Yes'" class="impText"> Required </span> <span ng-if="licenseScreeningResponse.eldsHostedServiceView[0].licReq == 'No'" class="impText"> Not Required </span> to export the  item <span class="impText bold-text">{{ licenseScreeningResponse.eldsHostedServiceView[0].category }}</span> from <span class="impText bold-text">{{ licenseScreeningResponse.eldsHostedServiceView[0].ctrlCtry }}</span> to <span class="impText bold-text">{{ licenseScreeningResponse.eldsHostedServiceView[0].expCtry }}</span>.
+            	<BR />
+            	2. Reporting is <span ng-if="licenseScreeningResponse.eldsHostedServiceView[0].reportReq == 'Yes'" class="impText"> Required </span> <span ng-if="licenseScreeningResponse.eldsHostedServiceView[0].reportReq == 'No'" class="impText"> Not Required </span> to export the item <span class="impText bold-text">{{ licenseScreeningResponse.eldsHostedServiceView[0].category }}</span> from <span class="impText bold-text">{{ licenseScreeningResponse.eldsHostedServiceView[0].ctrlCtry }}</span> to <span class="impText bold-text">{{ licenseScreeningResponse.eldsHostedServiceView[0].expCtry }}</span>.
+            	<BR />
+            </div>
+            
+            <div class="">
+	            <label class="col-sm-1 col-md-1 control-label select-label">
+	            	Country : 
+	            </label>
+	            
+	            <div class="col-sm-3 col-md-3">
+	            	  <select class="selectpicker input-entity" ng-change="screenLicenseCtry()" ng-model="countryVal" 
+					                    		data-live-search="false" data-width="100%" data-toggle="tooltip">
+           					<option>Select</option>
+           					<option value="IN">India</option>
+           					<option value="CA">Canada</option>
+           					<option value="AF">Afghanistan</option>
+           					<option value="PK">Pakistan</option>
+           					<option value="CN">CHINA</option>
+           					<option value="EG">EGYPT</option>
+           					<option value="IR">Iran</option>
+           					<option value="IQ">Iraq</option>
+           			  </select>
+	            </div>			  
+            </div>
+            
+            <div class="col-sm-12 col-md-12 margin-10tb">
+            	
+            	<table class="shop_table" id="entity-table">
+                       <thead>
+                           <tr>
+                               <th class="product-num">Code</th>
+                               <th class="product-thumbnail">License Agency</th>
+                               <th class="product-thumbnail">Exceptions Used</th>
+                               <th class="product-name">License Required</th>
+                               <th class="product-price" style="width: 40%">Other Excep. Avail.</th>
+                               <th class="product-quantity">Report Required</th>
+                               <th class="product-quantity">Sub ECCN No</th>                            
+                               <th class="product-subtotal">Reason for Control</th>      
+                           </tr>
+                       </thead>                        
+                       <tbody>
+                       		
+                       		<tr ng-repeat-start="result in licenseScreeningResponse.eldsHostedServiceView[0].eldsSummaryViews track by $index">
+                       			<td>{{ $index + 1 }}</td>
+                       			<td>{{ result.licAgency }}</td>
+                       			<td>{{ result.licExcepUsed }}</td>
+                       			<td>{{ result.licRquire }}</td>
+                       			<td>{{ result.exceptions }}</td>
+                       			<td>{{ result.reportReq }}</td>
+                       			<td>{{ result.subEccnNo }}</td>
+                       			<td>{{ result.reasonForControl }}</td>
+                       		</tr>
+                       		
+                       		<tr ng-repeat-end>
+                       			<td colspan="7">
+                       				<span class="italic-text bold-text">Description</span> : <BR />
+                       				<span class="italic-text">{{ result.description }}</span>
+                       			</td>
+                       		</tr>
+                       
+                       </tbody>
+                 </table>
+            </div>
+            
+            <div class="col-sm-12 col-md-12 margin-20b text-center" >
+                <input type="button" name="screen" value="RE SCREEN" gtn-click="/createLicenseScreening" class="btn btn-entity">			                    
+            </div>  
+		                
+         </div>
+       </div>
+     </div>
+</div>
+<style>
+	.odd_col_bold tbody tr td{
+		width: 12.5%;
+	}
+	.impText{
+		color: #990033;
+	}
+	.well{
+		background-color: #FFF;
+	}
+</style>

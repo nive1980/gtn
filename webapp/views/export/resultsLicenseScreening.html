@@ -1,0 +1,131 @@
+<div ng-init="initLsPopup()" ng-controller="exportOperationCtlr">
+	<div class="modal-dialog modal-lg">	
+		<div class="modal-content {{gtnClass}}">
+			<div class="modal-header">
+		            <h3 class="modal-title" id="modal-title">License Screening</h3>
+		        </div>
+		        <div class="modal-body" id="modal-body">
+		        	
+		        	<mdt-table animate-sort-icon="true" ripple-effect="true"
+			            				selectable-rows = "false"
+			            				table-card="{visible: true, title: 'License Screening', columnSelector: true}"	
+								        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}">
+							   <mdt-header-row>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Item No"><span>Item No</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Part No"><span>Part No</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="License Required"><span>License Required</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Status"><span>Status</span></mdt-column>
+						            
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Report Required"><span>Report Required</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="License No"><span>License No</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="License Exp. Date"><span>License Exp. Date</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Screened On"><span>Screened On</span></mdt-column>
+						            
+						        </mdt-header-row>
+									    
+									    
+							    <mdt-row ng-repeat="item in licenseItems">
+							    							    
+									    <mdt-cell><span>{{ item.itemNo }}</span></mdt-cell>
+									    <mdt-cell><span>{{ item.partNo }}</span></mdt-cell>
+									    <mdt-cell><span>{{ item.licReq | liceReqFilter }}</span></mdt-cell>
+									    <mdt-cell><span> 
+										    		<span ng-if="item.licReq == 'N'">
+													    <i class="fa fa-check-circle green" uib-tooltip="License is not required." aria-hidden="true"></i>
+													</span>
+													<span ng-if="item.licReq == 'P'">
+													    <i class="fa fa-check-circle green" uib-tooltip="License provided." aria-hidden="true"></i>
+													</span>
+													
+													<span ng-if="item.licReq == 'Y'">
+													    <i class="fa fa-exclamation-circle red" uib-tooltip="License is required." aria-hidden="true"></i>
+													</span>
+													<span ng-if="item.licReq == 'E'">
+													    <i class="fa fa-exclamation-circle red" uib-tooltip="License is expired." aria-hidden="true"></i>
+													</span>
+													
+													<span ng-if="item.licReq == 'NA'">
+													    <i class="fa fa-exclamation-triangle" uib-tooltip="Invalid ECCN number." aria-hidden="true"></i>
+													</span>
+									    		</span>
+									    	</mdt-cell>
+									    <mdt-cell><span>{{ item.repReq }}</span></mdt-cell>
+									    <mdt-cell><span>{{ item.licenseNo }}</span></mdt-cell>
+									    <mdt-cell><span>{{ item.licenseExpDate | date:'dd/MM/yyyy' }}</span></mdt-cell>
+									    <mdt-cell><span>{{ item.screenedOn | date:'MM/dd/yyyy' }}</span></mdt-cell>
+									    
+							    </mdt-row>
+					  </mdt-table>
+		        
+		        
+		           <!--  <table class="table table-bordered table-hover table-condensed" style="font-size: 12px">
+		            	
+		            	<thead>
+		            		<tr style="background-color: #f9f9f9">
+		            			<th>Sr</th>
+		            			<th>Item No</th>
+		            			<th>Screening Type</th>
+		            			<th>License Required</th>
+		            			<th>Status</th>   
+		            			<th>Report Required</th>      
+		            			<th>License No</th>
+		            			<th>License Exp. Date</th>   			
+		            			<th>Screened On</th>
+		            		</tr>
+		            	</thead>
+		            	
+		            	<tbody>
+		            		
+		            		<tr ng-repeat="item in licenseItems track by $index">
+		            			<td>{{$index + 1}}</td>
+		            			<td>{{item.itemNo}}</td>
+		            			<td>{{item.screenType}}</td>
+		            			<td>{{item.licReq | liceReqFilter}}</td>
+		            			<td>
+		            				<span ng-if="item.licReq == 'N'">
+									    <i class="fa fa-check-circle green" uib-tooltip="License is not required." aria-hidden="true"></i>
+									</span>
+									<span ng-if="item.licReq == 'P'">
+									    <i class="fa fa-check-circle green" uib-tooltip="License provided." aria-hidden="true"></i>
+									</span>
+									
+									<span ng-if="item.licReq == 'Y'">
+									    <i class="fa fa-exclamation-circle red" uib-tooltip="License is required." aria-hidden="true"></i>
+									</span>
+									<span ng-if="item.licReq == 'E'">
+									    <i class="fa fa-exclamation-circle red" uib-tooltip="License is expired." aria-hidden="true"></i>
+									</span>
+									
+									<span ng-if="item.licReq == 'NA'">
+									    <i class="fa fa-exclamation-triangle" uib-tooltip="Invalid ECCN number." aria-hidden="true"></i>
+									</span>
+		            			</td>
+		            			<td>{{item.repReq}}</td>
+		            			<td>{{item.licenseNo}}</td>
+		            			<td>{{item.licenseExpDate | date:'dd/MM/yyyy'}}</td>
+		            			<td>{{item.screenedOn | date:'MM/dd/yyyy'}}</td>
+		            		</tr>
+		            	
+		            	</tbody>
+		            	
+		            
+		            </table>  -->
+		        </div>
+		        <div class="modal-footer">
+		            <!-- <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button> -->
+		            <button class="btn btn-license" type="button" ng-click="cancel()">Close</button>
+		        </div>
+		
+		</div>
+	</div>
+</div>	
+
+<script>
+	$(document).ready(function(){
+		var widthArr = [{index: 1, width: '8%'}, {index: 2, width: '12%'}, {index: 3, width: '12%'}, {index: 4, width: '12%'}, 
+		                {index: 5, width: '12%'}, {index: 6, width: '12%'}, {index: 7, width: '12%'}, {index: 8, width: '12%'},
+		                {index: 9, width: '8%'}];
+		
+		adjustColumns(widthArr);		
+	});
+</script>

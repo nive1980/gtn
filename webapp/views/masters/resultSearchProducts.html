@@ -1,0 +1,175 @@
+<div ng-init="initResultProducts()" ng-controller="masterCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>Result Products</h1>
+                </div>
+                <hr>
+				<!-- Contact login form -->
+				<!--<form id="registration-form" name="registration-form" class="registration-form" action="#" method="post"> -->
+		        <form name="entity-form" id="entity-form" class="af-entity" novalidate>
+			   		
+			   		<!-- <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editExporter(exporter.expCode, 'New')" class="btn btn-license">Add Exporter</button>
+		            		<button gtn-click="/createSearchExporter" class="btn btn-license">New Search</button>		            		
+		            	</div>
+		            </div> -->
+		            
+		            <!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">			
+							<div class="col-xs-12">				
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						      
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+						      
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+		            
+		            
+		            <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editProduct(product.partNo, 'New')" class="btn btn-license">Add Product</button>
+		            		<button gtn-click="/createSearchProduct" class="btn btn-license">New Search</button>		            		
+		            	</div>
+		            	
+		            	<!-- <div class="col-xs-6 records-container">
+		            		Total records : <span class="bold-text">{{ products.length }}</span>
+		            	</div> -->
+		            </div>
+		            
+		            <div class="row">
+		            	<div class="col-xs-12">		            	
+ 		            		<mdt-table animate-sort-icon="true" ripple-effect="true"
+		            				selectable-rows = "false"
+		            				table-card="{visible: true, title: 'Products', columnSelector: true}"	
+							        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+							        mdt-row-paginator="getProductList(page, pageSize, options)"
+							        mdt-row-paginator-error-message="Error happened during loading products."
+							        mdt-row="{
+							            'table-row-id-key': 'partNo',
+							            'column-keys': productColumns
+							        }">
+						        <mdt-header-row>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Product Code"><span>Product Code</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Export Class"><span>Export Class</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Import Class"><span>Import Class</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Model No"><span>Model No</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Hazardous"><span>Hazmat</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="SBU"><span>SBU</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="SKU"><span>SKU No</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Created Date"><span>Created On</span></mdt-column>
+						            <mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+						        </mdt-header-row>
+						        
+						        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+						        <mdt-custom-cell column-key="createdOn">
+						        	{{ value | date:'dd/MM/yyyy' }}
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="partNo">
+						        	<a href="javascript:void(0);" ng-click="clientScope.editProduct(value, 'Edit')" style="text-decoration: underline">{{ value }}</a>
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="delete">						            
+						            <a href="javascript:void(0)" ng-click="clientScope.deleteProduct(value, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						        </mdt-custom-cell>
+        
+						    </mdt-table>
+		            	
+		            	
+		            		<!-- <table class="exp_ship_table">
+	                                <thead>
+		                                    <tr>
+		                                        <th class="">Sr. No.</th>
+		                                        <th class="">Product Code </th>
+		                                        <th class="">Export Class</th>
+		                                        <th class="">Import Class</th>
+		                                        <th class="">Model No </th>		                                        
+		                                        <th class="">Hazmat </th>
+		                                        <th class="">SBU Code </th>
+		                                        <th class="">SKU No </th>
+		                                     	<th class="">Created On </th>
+		                                        <th class="">Delete</th>
+		                                    </tr>
+		                                </thead>					                                
+		                                <tbody>
+		                                
+		                                	<tr ng-repeat="product in products track by $index" class="exp_ship_item">
+		                                		<td> {{ $index + 1 }} </td>
+		                                		<td><a href="javascript:void(0);" ng-click="editProduct(product.partNo, 'Edit')" style="text-decoration: underline">{{ product.partNo }}</a></td>
+		                                		<td>{{ product.exportClass }}</td>
+		                                		<td>{{ product.importClass }}</td>
+		                                		<td>{{ product.modelNo }}</td>
+		                                		<td>{{ product.hazmat }}</td>
+		                                		<td>{{ product.sbu }}</td>
+		                                		<td>{{ product.skuNo }}</td>
+		                                		<td>{{ product.createdOn |  date:'dd/MM/yyyy' }}</td>
+		                                		<td class=""><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)" ng-click="deleteProduct(product.partNo, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+		                                	</tr>					                                
+		                                				                                               
+		                                </tbody>
+		                            </table> -->
+		            	</div>
+		            </div>
+		            
+		            <div class="row btn-row-bottom">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editProduct(product.partNo, 'New')" class="btn btn-license">Add Product</button>
+		            		<button gtn-click="/createSearchProduct" class="btn btn-license">New Search</button>		            		
+		            	</div>
+		            </div>
+			   		
+		        </form> 
+                <!-- /Contact entity form -->
+             </div>                                
+		</div>
+      </div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '14%'}, {index: 2, width: '11%'}, {index: 3, width: '11%'}, {index: 4, width: '11%'}, 
+		                {index: 5, width: '12%'}, {index: 6, width: '11%'}, {index: 7, width: '11%'}, {index: 8, width: '11%'}
+		                , {index: 8, width: '9%'}, {index: 9, width: '6%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>

@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+    <title>Global Tradenet | Dashboard</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <!-- CSS Global -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/plugins/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+
+    <link href="assets/plugins/angular-material/angular-material.css" rel="stylesheet">
+
+<!--For flowpaper-->
+<!-- <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"> -->
+    <style type="text/css" media="screen">
+        html, body	{ height:100%; }
+        body { margin:0; padding:0; overflow:auto; }
+        .infoBox > * {font-family:Lato;}
+        #flashContent { display:none; }
+    </style>
+
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'> -->
+    <link rel="stylesheet" type="text/css" href="css/flowpaper_flat.css" />
+   <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
+
+<!--ends-->
+
+    <link href="assets/css/theme-dashboard.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/iesupport/html5shiv.js"></script>
+    <script src="assets/plugins/iesupport/respond.min.js"></script>
+    <![endif]-->
+
+
+<link href="assets/plugins/mdDataTable-master/dist/md-data-table-style.css" rel="stylesheet" type="text/css"/>
+
+<!--Top menu-->
+<link href="css/menu.css" rel="stylesheet" type="text/css" />
+<link href="css/gtn.css" rel="stylesheet" type="text/css" />
+
+<link href="assets/css/web-grid-dashboard.css" rel="stylesheet">
+<link href="assets/css/web-grid-user.css" rel="stylesheet">
+
+<script type='text/javascript' src='js/jquery-1.9.1.js'></script>
+<script type='text/javascript' src='js/gtn.js'></script>
+
+<!-- Angular JS libs -->
+<script type='text/javascript' src='lib/angular.js'></script>
+<script type='text/javascript' src='lib/angular-route.js'></script>
+<script type='text/javascript' src='lib/angular-sanitize.js'></script>
+<script type='text/javascript' src='lib/angular-animate.js'></script>
+<script type='text/javascript' src='lib/angular-touch.js'></script>
+<script type='text/javascript' src='lib/angular-resource.js'></script>
+<script type='text/javascript' src="lib/angular-cookies.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-2.5.0.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-tpls-2.5.0.min.js"></script>
+
+<script type='text/javascript' src="lib/angular-animate.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-aria.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-material.js"></script>
+
+<!-- angular md data table -->
+<!-- <link href="assets/plugins/md-data-table-master/dist/md-data-table.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="assets/plugins/md-data-table-master/dist/md-data-table.js"></script> -->
+
+
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/lodash.min.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/angular-material-icons.min.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/md-data-table-templates.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/md-data-table.js"></script>
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+  //Stripe.setPublishableKey('pk_test_Cr1ZoJdQSszF8673thfU104o');
+</script>
+<script src="lib/angular-md5/angular-md5.js"></script>
+
+<!--  <script type="text/javascript"
+	src="lib/angular-payments/lib/angular-payments.js">
+    src="lib/angular-payments/lib/angular-payments.min.js">
+</script>  -->
+<script type="text/javascript" src="lib/angular-payments/lib/angular-payments.min.js"></script>
+
+<script type='text/javascript' src='js/app.js'></script>
+<script type="text/javascript" src="js/store.js"></script>
+<script type="text/javascript" src="js/shoppingCart.js"></script>
+
+<script type="text/javascript" src="js/controller/homeController.js"></script>
+<script type="text/javascript" src="js/controller/controller.js"></script>
+<script type='text/javascript' src='js/controller/entityScreeningController.js'></script>
+<script type='text/javascript' src='js/controller/licenseScreeningController.js'></script>
+<script type='text/javascript' src='js/controller/businessIntelligenceCtlr.js'></script>
+<script type='text/javascript' src='js/controller/exportOperationsController.js'></script>
+<script type='text/javascript' src='js/controller/masterController.js'></script>
+<script type='text/javascript' src='js/controller/userController.js'></script>
+
+<script type='text/javascript' src='js/factory/factory.js'></script>
+<script type='text/javascript' src='js/factory/entityScreeningFactory.js'></script>
+<script type='text/javascript' src='js/factory/licenseScreeningFactory.js'></script>
+<script type='text/javascript' src='js/factory/exportOperationFactory.js'></script>
+<script type='text/javascript' src='js/factory/masterFactory.js'></script>
+
+<script type='text/javascript' src='js/interceptors/gtnInterceptors.js'></script>
+<script type="text/javascript" src="js/angular-toggle-switch.min.js"></script>
+<link href="css/angular-toggle-switch-bootstrap-3.css" rel="stylesheet" type="text/css" />
+
+<script type='text/javascript' src='js/directive/navigate.js'></script>
+<script type='text/javascript' src='js/directive/bindHtml.js'></script>
+<script type='text/javascript' src='js/filter/gtnFilter.js'></script>
+<script type='text/javascript' src='js/service/service.js'></script>
+<script type='text/javascript' src='js/service/masterService.js'></script>
+<!-- <script type='text/javascript' src='js/service/entityScreeningService.js'></script>
+<script type='text/javascript' src='js/service/licenseScreeningService.js'></script> -->
+<script src="js/service/alertService.js" type="text/javascript"></script>
+<script src="js/service/messageService.js" type="text/javascript"></script>
+<script src="js/service/subscriptionService.js" type="text/javascript"></script>
+<script src="js/controller/PublicationController.js" type="text/javascript"></script>
+<script src="js/service/publicationService.js" type="text/javascript"></script>
+ <script src="https://flowpaper.com/js/jquery.1.9.1.min.js"></script>
+<script src="js/service/paymentService.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.extensions.min.js"></script>
+<script type="text/javascript" src="js/flowpaper.js"></script>
+<script type="text/javascript" src="js/FlowPaperViewer.js"></script>
+
+<script src="js/service/userService.js" type="text/javascript"></script>
+<!-- NVD3 Charts -->
+<link rel="stylesheet" href="lib/ndv3-charts/nv.d3.css">
+
+<script type='text/javascript' src='lib/ndv3-charts/d3.min.js' charset="utf-8"></script>
+<script type='text/javascript' src='lib/ndv3-charts/nv.d3.js' charset="utf-8"></script>
+<script type='text/javascript' src='lib/ndv3-charts/angular-nvd3.min.js' charset="utf-8"></script>
+
+<!-- Angular charts -->
+<!-- <script type='text/javascript' src='js/charts/angular-charts/Chart.js-master/src/chart.js' charset="utf-8"></script>
+<script type='text/javascript' src='js/charts/angular-charts/angular-chart.js/angular-chart.js' charset="utf-8"></script> -->
+
+<!-- Data map -->
+<script type='text/javascript' src='lib/datamap/topojson.min.js' charset="utf-8"></script>
+<script type='text/javascript' src='lib/datamap/datamaps.world.hires.min.js' charset="utf-8"></script>
+
+<!--Top menu-->
+
+<link href="fontawesome/css/font-awesome.min.css" rel="stylesheet">
+<!--collapse.css--><link href="css/collapse.css" rel="stylesheet" type="text/css" media="all"/>
+<script type="text/javascript" src="js/ddaccordion.js"></script>
+<script type="text/javascript" src="js/collapse.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+<!--collapse.css-->
+
+<link href="css/gt.message.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="css/gt.messages.v3.css" rel="stylesheet" type="text/css" media="all"/>
+
+<link href="css/sch_menu2.css" rel="stylesheet" type="text/css" />
+
+<!-- cron schedular -->
+<script type='text/javascript' src='lib/shawnchin-jquery-cron/cron/jquery-cron-min.js' charset="utf-8"></script>
+<link href="lib/shawnchin-jquery-cron/cron/jquery-cron.css" rel="stylesheet" type="text/css" media="all"/>
+
+<style>
+
+	.shop_table tbody td{
+		padding: 2px;
+	}
+
+</style>
+
+
+<!-- Table lib start -->
+
+
+<script type='text/javascript' src='lib/KingTable-master/source/libs/es6-promise.js' ></script>
+<script type='text/javascript' src='lib/KingTable-master/dist/kingtable.js' ></script>
+<script type='text/javascript' src='lib/KingTable-master/source/libs/xlsx.core.min.js' async="async"></script>
+<script type='text/javascript' src='lib/KingTable-master/source/libs/blob.js' async="async"></script>
+<script type='text/javascript' src='lib/KingTable-master/dist/kingtable.xlsx.js' ></script>
+<script type='text/javascript' src='lib/KingTable-master/dist/common-control.js' ></script>
+
+<link href="lib/KingTable-master/dist/styles/kingtable.css" rel="stylesheet" type="text/css" />
+
+<!-- Table lib end -->
+
+
+</head>
+
+	<body id="home" class="wide body-light" ng-app="gtnDashboard" ng-controller="HomeCtrl"  ng-init = "homeinit()" ng-cloak>
+
+			<!-- Preloader -->
+			<div id="preloader" class="loading-spiner-holder" data-scroll="true" data-load="true" data-gtn-loading>
+				<img src="assets/img/loading.gif" >
+				<!-- <img src="img/GD.gif" > -->
+			</div>
+
+			<!-- Wrap all content -->
+			<div class="wrapper">
+			   <!-- HEADER -->
+			        <!--Top menu-->
+			        <header class="wg-header" role="banner">
+
+			    <div class="wg-header__mobile">
+			    <div class="wg-header__mobile-content">
+			    <div class="wg-header__mobile-left">
+			    <div class="wg-header__mobile-controls">
+			        <span role="button" class="wg-header__mobile-burger"><i></i><i></i><i></i></span>
+			        <a href="javascript:void(0);" gtn-click="/" title="Global Tradenet"><span role="img" class="wg-header__logo"></span> </a>
+			    </div>
+			    </div>
+
+			    <div class="wg-header__mobile-right">
+			    <div class="wg-header__free-trial-form wg-form">
+			    <!--<a href="gt_login.html" class="wg-header__login-button wg-btn wg-btn--white wg-btn--hollow log_btn">Login</a> -->
+			    <ul class="nav navbar-nav navbar-right">
+			                <li class="dropdown">
+			                    <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+			                       <span class="gb_8a gbii gb_b gb_db gb_R" ></span>
+			                         Raaz Das
+			                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+			                    </a>
+			                    <ul class="dropdown-menu">
+			                        <li>
+			                            <div class="navbar-login">
+			                                <div class="row">
+			                                    <div class="col-lg-4">
+			                                        <p class="text-center">
+			                                            <!--<span class="glyphicon glyphicon-user icon-size"></span> -->
+			                                            <a class="gb_b gb_db gb_R" href="javascript:void(0)" title="" >
+			                                            <span class="gb_8a gbii"></span></a>
+
+			                                        </p>
+			                                    </div>
+			                                    <div class="col-lg-8">
+			                                        <p class="text-left"><strong>Raaz Das</strong></p>
+			                                        <div class="text-left">
+			                                            <a href="usermgt-index.html#/profile" class=" ">View profile</a>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </li>
+
+			                         <li><a href="usermgt-index.html#/activity">User Management <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+									 <!-- <li><a href="#sbuParams">Global Variable <span class="glyphicon glyphicon-th pull-right"></span></a></li> -->
+
+           							 <!-- <li class="divider"></li> -->
+            						<li style="border-top: 1px solid #b7b7b7!important"><a href ng-click= "logout()">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+			                    </ul>
+			                </li>
+
+			            </ul>
+			    </div>
+
+			    </div>
+			    </div><!--.wg-header__mobile-content-->
+
+			    <div class="wg-header__mobile-overlay-color" role="button"></div>
+			    <div class="wg-header__mobile-overlay-mask"></div>
+			    <div class="wg-header__mobile-logo-mask"></div>
+			    <div class="wg-header__mobile-overlay">
+
+			    <nav class="wg-header__mobile-overlay-nav">
+
+			<div class="left-grid-m">
+			<div class="menu_name_div">
+
+				<div class="pad_tb20px"></div>
+
+				    <div class="glossymenu-m ">
+				        <a class="menuitem-m submenuheader-m " href="javascript:void(0);" ><i class="fa fa-user fa-lg"></i>  Global Trade Control </a>
+				        <div class="submenu-m">
+				            <ul>
+					            <li><a href="gtn/watchListScreening">Watch List Screening</a></li>
+					            <li><a href="gtn/licenseScreening">License Screening</a></li>
+				            </ul>
+				        </div>
+				    </div>
+
+				    <div class="glossymenu-m ">
+				        <a class="menuitem-m submenuheader-m" href="javascript:void(0);" > <i class="fa fa-dashboard fa-lg"></i> Export Operations <span class="arrow"></span></a>
+				        <div class="submenu-m">
+				            <ul>
+				            <li><a href="javascript:void(0);">Watch List Screening</a></li>
+				            <li><a href="javascript:void(0);">License Screening</a></li>
+				            </ul>
+				        </div>
+				    </div>
+
+				    <div class="glossymenu-m ">
+				        <a class="menuitem-m submenuheader-m" href="javascript:void(0);" > <i class="fa fa-dashboard fa-lg"></i> Import Operations  </a>
+				        <div class="submenu-m">
+				            <ul>
+				            <li><a href="javascript:void(0);">Import Shipment</a></li>
+				            <li><a href="javascript:void(0);">Customs Filing</a></li>
+				            </ul>
+				        </div>
+				    </div>
+
+				    <div class="glossymenu-m ">
+				        <a class="menuitem-m submenuheader-m" href="javascript:void(0);" > <i class="fa fa-dashboard fa-lg"></i> Publications </a>
+				        <div class="submenu-m">
+				            <ul>
+				            <li><a href="javascript:void(0);">Unlimited Access</a></li>
+				            <li><a href="javascript:void(0);">Annotate Online</a></li>
+				            </ul>
+				        </div>
+				    </div>
+
+				    <div class="glossymenu-m ">
+				        <a class="menuitem-m submenuheader-m" href="javascript:void(0);" > <i class="fa fa-dashboard fa-lg"></i> Consulting Services </a>
+				        <div class="submenu-m">
+				            <ul>
+				            <li><a href="javascript:void(0);">Basic</a></li>
+				            <li><a href="javascript:void(0);">Advanced</a></li>
+				            </ul>
+				        </div>
+				    </div>
+
+				    <div class="clear"> </div>
+				</div>
+				</div>
+
+			    </nav>
+
+			    </div><!--.wg-header__mobile-overlay-->
+
+			    </div><!--.wg-header__mobile-->
+
+			    <div class="wg-header__desktop">
+			    <!--.wg-header__top-menu-->
+
+
+			    <div class="wg-header__sticky-menu">
+			    <div class="wg-header__sticky-mainmenu">
+			    <div class="wg-grid">
+			    <div class="logo_gt" ng-cloak>
+			        <div class="wg-cell wg-cell--xs-3 wg-cell--md-1 wg-cell--xl-1 flt_l">
+			            <nav class="wg-header__desktop-primary-nav">
+			                <a href="javascript:void(0);" gtn-click="/" title="Global Tradenete"><span role="img" class="wg-header__logo"></span></a>
+
+			            </nav>
+			        </div>
+
+			        <div class="flt_r">
+			        <div class="wg-cell wg-cell--xs-3 wg-cell--sm-6 wg-cell--md-12 wg-cell--xl-5 text-right">
+			            <div class="r ">
+			                <ul class="nav navbar-nav navbar-right  black_color">
+			                <li class="pad_tb2px dropdown" style="top: 3px">
+				                    <a href="#" class="dropdown-toggle link-icon" data-toggle="dropdown">
+										<span class="user_name flt_l"></span>
+										<i class="fa fa-bell font_14px" aria-hidden="true"></i>
+
+										<span class="badge--darkRed jsCount" data-type="activity" data-count={{alertCount}}>
+										<!-- <span class="badge--darkRed jsCount" data-type="activity" data-count={{alertCount}} ng-if="alertCount == 0"> -->
+
+											{{alertCount}}
+										</span>
+									</a>
+
+				                    <ul class="dropdown-menu" ng-if="alerts.length > 0">
+											<li ng-repeat="alert in alerts"><strong>{{alert.alertDescription}} </strong></li>
+				                    </ul>
+
+			                </li>
+
+			                <li class="pad_tb2px" style="top: 3px">
+			                <a href="usermgt-index.html#/activity" class="link-icon"><i class="fa fa-envelope font_14px" aria-hidden="true"></i>
+
+			                	<span class="badge--darkYellow jsCount" data-type="activity" data-count="messageCount">
+			                	<!-- <span class="badge--darkYellow jsCount" data-type="activity" data-count="messageCount" ng-if="obj.messageCount == 0"> -->
+
+			                		{{obj.messageCount}}
+			                	</span>
+			                </a>
+			                </li>
+
+			                <li class="pad_tb2px" style="top: 3px">
+			                <a href="usermgt-index.html#/subscriptionDetails" class="link-icon"><i class="fa fa-shopping-cart font_14px" aria-hidden="true"></i>
+
+			                	<span class="badge--darkYellow jsCount" data-type="activity" data-count="messageCount">
+			                	<!-- <span class="badge--darkYellow jsCount" data-type="activity" data-count="messageCount" ng-if="obj.messageCount == 0"> -->
+
+			                		{{ finalCart.getTotalCount }}
+			                	</span>
+			                </a>
+			                </li>
+			            <li class="pad_tb2px">
+								<a href="usermgt-index.html#/subscriptionDetails" title="go to shopping cart" ng-disabled="finalCart.getTotalCount < 1" class="txt-price">
+				                <!-- <img src="img/cart_icon.png"/> -->
+				                <!-- <b>{{cart.getTotalCount()}}</b> items, --> <b>{{finalCart.getTotalPrice | currency}}</b>
+            				</a>
+             			</li>
+
+			                <li class="dropdown">
+			                    <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+		     <span class="">
+		     	<img class="gb_8a gbii gb_b gb_db gb_R flt_l" ng-if="!!LoggedInUser.image" ng-src="data:image/JPEG;base64,{{LoggedInUser.image}}"/>
+		     </span>
+
+                         <span class="user_name flt_l">{{LoggedInUser.firstName}} {{LoggedInUser.lastName}}</span>
+        <i class="fa fa-ellipsis-v ellipsis_t" aria-hidden="true"></i>
+
+                	                    </a>
+			                    <ul class="dropdown-menu dropdown-menu-user">
+			                        <li>
+			                            <div class="navbar-login">
+			                                <div class="row">
+			                                    <div class="col-lg-4">
+			                                        <p class="text-center">
+			                                            <!--<span class="glyphicon glyphicon-user icon-size"></span> -->
+			                                            <a class="gb_b gb_db gb_R" href="javascript:void(0)" title="" >
+			                                            <span ><img class="gb_8a gbii gb_b gb_db gb_R flt_l" ng-if="!!LoggedInUser.image" ng-src="data:image/JPEG;base64,{{LoggedInUser.image}}"/> </span></a>
+
+			                                        </p>
+			                                    </div>
+			                                    <div class="col-lg-8">
+			                                       <p class="text-left"><strong>{{LoggedInUser.firstName}} {{LoggedInUser.lastName}}</strong>
+
+			                                       <br>
+			                                       <a href="usermgt-index.html#/profile" class=" ">View profile</a>
+			                                       </p>
+
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </li>
+
+			                          <li><a href="usermgt-index.html#/activity">User Management <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+									  <!-- <li><a href="#sbuParams">Global Variable <span class="glyphicon glyphicon-star pull-right"></span></a></li> -->
+									  <!-- <li><a href="#themes">Themes <span class="glyphicon glyphicon-user pull-right"></span></a></li> -->
+
+            						<!-- <li class="divider"></li> -->
+            						<li style="border-top: 1px solid #b7b7b7!important"><a href ng-click= "logout()">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+			                    </ul>
+			                </li>
+
+			            </ul>
+			            </div>
+			        </div>
+			        </div>
+			        <!--.wg-cell-->
+
+			        </div>
+			        <!--.wg-cell-->
+
+			    </div><!--.wg-grid-->
+			    </div><!--.wg-header__sticky-mainmenu-->
+
+			    </div><!--.wg-header__sticky-menu-->
+			    </div><!--.wg-header__desktop-->
+
+			    </header>
+			        <!--//End top menu-->
+			    <!-- /HEADER -->
+
+			    <!-- Content area -->
+			    <div class="content-area">
+
+
+
+		        <!-- PAGE ABOUT -->
+		        <section class="page-section sec_6p" >
+		            <div class="container-fluid">
+							<div class="row clearfix">
+							<!--nav sidebar -->
+							<div class="left-grid">
+								<div class="artist_name_div" id="lhs_container">
+									<div class="pad_tb10px"></div>
+
+
+									<!-- <div class="glossymenu ">
+								        <a class="menuitem submenuheader " href="javascript:void(0);" ><i class="fa fa-user fa-lg"></i>  Global Trade Control </a>
+								        <div class="submenu">
+								            <ul>
+									            <li><a href="#createEntityScreening">Watch List Screening</a></li>
+									            <li><a href="#createLicenseScreening">License Screening</a></li>
+									            <li><a href="#createBusinessIntelligence">Business Intelligence</a></li>
+								            </ul>
+								        </div>
+								    </div> -->
+
+									<div ng-repeat="menuItem in menuItems track by $index" class="glossymenu ">
+								        <a class="menuitem submenuheader " href="javascript:void(0);" ><i class="fa {{ menuItem.faIcon }} fa-lg"></i>  {{ menuItem.displayName }} </a>
+								        <div class="submenu">
+								            <ul>
+									            <li ng-repeat="subMenuItem in menuItem.subMenu track by $index">
+									            	<span ng-if="subMenuItem.active == 'Y'">
+									            		<a href="#{{ subMenuItem.itemUrl }}" >{{ subMenuItem.displayName }} </a>
+									            	</span>
+									            	<span ng-if="subMenuItem.active == 'N'">
+									            		<a href="javascript:void(0)" class="disabled-link">{{ subMenuItem.displayName }} </a>
+									            	</span>
+									            </li>
+								            </ul>
+								        </div>
+								    </div>
+
+								    <!-- <div class="glossymenu ">
+								        <a class="menuitem submenuheader " href="javascript:void(0);" ><i class="fa fa-user fa-lg"></i>  Global Trade Control </a>
+								        <div class="submenu">
+								            <ul>
+									            <li><a href="#createEntityScreening">Watch List Screening</a></li>
+									            <li><a href="#createLicenseScreening">License Screening</a></li>
+									            <li><a href="#createBusinessIntelligence">Business Intelligence</a></li>
+								            </ul>
+								        </div>
+								    </div>
+
+								   <div class="glossymenu ">
+								        <a class="menuitem submenuheader" href="javascript:void(0);" > <i class="fa fa-globe fa-lg"></i> Export Operations</a>
+								        <div class="submenu">
+								            <ul>
+									            <li><a href="#createShipmentWizard">Export Shipment</a></li>
+									            <li><a href="javascript:void(0);">Integrated WLS</a></li>
+									            <li><a href="javascript:void(0);">Integrated LS</a></li>
+									            <li><a href="javascript:void(0);">Customs Filing</a></li>
+									            <li><a href="javascript:void(0);">Logistics Integration</a></li>
+								            </ul>
+								        </div>
+								    </div>
+
+								    <div class="glossymenu ">
+								        <a class="menuitem submenuheader" href="javascript:void(0);" > <i class="fa fa-navicon fa-lg"></i> Import Operations  </a>
+								        <div class="submenu">
+								            <ul>
+								            <li><a href="javascript:void(0);">Import Shipment</a></li>
+								            <li><a href="javascript:void(0);">Customs Filing</a></li>
+								            </ul>
+								        </div>
+								    </div>
+
+								    <div class="glossymenu ">
+								        <a class="menuitem submenuheader" href="#!/publication" > <i class="fa fa-file-powerpoint-o fa-lg"></i> Publications </a>
+								        <div class="submenu">
+								            <ul>
+								            <li><a href="#publication">Unlimited Access</a></li>
+								            <li><a href="#publication">Annotate Online</a></li>
+								            </ul>
+								        </div>
+								    </div>
+
+								    <div class="glossymenu ">
+								        <a class="menuitem submenuheader" href="javascript:void(0);" > <i class="fa fa-dashboard fa-lg"></i> Consulting Services </a>
+								        <div class="submenu">
+								            <ul>
+								            <li><a href="javascript:void(0);">Basic</a></li>
+								            <li><a href="javascript:void(0);">Advanced</a></li>
+								            </ul>
+								        </div>
+								    </div>
+
+
+								    <div class="glossymenu ">
+								        <a class="menuitem submenuheader" href="javascript:void(0);" > <i class="fa fa-inbox fa-lg"></i> Admin </a>
+								        <div class="submenu">
+								            <ul>
+								            	<li><a href="#createSearchSbu">SBU</a></li>
+								            	<li><a href="#createSearchScheduledJob">Schedule Job</a></li>
+								            	<li><a href="#sbuParams">Global Variable</span></a></li>
+								            </ul>
+								        </div>
+								    </div>
+
+								    <div class="glossymenu ">
+								        <a class="menuitem submenuheader" href="javascript:void(0);" > <i class="fa fa-table fa-lg"></i> Tables </a>
+								        <div class="submenu">
+								            <ul>
+								            	<li><a href="#createSearchExporter">Exporter</a></li>
+								            	<li><a href="#createSearchConsignee">Consignee</a></li>
+								            	<li><a href="#createSearchProduct">Product</a></li>
+								            </ul>
+								        </div>
+								    </div> -->
+
+								    <div class="clear"></div>
+								</div>
+							</div>
+							<!--/End nav sidebar -->
+							</div>
+
+				            <!-- Center content to load partials -->
+					        <div class="panel-grid-cell dashboard-rt padding-top30 sans-serif-font dashboard-container {{user.gtnClass}}" ng-init="init()" ng-controller="controller" id="dashboardParentController" ng-cloak>
+					            <div ng-view></div>
+					        </div>
+
+			                <div class="row margin-top30 clearfix">
+			                </div>
+
+			       </div><!-- container fluid -->
+        	</section><!-- -->
+        <!-- /PAGE ABOUT -->
+
+
+
+
+    </div>
+    <!-- /Content area -->
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-meta">
+            <div class="container ">
+
+    <div class="copyright" >
+        <div class="col-sm-6 col-md-4 text-l">
+            <ul class="social-line social-wohex list-inline">
+            <li>Follow us</li>
+            <li data-animation="flipInY" data-animation-delay="300"><a href="javascript:void();" class="facebook"><i class="fa fa-facebook"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="100"><a href="javascript:void();" class="twitter"><i class="fa fa-twitter"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="200"><a href="javascript:void();" class="google"><i class="fa fa-google"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="400"><a href="javascript:void();" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+
+            </ul>
+            </div>
+            <div class="col-sm-6 col-md-8 text-r">
+            <div class="pad_tb4px">&copy; 2017 Global Trade net. All rights reserved. Patented.   |  <a href="javascript:void();" >Privacy Policy</a> & <a href="javascript:void();" >Terms of Service</a></div>
+            </div>
+    </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
+    <!--<div class="to-top"><i class="fa fa-angle-up"></i></div> -->
+
+</div>
+
+<!--  <script>
+    window.pageParams = {
+        'locale': 'en',
+        'universalCode': 'GTM-WRBD5L',
+        'yandexMetrikaAccount': '18776650',
+    };
+    window.strings = {
+        EN: {
+            goto: 'Go to the English version of the site?',
+            no: 'Close',
+            yes: 'Yes',
+            cookie: 'This website uses cookies: by&nbsp;continuing to&nbsp;browse this site you accept this <a href="privacy/">policy</a>',
+            url: '/'
+        }
+    }
+</script>-->
+
+<script src="js/web-grid.js"></script>
+
+<script>
+	var isSafari = navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') == -1;
+	if(isSafari) {
+		document.addEventListener("DOMContentLoaded", function () {
+			if ('classList' in document.createElement('div') &&
+					'querySelector' in document &&
+					'addEventListener' in window && Array.prototype.forEach) {
+				document.documentElement.classList.add('mdl-js');
+				componentHandler.upgradeAllRegistered();
+			} else {
+				componentHandler.upgradeElement = function() {};
+				componentHandler.register = function() {};
+			}
+			WG.initAllRegistered();
+			window.svg4everybody();
+		})
+	}
+</script>
+<!-- /Wrap all content -->
+
+
+<script src="js/web-grid.js"></script>
+<!-- <script src="js/common.min.js"></script> -->
+
+<!-- JS Global -->
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<!-- <script src="assets/plugins/bootstrap-select/nya-bootstrap-select.js"></script> -->
+<script src="assets/plugins/superfish/js/superfish.js"></script>
+<script src="assets/plugins/prettyphoto/js/jquery.prettyPhoto.js"></script>
+<script src="assets/plugins/placeholdem.min.js"></script>
+<script src="assets/plugins/jquery.smoothscroll.min.js"></script>
+<script src="assets/plugins/jquery.easing.min.js"></script>
+
+<!--[if lt IE 9]><script src="assets/plugins/jquery/jquery-1.11.1.min.js"></script><![endif]-->
+<!--[if gte IE 9]><!--><!--<script src="assets/plugins/jquery/jquery-2.1.1.min.js"></script><![endif]-->
+<script src="assets/plugins/modernizr.custom.js"></script>
+
+
+<!-- JS Page Level -->
+<script src="assets/plugins/owlcarousel2/owl.carousel.min.js"></script>
+<script src="assets/plugins/waypoints/waypoints.min.js"></script>
+<script src="assets/plugins/countdown/jquery.plugin.min.js"></script>
+<script src="assets/plugins/countdown/jquery.countdown.min.js"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script> -->
+
+<script src="js/start.js" type="text/javascript"></script>
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/custom.js"></script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/plugins/jquery.cookie.js"></script>
+<script src="assets/js/theme-config.js"></script>
+<!--<![endif]-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        theme.init();
+        theme.initMainSlider();
+    });
+    jQuery(window).load(function () {
+        theme.initAnimation();
+    });
+
+    jQuery(window).load(function () { jQuery('body').scrollspy({offset: 100, target: '.navigation'}); });
+    jQuery(window).load(function () { jQuery('body').scrollspy('refresh'); });
+    jQuery(window).resize(function () { jQuery('body').scrollspy('refresh'); });
+
+    jQuery(document).ready(function () { theme.onResize(); });
+    jQuery(window).load(function(){ theme.onResize(); });
+    jQuery(window).resize(function(){ theme.onResize(); });
+
+    jQuery(window).load(function() {
+        if (location.hash != '') {
+            var hash = '#' + window.location.hash.substr(1);
+            if (hash.length) {
+                jQuery('html,body').delay(0).animate({
+                    scrollTop: jQuery(hash).offset().top - 44 + 'px'
+                }, {
+                    duration: 1200,
+                    easing: "easeInOutExpo"
+                });
+            }
+        }
+    });
+
+</script>
+
+<script type="text/ng-template" id="currencyTmpl.html">
+     	<a tabindex="-1">
+			<span style="float: right">{{match.model.currencyCode}}</span>
+			<span style="text-align: left">{{match.model.description}}</span>
+			
+	    </a>
+</script>
+
+<script type="text/ng-template" id="countryTmpl.html">
+     	<a tabindex="-1">
+			<span style="float: right">{{match.model.countryCode}}</span>
+			<span style="text-align: left">{{match.model.countryName}}</span>			
+	    </a>
+</script>
+
+<script type="text/ng-template" id="exporter.html">
+     	<a tabindex="-1">
+			
+			<span style="float: right; margin-left: 20px">{{match.model.expCountry}}</span>
+			<span style="float: right">{{match.model.expCode}}</span>
+			<span style="text-align: left">{{match.model.expName}}</span>
+	    </a>
+</script>
+
+<script type="text/ng-template" id="consignee.html">
+     	<a tabindex="-1">
+			
+			<span style="float: right; margin-left: 20px">{{match.model.consigneeCountry}}</span>
+			<span style="float: right">{{match.model.consigneeId}}</span>
+			<span style="text-align: left">{{match.model.consigneeName}}</span>
+	    </a>
+</script>
+
+<script type="text/ng-template" id="stateTmpl.html">
+     	<a tabindex="-1">
+			
+			<span style="float: right">{{match.model.countryCode}}</span>
+			<span style="float: right; margin-right: 15px">{{match.model.stateCode}}</span>
+			<span style="text-align: left">{{match.model.stateName}}</span>
+	    </a>
+</script>
+
+<script type="text/ng-template" id="mot.html">
+     	<a tabindex="-1">
+			
+			<span style="float: right; margin-left: 20px">{{match.model.motId}}</span>
+			<span style="float: right">{{match.model.typeOfTransport}}</span>
+			<span style="text-align: left">{{match.model.motDes}}</span>
+	    </a>
+</script>
+
+<script type="text/ng-template" id="portsTmpl.html">
+     	<a tabindex="-1">
+			<span style="float: right">{{match.model.portCode}}</span>
+			<span style="text-align: left">{{match.model.description}}</span>
+			
+	    </a>
+</script>
+
+<script type="text/ng-template" id="productTmpl.html">
+	
+		<a tabindex="-1">
+			<span style="float: right; margin-left: 20px">{{match.model.exportClass}}</span>
+			<span style="text-align: left">{{match.model.partNo}}</span>
+	    </a>
+</script>
+
+</body>
+</html>

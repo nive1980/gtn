@@ -1,0 +1,102 @@
+<div ng-init="initDplReasonPopup()" ng-controller="masterCtlr">
+	<div class="modal-dialog modal-lg">	
+		<div class="modal-content {{gtnClass}}">
+			<div class="modal-header">
+		            <h5 class="modal-title" id="modal-title" style="color: black !important">Disposition Reason Matrix</h5>
+		        </div>
+		        <div class="modal-body" id="modal-body">
+		        	
+		        	<div class="hidden">
+		        		<input type="hidden" ng-model="code" />
+		        		<input type="hidden" ng-model="statusCode" />
+		        		<input type="hidden" ng-model="entityType" />	
+		        	</div>
+		        	
+		        	<!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">			
+							<div class="col-xs-12">				
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						      
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+						      
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+		        
+		        	<div class="row">
+		        		<div class="col-xs-12">
+				            <table class="table table-bordered table-hover table-condensed" style="font-size: 12px">
+				            	
+				            	<thead>
+				            		<tr style="background-color: #ccc">
+				            			<th>Select</th>
+				            			<th>Code</th>
+				            			<th>Description</th>
+				            		</tr>
+				            	</thead>
+				            	
+				            	<tbody>
+				            		
+				            		<tr ng-repeat="wplReason in wplReasons track by $index">
+				            			<td><input type="checkbox" ng-model="selected[wplReason.reasonCode]" /></td>
+				            			<td>{{wplReason.reasonCode}}</td>
+				            			<td>{{wplReason.reason}}</td>
+				            		</tr>
+				            	
+				            	</tbody>
+				            </table>
+			            </div>
+		            </div>
+		            
+		            <div class="row" style="margin-top: 20px">
+		            	<label class="col-xs-12">
+		            		Remarks
+		            	</label>
+		            </div>
+		            
+		            <div class="row">
+		            	<div class="col-xs-12">
+		            		<textarea class="form-control" rows="5" ng-model="otherReason"></textarea>
+		            	</div>
+		            </div>
+		        </div>
+		        <div class="modal-footer">
+		            <button class="btn btn-license" type="button" ng-click="updateWlsStatus()">Save</button>
+		            <button class="btn btn-black" type="button" ng-click="cancel()">Close</button>
+		        </div>
+		
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,45 @@
+<mdt-table animate-sort-icon="true" ripple-effect="true"
+        				selectable-rows = "false"
+        				table-card="{visible: true, title: 'Products', columnSelector: true}"	
+	        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+	        mdt-row-paginator="getProductList(page, pageSize, options)"
+	        mdt-row-paginator-error-message="Error happened during loading products."
+	        mdt-row="{
+	            'table-row-id-key': 'partNo',
+	            'column-keys': 	  [	
+		                         	'delete',
+		                         	'partNo',
+					                'exportClass',
+					                'importClass',
+					                'modelNo',
+					                'hazmat',
+					                'sbu',
+					                'skuNo',
+					                'createdOn',
+					               ]
+	        }">
+        <mdt-header-row>
+        	
+        	<mdt-column column-definition="Select"><span>Select</span></mdt-column>
+        	<mdt-column align-rule="left" column-sort="true" column-definition="Product Code"><span>Product Code</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true" column-definition="Export Class"><span>Export Class</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true" column-definition="Import Class"><span>Import Class</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true" column-definition="Model No"><span>Model No</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true" column-definition="Hazardous"><span>Hazmat</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true" column-definition="SBU"><span>SBU</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true" column-definition="SKU"><span>SKU No</span></mdt-column>
+            <mdt-column align-rule="left" column-sort="true" column-definition="Created Date"><span>Created On</span></mdt-column>
+           
+        </mdt-header-row>
+        
+        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+         <mdt-custom-cell column-key="createdOn">
+        	{{ value | date:'dd/MM/yyyy' }}
+        </mdt-custom-cell>
+        <mdt-custom-cell column-key="delete">
+        	<input type="radio" name="selectedProduct"
+							ng-model="selectedProduct"
+							ng-value="value" />
+        </mdt-custom-cell>
+       
+    </mdt-table>

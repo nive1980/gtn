@@ -1,0 +1,110 @@
+<div class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="">
+                     <h1 class="head strong">Export Shipment</h1>
+                </div>
+                <hr>
+            </div>
+            
+            <div class="col-sm-12 col-md-12 margin-10tb">
+            	<div>New Shipment</div>            	
+            	 <!-- user form -->
+                 <form name="shipment-form" id="shipment-form" method="post" action="#shipment-form" class="af-user row">
+                         <div class="col-sm-9 col-md-9">
+                                     <div class=" af-outer af-required clearfix">
+                                         <div class="form-group">
+                                                 <div class="col-sm-5 enti_tt_alig">
+                                                 <label for="shipment_num">Shipment Number:</label> 
+                                                 </div>
+                                                 <div class="col-sm-7">
+                                                 <input
+                                                     type="text" name="shipment_num" id="shipment_num" placeholder="" value="" size="30"
+                                                     data-toggle="tooltip" title="Shipment Number is required"
+                                                     class="form-control placeholder"/>                            
+                                                  </div>
+                                         </div>
+                                     </div>            
+                                     <div class=" af-outer af-required clearfix">
+                                         <div class="form-group">
+                                             <div class="col-sm-5 enti_tt_alig">
+                                                 <label for="date_export">Date of Export:</label> 
+                                                 </div>
+                                                 <div class="col-sm-7">
+                                                 <input
+                                                     type="date" name="date_export" id="date_export" placeholder="" value="" size="30"
+                                                     data-toggle="tooltip" title="Date of Export is required"
+                                                     class="form-control placeholder"/>                            
+                                                  </div>
+                                          </div>
+                                     </div>            
+                                     <!--<div class=" af-outer af-required clearfix">
+                                         <div class="form-group">                
+                                                 <div class="col-sm-5 enti_tt_alig">
+                                                 <label for="country_shipped">Country Shipped From:</label> 
+                                                 </div>
+                                                 <div class="col-sm-7">
+                                                 <input
+                                                     type="text" name="country_shipped" id="country_shipped" placeholder="" value="" size="30"
+                                                     data-toggle="tooltip" title="Country is required"
+                                                     class="form-control placeholder input-email"/>                            
+                                                  </div>
+                                         </div>
+                                     </div> -->
+                                     <div class="form-group af-required">                
+                                         <div class="col-sm-5 enti_tt_alig">
+                                         <label for="shipped_country">Country Shipped From: </label> 
+                                         </div>
+                                         <div class="col-sm-7 ">                                                    
+                                                 <div class="form-group selectpicker-wrapper">
+                                                     <select class="selectpicker input-shipped" id="shipped_country" data-live-search="false" data-width="100%"
+                                                         data-toggle="tooltip" title="Day">
+                                                         <option value="">Select Country</option>
+                                                         <option value="01">ABC </option>
+                                                         <option value="02">XYZ</option>
+                                                     </select>
+                                                 </div>
+                                         </div>
+                                 </div>
+                                 <div class=" af-outer af-required clearfix">
+                                     <div class="form-group af-required">                
+                                       <div class="col-sm-5 enti_tt_alig">
+                                       <label for="desti_country">Country of Ultimate destination: </label> 
+                                       </div>
+                                       <div class="col-sm-7 ">
+                                           
+                                               <div class="form-group selectpicker-wrapper">
+                                                   <select class="selectpicker " id="desti_country" data-live-search="false" data-width="100%"
+                                                       data-toggle="tooltip" title="Day">
+                                                       <option value="">Select Country</option>
+                                                       <option value="01">ABC </option>
+                                                       <option value="02">XYZ</option>
+                                                   </select>
+                                               </div>
+                                       </div>
+                               		</div>
+                                 </div>
+                                     
+                              <div class="col-sm-12 col-md-12 margin-20b text-right" >
+                                 <div class=" margin-20tb text-right" >
+                                     <input type="reset" name="Next" value="Next" onclick="return this);" id=" " class="btn-license">
+                                     <input type="submit" name="Save Shipment" value="Save shipment" onclick="return this);" id="btn-license" class="btn-license">
+                                     <input type="reset" name="Cancel" value="Cancel" onclick="return this);" id=" " class="btn-license">
+                                 </div>
+                             </div>
+                                     
+                         </div>             
+                                                     
+                    </form>
+                   <!-- /user form -->
+            	
+            </div>
+                        
+         </div>
+       </div>
+     </div>
+</div>

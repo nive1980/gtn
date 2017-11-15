@@ -1,0 +1,88 @@
+<div ng-init="initAesValidationPopup()" ng-controller="controller">
+	<div class="modal-dialog modal-lg" style="font-size: 14px">	
+		<div class="modal-content {{gtnClass}}">
+			<div class="modal-header">
+		            <h3 class="modal-title" id="modal-title">AES Validation</h3>
+		        </div>
+		        <div class="modal-body" id="modal-body">
+		        	
+		        	<div style="display: none">
+		        		<input type="hidden" ng-model="shipment.id" />
+		        	</div>
+		        
+		             <uib-tabset active="active" class="tab-container">
+						    <uib-tab index="0" heading="Shipment" class="{{shipmentClass}}">
+						    	<div ng-if="shipmentErrors.length == 0">
+						    		<i class="fa fa-check-circle-o green" aria-hidden="true"></i> Success
+						    	</div>
+						    	<div ng-if="shipmentErrors.length > 0">
+						    		<ul>
+						    			<li ng-repeat="error in shipmentErrors">
+						    				<a ng-if="error.url" ng-click="nagivateToError(error.url, error.field, error.itemId, error.section, error.cartonId)">{{ error.msg }}</a>
+						    				<span ng-if="!error.url">{{ error.msg }}</span>
+						    			</li>
+						    		</ul>
+						    	</div>
+						    </uib-tab>
+						    <uib-tab index="1" heading="Invoice" class="{{invoiceClass}}">
+						    	<div ng-if="invoiceErrors.length == 0">
+						    		<i class="fa fa-check-circle-o green" aria-hidden="true"></i> Success
+						    	</div>
+						    	<div ng-if="invoiceErrors.length > 0">
+						    		<ul>
+						    			<li ng-repeat="error in invoiceErrors">
+						    				<a ng-if="error.url" ng-click="nagivateToError(error.url, error.field, error.itemId, error.section, error.cartonId)">{{ error.msg }}</a>
+						    				<span ng-if="!error.url">{{ error.msg }}</span>
+						    			</li>
+						    		</ul>
+						    	</div>
+						    </uib-tab>
+						    <uib-tab index="2" heading="Item" class="{{itemClass}}">
+						    	<div ng-if="itemsErrors.length == 0">
+						    		<i class="fa fa-check-circle-o green" aria-hidden="true"></i> Success
+						    	</div>
+						    	<div ng-if="itemsErrors.length > 0">
+						    		<ul>
+						    			<li ng-repeat="error in itemsErrors">
+						    				<a ng-if="error.url" ng-click="nagivateToError(error.url, error.field, error.itemId, error.section, error.cartonId)">{{ error.msg }}</a>
+						    				<span ng-if="!error.url">{{ error.msg }}</span>
+						    			</li>
+						    		</ul>
+						    	</div>
+						    </uib-tab>
+						    <uib-tab index="3" heading="AES validation" class="{{aesClass}}">
+						    	<div ng-if="aesErrors.length == 0">
+						    		<i class="fa fa-check-circle-o green" aria-hidden="true"></i> Success
+						    	</div>
+						    	<div ng-if="aesErrors.length > 0">
+						    		<ul>
+						    			<li ng-repeat="error in aesErrors">
+						    				<a ng-if="error.url" ng-click="nagivateToError(error.url, error.field, error.itemId, error.section, error.cartonId)">{{ error.msg }}</a>
+						    				<span ng-if="!error.url">{{ error.msg }}</span>
+						    			</li>
+						    		</ul>
+						    	</div>
+						    </uib-tab>
+						    <uib-tab index="4" heading="License" class="{{licenseClass}}">
+						    	<div ng-if="licenseErrors.length == 0">
+						    		<i class="fa fa-check-circle-o green" aria-hidden="true"></i> Success
+						    	</div>
+						    	<div ng-if="licenseErrors.length > 0">
+						    		<ul>
+						    			<li ng-repeat="error in licenseErrors">
+						    				<a ng-if="error.url" ng-click="nagivateToError(error.url, error.field, error.itemId, error.section, error.cartonId)">{{ error.msg }}</a>
+						    				<span ng-if="!error.url">{{ error.msg }}</span>
+						    			</li>
+						    		</ul>
+						    	</div>
+						    </uib-tab>
+					  </uib-tabset>
+		        </div>
+		        <div class="modal-footer">
+		            <!-- <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button> -->
+		            <button class="btn btn-license" type="button" ng-click="cancel()">Close</button>
+		        </div>
+		
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,167 @@
+<div ng-init="initResultProductManuf()" ng-controller="masterCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>Product Manufacturer</h1>
+                </div>
+                <hr>
+				<!-- Contact login form -->
+				<!--<form id="registration-form" name="registration-form" class="registration-form" action="#" method="post"> -->
+		        <form name="entity-form" id="entity-form" class="af-entity" novalidate>
+			   		
+			   		<!-- <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editExporter(exporter.expCode, 'New')" class="btn btn-license">Add Exporter</button>
+		            		<button gtn-click="/createSearchExporter" class="btn btn-license">New Search</button>		            		
+		            	</div>
+		            </div> -->
+		            
+		            <div style="display: none">
+		            	<input type="hidden" name="partNo" ng-model="product.partNo" />
+		            </div>
+		            
+		            <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editProductManuf(product.partNo, product.itemNo, 'New')" class="btn btn-license">Add Product Manufacture</button>
+		            		<button ng-click="editProduct(product.partNo, 'Edit')" class="btn btn-black">Cancel</button>		            		
+		            	</div>
+		            </div>
+		            
+		            <!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">			
+							<div class="col-xs-12">				
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						      
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+						      
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+		            
+		            
+		            <div class="row">
+		            	<div class="col-xs-12">
+		            	
+		            	<mdt-table animate-sort-icon="true" ripple-effect="true"
+		            				selectable-rows = "false"
+		            				table-card="{visible: true, title: 'Product Manufacturers', columnSelector: true}"	
+							        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+							        mdt-row="{
+							        	 data: productManufacturerList,
+							            'table-row-id-key': 'itemNo',
+							            'column-keys': productManufacturerColumns
+							        }">
+						        <mdt-header-row>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Product Code"><span>Product Code</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Item No"><span>Item No</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Manufacture Id"><span>Manufacture ID</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Manufacture Name"><span>Manufacture Name</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Country of origin"><span>COO</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Contact Name"><span>Contact Name</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Created Date"><span>Created On</span></mdt-column>
+						            <mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+						        </mdt-header-row>
+						        
+						        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+						        <mdt-custom-cell column-key="createdOn">
+						        	{{ value | date:'dd/MM/yyyy' }}
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="itemNo">
+						        	<a href="javascript:void(0);" ng-click="clientScope.editProductManuf(product.partNo, value, 'Edit')" style="text-decoration: underline">{{ value }}</a>
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="delete">						            
+						            <a href="javascript:void(0)" ng-click="clientScope.deleteProductManuf(product.partNo, value, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						        </mdt-custom-cell>
+        
+					    </mdt-table>
+						    
+						    
+		            		<!-- <table class="exp_ship_table">
+	                                <thead>
+		                                    <tr>
+		                                        <th class="">Sr. No.</th>
+		                                        <th class="">Product Code </th>
+		                                        <th class="">Item No</th>
+		                                        <th class="">Manufacture ID</th>
+		                                        <th class="">Manufacture Name </th>		                                        
+		                                        <th class="">COO </th>
+		                                        <th class="">Contact Name </th>
+		                                     	<th class="">Created On </th>
+		                                        <th class="">Delete</th>
+		                                    </tr>
+		                                </thead>					                                
+		                                <tbody>
+		                                
+		                                	<tr ng-repeat="manuf in manufs track by $index" class="exp_ship_item">
+		                                		<td> {{ $index + 1 }} </td>
+		                                		<td>{{ manuf.partNo }}</td>
+		                                		<td><a href="javascript:void(0);" ng-click="editProductManuf(manuf.partNo, manuf.itemNo, 'Edit')" style="text-decoration: underline">{{ manuf.itemNo }}</a></td>
+		                                		<td>{{ manuf.manufactureId }}</td>
+		                                		<td>{{ manuf.name }}</td>
+		                                		<td>{{ manuf.cooName }}</td>
+		                                		<td>{{ manuf.contactName }}</td>
+		                                		<td>{{ manuf.createdOn |  date:'dd/MM/yyyy' }}</td>
+		                                		<td class=""><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)" ng-click="deleteProductManuf(manuf.partNo, manuf.itemNo, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+		                                	</tr>					                                
+		                                				                                               
+		                                </tbody>
+		                            </table> -->
+		            	</div>
+		            </div>
+		            
+		            
+			   		
+		        </form> 
+                <!-- /Contact entity form -->
+             </div>                                
+		</div>
+      </div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '14%'}, {index: 2, width: '11%'}, {index: 3, width: '11%'}, {index: 4, width: '11%'}, 
+		                {index: 5, width: '12%'}, {index: 6, width: '11%'}, {index: 7, width: '11%'}, {index: 8, width: '11%'}
+		                , {index: 8, width: '5%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>

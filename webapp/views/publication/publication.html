@@ -1,0 +1,207 @@
+<!-- ng-controller="PublicationCtrl" ng-init="loadPublications()"  -->
+
+  <div ng-app="dashboardApp" class="container-fluid no_pad">
+
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          		<!-- TOVAR INFORMATION -->
+			  <div class="tovar_information">
+								
+				<div class="box visible">
+            <div class="">
+                   
+                   <div class="col-sm-12 col-md-12 text-left wel_div blue-div" >
+                   <div class="" >
+	                     <h1>Publications</h1>
+	                </div>                 
+                   
+                   <hr>
+                   
+                   <!--<div class="row margin-top30 clearfix">&nbsp;</div> -->
+                   
+                   <div class="container-fluid no_pad">
+                   	<div class="col-sm-12 col-md-12 text-left " >
+                    
+                    	<div class="col-sm-12 col-md-12 row response_icon">
+                        <p>OCR's Library of Publications is a veritable storehouse of information on various aspects of international trade. These reliable resources are used by both government and commercial sectors involved in cross border trade.</p>
+                        
+<p> All OCR Publications can now be bought online. </p>
+                       </div>
+                       
+                       <div class="row">
+                       <div class="col-sm-3 col-md-3 clearfix">
+    	                       <div class="pub_icon"> 
+            	               </div>
+                          </div>
+                          
+                       <div class="col-sm-6 col-md-6 response_icon text-center">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control empty" id="iconified" placeholder="&#xF002;">
+                                <span class="input-group-addon pub_sear">
+                                     <button type="submit">Search</button>  
+                                </span>
+                            </div>
+                       </div>
+                       
+                       </div>
+                       
+                       <div class="col-sm-12 col-md-12 row response_icon margin-top20">
+                        <p>When searching for a publication, please refer to the complete list of available documents below. </p>
+                       </div>
+                       
+                       <div class="clearfix margin-20tb"></div>
+                       
+                       <div class="clearfix margin-30b ">
+	                       <div class="col-sm-3 col-md-3 clearfix pub_bor_r">
+    	                       <div class="pub_icon">
+        	                        <a href="javascript:void(0)" ng-click="getSubPublication('compliance')"><img src="../gtn/img/ch-icon.png" width="185" height="156"> 
+<strong>Compliance Handbooks</strong></a>
+            	               </div>
+                          </div>
+                          
+                          <div class="col-sm-9 col-md-9 ">
+    	                       <div class="pub_detail">
+                                  <div  class="inner-list">
+                                   <ul>
+                                   <li>Commerce Export Compliance Handbook (CECH)</li>
+                                   <li>Defense Trade Controls Handbook (DTCH)</li>
+                                   <li>Import Compliance Recordkeeping Handbook (ICRH)</li>
+                                   <li>Multilateral Export Controls (MEC)</li>
+                                   </ul>
+                                  </div> 
+                               </div>
+                          </div>
+                       </div>
+                       
+                       <hr>                       
+                       <div class="clearfix margin-30b ">
+	                       <div class="col-sm-3 col-md-3 clearfix pub_bor_r">
+    	                       <div class="pub_icon">
+        	                        <a href="javascript:void(0)" ng-click="getSubPublication('regulatory')"><img src="../gtn/img/gr-icon.png" width="185" height="156"> 
+<strong>Government Regulatory</strong></a>
+            	               </div>
+                          </div>
+                          
+                          <div class="col-sm-9 col-md-9 ">
+    	                       <div class="pub_detail">
+                                  <div  class="inner-list">
+                                   <ul>
+                                    <li>Bureau of Alcohol, Tobacco, and Firearms and Explosives (BATF)</li>
+                                    <li>Export Administration Regulations (EAR)</li>
+                                    <li>Federal Maritime Commissions Regulations (FMCR)</li>
+                                    <li>Foreign Assets Treasury Control (OFAC)</li>
+                                    <li>Foreign Trade Statistics Regulations (FTSR)</li>
+                                    <li>Hazardous Materials Transportation Regulations (HMTR)</li>
+                                    <li>International Traffic In Arms Regulations (ITAR)</li>
+                                    <li>United States Customs Regulations (USCR)</li>
+                                    </ul>
+                                  </div> 
+                               </div>
+                          </div>
+                       </div>
+                                              
+                       <hr>                       
+                       <div class="clearfix margin-30b ">
+	                       <div class="col-sm-3 col-md-3 clearfix pub_bor_r">
+    	                       <div class="pub_icon">
+        	                        <a href="javascript:void(0)" ng-click="getSubPublication('industrySpecific')"><img src="../gtn/img/isi-icon.png" width="185" height="156"> 
+<strong>Industry Specific Implementation</strong></a>
+            	               </div>
+                          </div>
+                          
+                          <div class="col-sm-9 col-md-9 ">
+    	                       <div class="pub_detail">
+                                  <div  class="inner-list">
+                                   <ul>
+                                    <li>Export Management Compliance Program (EMCP)</li>
+                                    <li>Foreign Trade Zones (FTZ)</li>
+                                    <li>Indirect Air Carrier Security Program (IASCP)</li>
+                                   </ul>
+                                  </div> 
+                               </div>
+                          </div>
+                       </div>
+                       
+                       <hr>                       
+                       <div class="clearfix margin-30b ">
+	                       <div class="col-sm-3 col-md-3 clearfix pub_bor_r">
+    	                       <div class="pub_icon">
+        	                        <a href="javascript:void(0)" ng-click="getSubPublication('statistics')"><img src="../gtn/img/sc-icon.png" width="185" height="156"> 
+<strong>Statistics & Classifications</strong></a>
+            	               </div>
+                          </div>
+                          
+                          <div class="col-sm-9 col-md-9 ">
+    	                       <div class="pub_detail">
+                                  <div  class="inner-list">
+                                   <ul>
+                                   	<li>Harmonized Tariff Schedule of the U.S (HTSUS)</li>
+									<li>Schedule B: Classification of Exports</li>
+
+                                   </ul>
+                                  </div> 
+                               </div>
+                          </div>
+                       </div>
+                       
+                   	</div>
+                                      
+                   
+                   
+                   </div>
+                </div>
+            </div>
+            
+            
+            </div>
+            </div>
+            </div>
+            
+            
+            </div>
+          
+
+    <!-- /Content area -->
+
+    <!-- FOOTER -->
+<input id="registrationCityValue" type="hidden" value= "Select Your City"/>
+
+
+
+
+<!--  <script>
+    window.pageParams = {
+        'locale': 'en',
+        'universalCode': 'GTM-WRBD5L',
+        'yandexMetrikaAccount': '18776650',
+    };
+    window.strings = {
+        EN: {
+            goto: 'Go to the English version of the site?',
+            no: 'Close',
+            yes: 'Yes',
+            cookie: 'This website uses cookies: by&nbsp;continuing to&nbsp;browse this site you accept this <a href="privacy/">policy</a>',
+            url: '/'
+        }
+    }
+</script>-->
+
+<script src="js/web-grid.js"></script>
+
+<script>
+	var isSafari = navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') == -1;
+	if(isSafari) {
+		document.addEventListener("DOMContentLoaded", function () {
+			if ('classList' in document.createElement('div') &&
+					'querySelector' in document &&
+					'addEventListener' in window && Array.prototype.forEach) {
+				document.documentElement.classList.add('mdl-js');
+				componentHandler.upgradeAllRegistered();
+			} else {
+				componentHandler.upgradeElement = function() {};
+				componentHandler.register = function() {};
+			}
+			WG.initAllRegistered();
+			window.svg4everybody();
+		})
+	}
+</script>

@@ -1,0 +1,281 @@
+<div ng-init="parentInit('parties');initUltConsignee()" ng-controller="exportOperationCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		   <!-- <div ng-include src="'views/export/menu.html'"></div> -->		   
+		   <div ng-include src="'views/export/menu.html'"></div>
+			   
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad response_info">
+            	      	
+            	 <!-- user form -->
+                          <form name="ultConsForm" id="ultConsForm" class="af-user row">
+	                        <div class="col-sm-6 col-md-6">
+	                        		
+	                        		 <div class=" af-outer af-required clearfix">
+		                                <div class="form-group">                
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="email">Consignee ID:</label>
+		                                        </div>
+		                                        <div class="col-sm-7">		                                        
+			                                        <input
+			                                            type="text" name="ultConsigneeCode" id="ultConsigneeCode" placeholder="" value="" size="30"
+			                                            data-toggle="tooltip" title="Email is required" ng-disabled="true"
+			                                            class="form-control placeholder" ng-model="shipment.ultConsigneeCode"/>                            
+		                                         </div>
+		                                </div>
+		                            </div>
+	                        		
+	                                <div class=" af-outer af-required clearfix">
+	                                    <div class="form-group">
+	                                            <div class="col-sm-5 enti_tt_alig">
+	                                            	<label for="name"><a href="javascript:void(0)" ng-click="searchConsigneePopup('ultCons')">Name:</a></label>&nbsp;<span class="required">*</span>
+	                                            </div>
+	                                            <div class="col-sm-7 autosuggest expConsAutoSuggest">
+		                                            <input
+		                                                type="text" name="ultConsigneeName" id="ultConsigneeName" uib-typeahead="consignee as consignee.consigneeId for consignee in getConsignees($viewValue) | limitTo:8"
+		                                                data-toggle="tooltip" title="Consignee is required"
+		                                                class="form-control placeholder" ng-model="shipment.ultConsigneeName"
+		                                                typeahead-template-url="consignee.html"
+		                                                typeahead-editable="true" 
+		                                                typeahead-min-length="0"
+		                                                typeahead-on-select="onConsigneeSelect($item, $model, $label)" autocomplete="off"/>
+	                                            <!-- <input
+	                                                type="text" name="name" id="name" placeholder="" value="" size="30"
+	                                                data-toggle="tooltip" title="Name is required"
+	                                                class="form-control placeholder" ng-model="shipment.ultConsigneeName"/> -->                            
+	                                             </div>
+	                                    </div>
+	                                </div>
+	                                            
+	                                <div class=" af-outer af-required clearfix">
+	                                    <div class="form-group">
+	                                        <div class="col-sm-5 enti_tt_alig">
+	                                            <label for="address_tt">Address:</label>&nbsp;<span class="required">*</span>
+	                                            </div>
+	                                            <div class="col-sm-7">
+	                                            <input
+	                                                type="text" name="address_tt" id="address_tt" placeholder="" value="" size="30"
+	                                                data-toggle="tooltip" title="Address is required"
+	                                                class="form-control placeholder" ng-model="shipment.ultConsigneeAddrLine1"/>                            
+	                                             </div>
+	                                     </div>
+	                                </div> 
+	                                
+	                                <div class="af-outer af-required clearfix">                
+	                                    <div class="col-sm-5 enti_tt_alig">
+	                                    <label for="export_city">City: </label>&nbsp;<span class="required">*</span>
+	                                    </div>
+	                                    <div class="col-sm-7 ">                                                    
+	                                            <div class="form-group selectpicker-wrapper">
+	                                                <!-- <select class="form-control input-shipped" name="export_city" ng-model="shipment.ultConsigneeCity" id="export_city" data-live-search="false" data-width="100%"
+	                                                    data-toggle="tooltip" title="Day">
+	                                                    <option value="">Select City</option>
+	                                                    <option value="01">ABC </option>
+	                                                    <option value="02">XYZ</option>
+	                                                </select> -->
+	                                                
+	                                                <input
+			                                              type="text" name="export_city" id="export_city" placeholder="" value="" size="30"
+			                                              data-toggle="tooltip" title="Address is required"
+			                                              class="form-control placeholder" ng-model="shipment.ultConsigneeCity"/>
+	                                            </div>
+	                                    </div>
+	                            </div>
+	                                <div class=" af-outer af-required clearfix">
+	                                    <div class="form-group af-required">                
+	                                    <div class="col-sm-5 enti_tt_alig">
+	                                    <label for="export_state">State: </label>&nbsp;<span class="required">*</span>
+	                                    </div>
+	                                    <div class="col-sm-7 autosuggest">
+	                                        
+	                                            <!-- <div class="form-group selectpicker-wrapper">
+	                                                <select class="form-control" name="export_state" ng-model="shipment.ultConsigneeState" id="export_state" data-live-search="false" data-width="100%"
+	                                                    data-toggle="tooltip" title="Day" ng-options="state.stateCode as state.stateName for state in states">
+	                                                    <option value="">Select State</option>
+	                                                   
+	                                                </select>
+	                                            </div> -->
+	                                            
+	                                             <input
+	                                                type="text" name="ultConsigneeStateName" id="ultConsigneeStateName" uib-typeahead="state as state.stateCode for state in getStates($viewValue, shipment.ultConsigneeCountryCode)"
+	                                                data-toggle="tooltip" title="State is required"
+	                                                class="form-control placeholder" ng-model="shipment.ultConsigneeStateName"
+	                                                typeahead-template-url="stateTmpl.html"
+	                                                typeahead-editable="false" 
+	                                                typeahead-min-length="0" 
+	                                                typeahead-on-select="selectStateEvent($item, $model, $label, 'ultConsigneeStateName', 'ultConsigneeState', shipment)" autocomplete="off" />
+		                                        <input
+		                                              type="text" name="ultConsigneeState" id="ultConsigneeState" placeholder="" value="" size="30"
+		                                              data-toggle="tooltip" 
+		                                              class="form-control placeholder" ng-model="shipment.ultConsigneeState" ng-show="false" />  
+	                                            
+	                                    </div>
+	                            </div>
+	                                </div>
+	                                
+	                                <div class=" af-outer af-required clearfix">
+	                                    <div class="form-group af-required">                
+	                                    <div class="col-sm-5 enti_tt_alig">
+	                                    <label for="export_country">Country: </label>&nbsp;<span class="required">*</span>
+	                                    </div>
+	                                    <div class="col-sm-7 autosuggest">
+	                                        
+	                                            <!-- <div class="form-group selectpicker-wrapper">
+	                                                <select class="form-control" name="export_country" ng-model="shipment.ultConsigneeCountryCode" id="export_country" data-live-search="false" data-width="100%"
+	                                                    data-toggle="tooltip" title="Day" ng-options="country.countryCode as country.countryName for country in countries"
+	                                                    ng-change="updateStates(shipment.ultConsigneeCountryCode)">
+	                                                    <option value="">Select Country</option>
+	                                                    
+	                                                </select>
+	                                            </div> -->
+	                                            
+	                                            <input
+	                                                type="text" name="ultConsigneeCountryName" id="ultConsigneeCountryName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+	                                                data-toggle="tooltip" title="Country is required"
+	                                                class="form-control placeholder left-inp" ng-model="shipment.ultConsigneeCountryName"
+	                                                typeahead-template-url="countryTmpl.html"
+	                                                typeahead-editable="false" 
+	                                                typeahead-min-length="0" ng-blur="clearCountry('ultConsigneeCountryCode', 'ultConsigneeStateName', 'ultConsigneeState', shipment.ultConsigneeCountryName, shipment)"
+	                                                typeahead-on-select="selectCountryEvent($item, $model, $label, 'ultConsigneeCountryName', 'ultConsigneeCountryCode', shipment)" autocomplete="off"/>
+								      	
+								      			<input name="ultConsigneeCountryCode" ng-model="shipment.ultConsigneeCountryCode" class="form-control right-inp" readonly="true"/>
+                                        
+	                                    </div>
+	                            </div>
+	                                </div>
+	                                
+	                                <div class=" af-outer af-required clearfix">
+	                                    <div class="form-group">
+	                                        <div class="col-sm-5 enti_tt_alig">
+	                                            <label for="export_postal">Zip/Postal Code:</label>&nbsp;<span class="required">*</span>
+	                                            </div>
+	                                            <div class="col-sm-7">
+	                                            <input
+	                                                type="text" name="export_postal" id="export_postal" placeholder="" value="" size="30"
+	                                                data-toggle="tooltip" title="Zip/Postal is required"
+	                                                class="form-control placeholder" ng-model="shipment.ultConsigneeZip"/>                            
+	                                             </div>
+	                                     </div>
+	                                </div>
+	                        </div>
+	                                                    
+	                        <div class="col-sm-6 col-md-6 ">
+	                        
+	                        	 <div class=" af-outer af-required clearfix">
+	                                <div class="form-group">                
+	                                        <div class="col-sm-5 enti_tt_alig">
+	                                        <label for="email">Consignee Type:</label>
+	                                        </div>
+	                                        <div class="col-sm-7">
+	                                        
+	                                        <select class="form-control" ng-model="shipment.ultConsigneeType">
+	                                        	<option value="">Select</option>
+												<option value="D">Direct Consumer</option>
+												<option value="G">Government Entity</option>
+												<option value="O">Other/ Unknown</option>
+												<option value="R">Reseller</option>
+	                                        </select>
+	                                        
+	                                        <!-- <input
+	                                            type="text" name="email" id="email" placeholder="" value="" size="30"
+	                                            data-toggle="tooltip" title="Email is required"
+	                                            class="form-control placeholder input-email" ng-model="shipment.ultConsigneeEmail"/>  -->                           
+	                                         </div>
+	                                </div>
+	                            </div>
+	                        
+	                            <div class=" af-outer af-required clearfix">
+	                                    <div class="form-group">
+	                                            <div class="col-sm-5 enti_tt_alig">
+	                                            <label for="firstname">First Name:</label>&nbsp;<span class="required">*</span>
+	                                            </div>
+	                                            <div class="col-sm-7">
+	                                            <input
+	                                                type="text" name="firstname" id="firstname" placeholder="" value="" size="30"
+	                                                data-toggle="tooltip" title="First name is required"
+	                                                class="form-control placeholder" ng-model="shipment.ultConsigneeFirstName"/>                            
+	                                             </div>
+	                                    </div>
+	                                </div>
+	                            
+	                            <div class=" af-outer af-required clearfix">                
+	                                <div class="form-group ">
+	                                    <div class="col-sm-5 enti_tt_alig">
+	                                        <label for="lastname">Last Name:</label>&nbsp;<span class="required">*</span>
+	                                        </div>
+	                                        <div class="col-sm-7">
+	                                        <input
+	                                            type="text" name="lastname" id="lastname" placeholder="" value="" size="30"
+	                                            data-toggle="tooltip" title="Last name is required"
+	                                            class="form-control placeholder" ng-model="shipment.ultConsigneeLastName"/>                            
+	                                    </div>
+	                                 </div>
+	                            </div>              
+	                            <div class=" af-outer af-required clearfix">
+	                                <div class="form-group">
+	                                        <div class="col-sm-5 enti_tt_alig">
+	                                        <label for="compname">Company Name:</label>&nbsp;<span class="required">*</span>
+	                                        </div>
+	                                        <div class="col-sm-7">
+	                                        <input
+	                                            type="text" name="Company" id="compname" placeholder="" value="" size="30"
+	                                            data-toggle="tooltip" title="Company name is required"
+	                                            class="form-control placeholder" ng-model="shipment.ultConsigneeCompanyName"/>                            
+	                                    </div>
+	                                </div>
+	                            </div>            
+	                            <div class=" af-outer af-required clearfix">
+	                                <div class="form-group">                
+	                                        <div class="col-sm-5 enti_tt_alig">
+	                                        <label for="phonenum">Phone No.: </label>&nbsp;<span class="required">*</span>
+	                                        </div>
+	                                        <div class="col-sm-7 ">
+	                                        <input onkeypress="return isNumber(event)"
+	                                            type="text" name="phoneNo" id="phonenum" placeholder="" value="" size="30"
+	                                            data-toggle="tooltip" title="Phone No. is required"
+	                                            class="form-control placeholder " ng-model="shipment.ultConsigneePhone" required/>                            
+	                                         </div>
+	                                </div>
+	                            </div>
+	                            <div class=" af-outer af-required clearfix">
+	                                <div class="form-group">                
+	                                        <div class="col-sm-5 enti_tt_alig">
+	                                        <label for="email">Email:</label>&nbsp;<span class="required">*</span>
+	                                        </div>
+	                                        <div class="col-sm-7">
+	                                        <input
+	                                            type="text" name="email" id="email" placeholder="" value="" size="30"
+	                                            data-toggle="tooltip" title="Email is required"
+	                                            class="form-control placeholder input-email" ng-model="shipment.ultConsigneeEmail"/>                            
+	                                         </div>
+	                                </div>
+	                            </div>
+	                            
+	                           
+	                        <!-- /User form Left part -->
+	                        </div>
+	
+							<div class="clearfix"></div>
+	
+	                        <div class="col-sm-6 col-md-6 margin-10tb clearfix" >
+	                            <div>
+	                                <input type="button" name="Next" value="Next" ng-click="saveShipment('continue', 'utlConsignee')" id=" " class="btn btn-license">
+	                                <input type="submit" name="Save Shipment" value="Save shipment" ng-click="saveShipment('save', 'utlConsignee')" id="btn-license" class="btn btn-license">
+	                                <input type="button" name="Cancel" value="Cancel" ng-click="cancelShipment(shipment.id, 'createExporter')" id=" " class="btn btn-black">
+	                            </div>
+	                        </div>                             
+                             </form>			                  
+                   <!-- /user form -->
+            	
+            </div>
+       			   
+			   <!-- <div>
+			   		<div ng-view></div>
+			   </div> -->
+			                        
+         </div>         
+       </div>
+     </div>
+</div>

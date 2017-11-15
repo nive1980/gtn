@@ -1,0 +1,226 @@
+<div ng-init="parentInit('listItemsCartons');initListItemCarton()" ng-controller="exportOperationCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		    <div ng-include src="'views/export/menu.html'"></div>
+			   
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad response_info yello-div">
+            	      	
+            	 <!-- user form -->
+           	               <form name="documents-form" class="af-user row">
+								
+								<div class="col-sm-12 col-md-12 clearfix " >
+					                    <h4 class="margin10-top strong">Items</h4>
+					            </div>
+					            
+					            <div class="col-sm-12 col-md-12 no_pad response_info" >
+					                   <div class="info_div item-container">
+					                           <div class="col-sm-12 col-md-12">
+					                           
+					                           <mdt-table animate-sort-icon="true" ripple-effect="true"
+						            				selectable-rows = "false"
+						            				table-card="{visible: true, title: 'Items', columnSelector: true}"	
+											        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+											        mdt-row="{
+											        	 data: itemList,
+											            'table-row-id-key': 'id',
+											            'column-keys': itemColumns
+											        }">
+										        <mdt-header-row>
+										            <mdt-column align-rule="left" column-sort="true" column-definition="Item No."><span>Item No.</span></mdt-column>
+										            <mdt-column align-rule="left" column-sort="true" column-definition="Part Number"><span>Part No</span></mdt-column>
+										            <mdt-column align-rule="left" column-sort="true" column-definition="HTS Schedule"><span>HTS Schedule</span></mdt-column>
+										            <mdt-column align-rule="left" column-sort="true" column-definition="Unit of Measure"><span>Unit of Measure</span></mdt-column>
+										            
+										            <mdt-column align-rule="left" column-sort="true" column-definition="Quantity"><span>Quantity</span></mdt-column>
+										            <mdt-column align-rule="left" column-sort="true" column-definition="Invoice Value"><span>Invoice Value</span></mdt-column>
+										            <mdt-column align-rule="left" column-sort="true" column-definition="Whole Sale Value"><span>Whole Sale Value</span></mdt-column>
+										            <mdt-column align-rule="left" column-sort="true" column-definition="Country of origin"><span>COO</span></mdt-column>
+										            
+										            <mdt-column column-definition="Copy"><span>Copy</span></mdt-column>
+										            <mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+										        </mdt-header-row>
+										        
+										        <mdt-custom-cell column-key="itemNo">
+										        	<a href="javascript:void(0);" ng-click="clientScope.addItem(shipment, rowId, value, false, null)" style="text-decoration: underline">{{ value }}</a>
+										        </mdt-custom-cell>
+										        <mdt-custom-cell column-key="copy">
+										        	<!-- <a href="javascript:void(0)" ng-click="copyCarton(shipment, carton.id)"><i class="fa fa-copy" aria-hidden="true"></i></a> -->
+										        	<a href="javascript:void(0);" ng-click="clientScope.copyItem(shipment, value)"><i class="fa fa-copy" aria-hidden="true"></i></a>
+										        </mdt-custom-cell>
+										        <mdt-custom-cell column-key="delete">						            
+										            <a href="javascript:void(0)" ng-click="clientScope.deleteItem(value, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+										        </mdt-custom-cell>
+					                           
+					                           <!-- <table class="exp_ship_table">
+					                                <thead>
+					                                    <tr>
+					                                        <th class="">Item No.</th>
+					                                        <th class="">Part No. </th>
+					                                        <th class="">HTS Schedule </th>
+					                                        <th class="">Unit of <br>Measure </th>
+					                                        <th class="">Quantity </th>
+					                                        <th class="">Invoice Value</th>
+					                                        <th class="">Whole Sale Value</th>
+					                                        <th class="">Country of <br>Origin</th>
+					                                        <th class="">Copy</th>
+					                                        <th class="">Delete</th>
+					                                    </tr>
+					                                </thead>
+					                                
+					                                <tbody>
+					                                
+					                                	<tr ng-repeat="item in items track by $index" class="exp_ship_item">
+					                                		<td><a href="javascript:void(0);" ng-click="addItem(shipment, item.id, item.itemNo, false, null)" style="text-decoration: underline"> {{ item.itemNo }} </a></td>
+					                                		<td>{{ item.partNo }}</td>
+					                                		<td>{{ item.htsSchedule }}</td>
+					                                		<td>{{ item.htsScheduleUom }}</td>
+					                                		<td>{{ item.invoiceQty }}</td>
+					                                		<td>{{ item.invoiceValue }}</td>
+					                                		<td>{{ item.wholeSaleValue }}</td>
+					                                		<td>{{ item.coo }}</td>
+					                                		<td class=""><span class="m-exp_ship_head">Copy: </span> <a href="javascript:void(0)" ng-click="copyItem(shipment, item.id)"><i class="fa fa-copy" aria-hidden="true"></i></a></td>
+					                                        <td class=""><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)" ng-click="deleteItem(item.id, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+					                                	</tr>					                                
+					                                
+					                                    				                                               
+					                                </tbody>
+					                            </table> -->
+					                        </div>
+												
+					                            <div class="col-sm-12 col-md-12 margin-20tb text-right clearfix">
+					                            	<!-- <a href="javascript:void(0)">View 1 - 2 of 2</a> &nbsp; -->
+					                            	
+					                            	<!-- gtn-click="/createAddItem" -->
+					                            	
+						                            <a href="javascript:void(0);" ng-click="addItem(shipment, null, null, false, null)"  class="btn btn-entity  strong">add item  <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+					                            </div>
+					                   </div>
+					                   </div>
+					            
+					            <div class="col-sm-12 col-md-12 clearfix " >
+					                    <h4 class="margin10-top strong">Cartons</h4>
+					            </div>
+					            
+					            <div class="col-sm-12 col-md-12 no_pad response_info" >
+					                   <div class="info_div carton-container">
+					                           <div class="col-sm-12 col-md-12">
+					                           
+					                           <mdt-table animate-sort-icon="true" ripple-effect="true"
+						            				selectable-rows = "false"
+						            				table-card="{visible: true, title: 'Cartons', columnSelector: true}"	
+											        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+											        mdt-row="{
+											        	 data: cartonsList,
+											            'table-row-id-key': 'id',
+											            'column-keys': cartonColumns
+												        }">
+											        <mdt-header-row>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Carton No."><span>Carton No.</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Gross Weight (KGs)"><span>Gross Weight (KGs)</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="No of Packages"><span>No of Packages</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Hazardous"><span>Hazardous</span></mdt-column>
+											            <mdt-column column-definition="Copy"><span>Copy</span></mdt-column>
+											            <mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+											        </mdt-header-row>
+											        
+											        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+											        <mdt-custom-cell column-key="cartonNo">
+											        	<a href="javascript:void(0);" ng-click="clientScope.addCarton(shipment, rowId, value, false, null)" style="text-decoration: underline">{{ value }}</a>
+											        </mdt-custom-cell>
+											        <mdt-custom-cell column-key="copy">
+											        	<!-- <a href="javascript:void(0)" ng-click="copyCarton(shipment, carton.id)"><i class="fa fa-copy" aria-hidden="true"></i></a> -->
+											        	<a href="javascript:void(0);" ng-click="clientScope.copyCarton(shipment, value)"><i class="fa fa-copy" aria-hidden="true"></i></a>
+											        </mdt-custom-cell>
+											        <mdt-custom-cell column-key="delete">						            
+											            <a href="javascript:void(0)" ng-click="clientScope.deleteCarton(value, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+											        </mdt-custom-cell>
+				        
+									    		</mdt-table>
+					                           
+					                           <!-- <table class="exp_ship_table">
+					                                <thead>
+					                                    <tr>
+					                                        <th class="">Sr No.</th>
+					                                        <th class="">Carton No. </th>
+					                                        <th class="">Gross Weight (KGs) </th>
+					                                        <th class="">No of Packages </th>
+					                                        <th class="">Hazardous</th>
+					                                        <th class="">Copy</th>
+					                                        <th class="">Delete</th>
+					                                    </tr>
+					                                </thead>
+					                                
+					                                <tbody>
+					                                	<tr ng-repeat="carton in cartons track by $index" class="exp_ship_item">
+					                                		<td><a href="javascript:void(0);" ng-click="addCarton(shipment, carton.id, carton.cartonNo, false, null)" style="text-decoration: underline"> {{ $index + 1 }} </a></td>		
+					                                		<td>{{ carton.cartonNo }} </td>	
+					                                		<td>{{ carton.grossWeight }}</td>	
+					                                		<td>{{ carton.packageNo }}</td>	
+					                                		<td>{{ carton.haszmat }}</td>
+					                                		<td class=""><span class="m-exp_ship_head">Copy: </span> <a href="javascript:void(0)" ng-click="copyCarton(shipment, carton.id)"><i class="fa fa-copy" aria-hidden="true"></i></a></td>
+					                                        <td class=""><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)" ng-click="deleteCarton(carton.id, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>	                                		
+					                                	</tr>
+					                                	
+					                                
+					                                    <tr class="exp_ship_item">
+					                                        <td class=""><span class="m-exp_ship_head">Item No.:</span> 1</td>
+					                                        <td class=""><span class="m-exp_ship_head">Invoice No.:</span> PINA123</td>
+					                                        <td class=""><span class="m-exp_ship_head">Carton No.: </span> Guns </td>
+					                                        <td class=""><span class="m-exp_ship_head">Gross Weight (KGs): </span> <a href="javascript:void(0)"> Bag</a></td>
+					                                        <td class=""><span class="m-exp_ship_head">No of Packages: </span> <a href="javascript:void(0)"> 100 Bag</a> </td>
+					                                        <td class=""><span class="m-exp_ship_head">Hazardous: </span> <a href="javascript:void(0)"> 100</a></td>
+					                                        <td class=""><span class="m-exp_ship_head">Copy: </span> <a href="javascript:void(0)"><i class="fa fa-copy" aria-hidden="true"></i></a></td>
+					                                        <td class=""><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+					                                    </tr>
+					                                                       
+					                                </tbody>
+					                            </table> -->
+					                        </div>
+												
+					                            <div class="col-sm-12 col-md-12 margin-20tb text-right clearfix">
+					                            	<!-- <a href="javascript:void(0)">View 1 - 1 of 1</a> &nbsp; -->
+						                            <a href="javascript:void(0)" ng-click="addCarton(shipment, null, null, false, null)" class="btn btn-entity  strong">add carton <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+					                            </div>
+					                   </div>
+					                   </div>
+					            
+					
+					                        <div class="col-sm-6 col-md-6 margin-10tb clearfix" >
+					                            <div>
+					                            	<input type="button" name="Next" value="Next" ng-click="saveListItemCarton('continue')" id=" " class="btn btn-license">
+					                                <input type="submit" name="Save Shipment" value="Save shipment" ng-click="saveListItemCarton('save')" id="btn-license" class="btn btn-license">
+					                                <input type="button" name="Cancel" value="Cancel" ng-click="cancelShipment(shipment.id, 'shipmentBilling')" id=" " class="btn btn-black">					                           
+					                            </div>
+					                        </div>                             
+                                </form>
+                   <!-- /user form -->
+            	
+            </div>
+       			   
+			   <!-- <div>
+			   		<div ng-view></div>
+			   </div> -->
+			                        
+         </div>         
+       </div>
+     </div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArrItem = [{index: 1, width: '8%'}, {index: 2, width: '11%'}, {index: 3, width: '11%'}, {index: 4, width: '11%'}, 
+		                {index: 5, width: '12%'}, {index: 6, width: '11%'}, {index: 7, width: '11%'}, {index: 8, width: '11%'}
+		                , {index: 8, width: '13%'}, {index: 9, width: '7%'}, {index: 10, width: '6%'}];
+		
+		adjustColumns(widthArrItem, '.item-container');
+		
+		var widthArrCarton = [{index: 1, width: '22%'}, {index: 2, width: '22%'}, {index: 3, width: '22%'}, {index: 4, width: '22%'}, 
+			                {index: 5, width: '6%'}, {index: 6, width: '6%'}];
+			
+		adjustColumns(widthArrCarton, '.carton-container');
+	});
+</script>

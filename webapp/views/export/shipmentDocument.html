@@ -1,0 +1,266 @@
+<div ng-init="parentInit('documents');initShipmentDocument()" ng-controller="exportOperationCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		   <div ng-include src="'views/export/menu.html'"></div>
+		   			
+			<!-- <div class="alert alert-danger" ng-show="errors.length > 0">
+			    <a href="javascript:void(0)" class="close" data-dismiss="alert">&times;</a>
+			    <strong>Error!</strong> 
+				  <ul>
+				  	<li ng-repeat="error in errors">
+				  		{{error}}
+				  	</li>
+				  </ul>
+			</div> -->
+
+					   
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad response_info yello-div">
+            	      	
+            	 <!-- user form -->           	               
+                   			<form name="documents-form" class="af-user row">
+                   			
+                   					<div style="display: none">
+                   						<input type="hidden" name="easeStatus" ng-model="shipment.easeStatus" />
+                   					</div>
+                   			
+                            		<div class="col-sm-12 col-md-12 clearfix " >
+				                        <h4 class="margin10-top strong">Supporting Documents</h4>
+			                        </div>
+	                        
+                        			<div class="col-sm-12 col-md-12 margin-20tb">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-3">
+			                                            <label for="port_num">Upload Documents:</label> 
+			                                            </div>
+			                                            <div class="col-sm-4">
+			                                            	<input type="file" name="shipmentDoc" file-model="shipmentDoc">  											
+			                                             </div>
+			                                             
+			                                             <div class="col-sm-2">
+			                                             	<input type="submit" value="Upload" ng-click="uploadShipmentDoc()" class="btn btn-upload">
+			                                             </div>
+			                                    </div>
+			                                    
+			                          </div>
+			                                
+			                        </div>
+
+						            <div class="col-sm-12 col-md-12 no_pad response_info" >
+						                   <div class="info_div">
+						                           <div class="col-sm-12 col-md-12">
+						                           
+						                           	 <mdt-table animate-sort-icon="true" ripple-effect="true"
+								            				selectable-rows = "false"
+								            				table-card="{visible: true, title: 'Documents', columnSelector: true}"	
+													        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+													        mdt-row="{
+													        	 data: shipmentDocList,
+													            'table-row-id-key': 'id',
+													            'column-keys': shipmentDocColumns
+														        }">
+													        <mdt-header-row>
+													            <mdt-column align-rule="left" column-sort="true" column-definition="Document ID"><span>No.</span></mdt-column>
+													            <mdt-column align-rule="left" 
+													            	column-sort="true" 
+													            	column-definition="File Type"><span>File Type</span></mdt-column>
+													            <mdt-column align-rule="left" column-sort="true" column-definition="File Name"><span>File Name</span></mdt-column>
+													            <mdt-column align-rule="left" column-sort="true" column-definition="Date Added"><span>Date Added</span></mdt-column>
+													            <mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+													        </mdt-header-row>
+													        
+													        
+													        <mdt-custom-cell column-key="createdOn">
+													        	{{ value | date:'dd/MM/yyyy' }}
+													        </mdt-custom-cell>
+													        
+													        <mdt-custom-cell column-key="fileName">
+													        	<a href="downloadDocument?id={{ rowId }}"  style="text-decoration: underline"> {{ value }} </a>
+													        	
+													        </mdt-custom-cell>
+													        
+													        <mdt-custom-cell column-key="delete">						            
+													            <a href="javascript:void(0)" ng-click="clientScope.deleteDoc(rowId, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+													        </mdt-custom-cell>
+						        
+											    		</mdt-table>
+						                           
+						                           		<!-- <mdt-table animate-sort-icon="true" ripple-effect="true"
+								            				selectable-rows = "false"
+								            				table-card="{visible: true, title: 'Documents', columnSelector: true}"	
+													        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}">
+														   <mdt-header-row>
+													            <mdt-column align-rule="left" column-sort="true" column-definition="Document ID"><span>No.</span></mdt-column>
+													            <mdt-column align-rule="left" 
+													            	column-sort="true" 
+													            	column-definition="File Type"><span>File Type</span></mdt-column>
+													            <mdt-column align-rule="left" column-sort="true" column-definition="File Name"><span>File Name</span></mdt-column>
+													            <mdt-column align-rule="left" column-sort="true" column-definition="Date Added"><span>Date Added</span></mdt-column>
+													            <mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+													        </mdt-header-row>
+														    <mdt-row ng-repeat="doc in shipmentDocList">
+														    
+														     <mdt-cell><span>{{doc.id}}</span></mdt-cell>
+														     <mdt-cell><span ng-dblclick="editFileType(doc)">
+														     
+														     	<span ng-hide="doc.editing" >{{doc.fileType}}</span>
+														     	<select ng-show="doc.editing" ng-model="doc.fileType" ng-change="doneEditing(doc)" ng-blur="doneEditing(doc)" class="form-control fileTypeSelect" autofocus >
+																        	<option>SED Form</option>
+																        	<option>Commercial Invoice</option>
+																        	<option>Customs Invoice</option>
+																        	<option>Shipper's letter of instructions</option>
+																        	<option>Mailing label</option>
+																        	<option>Certificate of origin</option>
+																        	<option>NAFTA declaration</option>
+																        	<option>Import certificate</option>
+																        	<option>Packing list</option>																        	
+																        	<option>House airway bill</option>
+																        	<option>Master airway bill</option>
+																        	<option>Lodge license letter</option>
+																        	<option>Re transfer request letters</option>
+																        	<option>ITAR 126.4(c) letters</option>
+																        	<option>AES confirmation email</option>
+																        	<option>Purchase order</option>
+																        	<option>Price quote</option>
+																        	<option>End use statement</option>
+																        	<option>Bill of landing</option>
+																        	<option>Other</option>
+																  </select> 
+																        
+														     </span></mdt-cell>
+														     <mdt-cell><span>
+														     		<a href="downloadDocument?id={{ doc.id }}"  style="text-decoration: underline"> {{doc.fileName}} </a>
+														     		
+														     </span></mdt-cell>
+														     <mdt-cell><span>{{doc.createdOn | date:'dd/MM/yyyy'}}</span></mdt-cell>
+														     <mdt-cell><span>
+														     	<a href="javascript:void(0)" ng-click="deleteDoc(doc.id, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+													
+														     </span></mdt-cell>
+														    </mdt-row>
+														  </mdt-table> -->
+						                           
+						                           
+							                           <!-- <table class="exp_ship_table">
+							                                <thead>
+							                                    <tr>
+							                                        <th class="">No.</th>
+							                                        <th class="">File Type</th>
+							                                        <th class="">File Name</th>
+							                                        <th class="">Dated Added</th>
+							                                        <th class="">Delete</th>
+							                                    </tr>
+							                                </thead>
+							                               
+							                                <tbody>
+							                                	<tr ng-repeat="doc in shipmentDocs track by $index" class="exp_ship_item">
+							                                		<td class="">{{ $index + 1 }}</td>
+							                                        <td class="" ng-dblclick="editFileType(doc)" style="width: 30%">
+							                                        	
+																        <span ng-hide="doc.editing" >{{doc.fileType}}</span>
+																        
+																        <select ng-show="doc.editing" ng-model="doc.fileType" ng-change="doneEditing(doc)" ng-blur="doneEditing(doc)" class="form-control fileTypeSelect" autofocus >
+																        	<option>SED Form</option>
+																        	<option>Commercial Invoice</option>
+																        	<option>Customs Invoice</option>
+																        	<option>Shipper's letter of instructions</option>
+																        	<option>Mailing label</option>
+																        	<option>Certificate of origin</option>
+																        	<option>NAFTA declaration</option>
+																        	<option>Import certificate</option>
+																        	<option>Packing list</option>																        	
+																        	<option>House airway bill</option>
+																        	<option>Master airway bill</option>
+																        	<option>Lodge license letter</option>
+																        	<option>Re transfer request letters</option>
+																        	<option>ITAR 126.4(c) letters</option>
+																        	<option>AES confirmation email</option>
+																        	<option>Purchase order</option>
+																        	<option>Price quote</option>
+																        	<option>End use statement</option>
+																        	<option>Bill of landing</option>
+																        	<option>Other</option>
+																        </select>        
+							                                        
+							                                       	</td>
+							                                        <td class=""><a href="downloadDocument?id={{ doc.id }}"  style="text-decoration: underline"> {{ doc.fileName }} </a> </td>
+							                                        <td class="">{{ doc.createdOn | date:'MM/dd/yyyy' }}</td>
+							                                        <td class=""><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)" ng-click="deleteDoc(doc.id, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+							                                	</tr>
+							                                                   
+							                                </tbody>
+							                            </table> -->
+						                        	</div>
+						
+						                   		</div>
+						                   </div>
+            
+								            <div class="col-sm-12 col-md-12 clearfix " >
+								                    <h4 class="margin10-top strong">Instructions</h4>
+								            </div>
+								            
+								            <div class="col-sm-12 ">
+								            	<div class="col-sm-12  ">
+								            <div class="col-sm-12 af-outer af-required no_pad">
+								                <div class="form-group">
+								                        <div class="col-sm-3 enti_tt_alig" >
+								                        <label for="spec_ins">Special Instructions: </label> 
+								                        </div>
+								                        <div class="col-sm-9 no_pad">
+								                        <textarea name="spec_ins" ng-model="shipment.specialInstruction" id="spec_ins" rows="4" cols="50" data-toggle="tooltip" title="Special Instructions is required" class="form-control placeholder spec_ins"></textarea>
+								                         </div>
+								                </div>
+								            </div> 
+								            
+								            <div class="col-sm-12 af-outer af-required no_pad">
+								                <div class="form-group">
+								                        <div class="col-sm-3 enti_tt_alig" >
+								                        <label for="ship_ins">Shipment Instructions: </label> 
+								                        </div>
+								                        <div class="col-sm-9 no_pad">
+								                        <textarea name="ship_ins" ng-model="shipment.shipmentInstruction" id="ship_ins" rows="4" cols="50" data-toggle="tooltip" title="Shipment Instructions is required" class="form-control placeholder ship_ins"></textarea>
+								                         </div>
+								                </div>
+								            </div>  
+								            	</div>         
+								            </div>
+								
+					                        <div class="col-sm-12 col-md-12 margin-10tb clearfix" >
+					                            <div class="col-sm-6 col-md-6">
+					                                <input type="button" name="Save Shipment" value="Save shipment" ng-click="saveShipment('save', 'shipmentDocument')" id="btn-license" class="btn btn-license">
+					                                <input type="button" name="Validate" value="Validate" ng-click="validateShipment(shipment.id)" class="btn btn-license">
+					                                <input type="button" name="Cancel" value="Cancel" ng-click="cancelShipment(shipment.id, 'bookingCustomFiling')" id=" " class="btn btn-black">
+					                                					                                
+					                            </div>
+					                            
+					                            <div class="col-sm-6 col-md-6 text-right">					                            	
+					                                <input type="button" name="Submit to AES" value="Submit to AES" ng-click="submitShipmetToEASE(shipment.id, $event)" id=" " class="btn btn-license">
+													<input type="button" name="Cancel Shipment" value="Cancel Shipment" ng-click="cancelShipmentStatus(shipment.id, $event)" id=" " class="btn btn-black">
+					                            </div>
+					                        </div>                             
+                                	</form>	
+                   <!-- /user form -->
+            	
+            </div>
+       			   
+			   <!-- <div>
+			   		<div ng-view></div>
+			   </div> -->
+			                        
+         </div>         
+       </div>
+     </div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '10%'}, {index: 2, width: '27%'}, {index: 3, width: '25%'}, {index: 4, width: '16%'}, 
+		                {index: 5, width: '6%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>

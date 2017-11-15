@@ -1,0 +1,26 @@
+.modal-header {
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #B8B6B6;
+  background-color: #EAEAEA;
+  text-align: center;
+}
+
+.modal-body {
+  position: relative;
+  padding: 15px;
+  background-color: #F4F4F4;
+  min-height: 400px;
+}
+
+.modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #B8B6B6;
+  background-color: #EAEAEA;
+
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+}

@@ -1,0 +1,269 @@
+<div ng-init="initSearchConsignee()" ng-controller="masterCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>Search Consignee</h1>
+                </div>
+                <hr>
+				<!-- Contact login form -->
+				<!--<form id="registration-form" name="registration-form" class="registration-form" action="#" method="post"> -->
+		        <form name="entity-form" id="entity-form" class="af-entity" novalidate>
+			   		
+			   		<!-- <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button ng-click="searchConsignee()" class="btn btn-license">Search</button>
+		            		<button ng-click="editConsignee(consignee.consigneeId, 'New')" class="btn btn-license">Add Consignee</button>
+		            		<button type="reset" class="btn btn-black">Reset</button>
+		            	</div>
+		            </div> -->
+		            
+		            <div ng-include src="'views/masters/message.html'"></div>
+		            
+		            <div class="row">
+		            
+		            	<label class="col-xs-2 control-label">
+		            		Consignee ID
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="consignee.consigneeId" class="form-control" />
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		SBU Code
+		            	</label>
+		            	<div class="col-xs-3">
+		            		            		
+		            		<select ng-model="consignee.sbuCode" class="form-control ">
+		            			<!-- <option value="">Select</option> -->
+		            			<option ng-repeat="sbu in sbuList" value="{{sbu}}"> {{ sbu }} </option>
+		            		</select>
+		            	</div>
+		            	
+		            	
+		            </div>
+		            
+		            <div class="row">
+		            
+		            	<label class="col-xs-2 control-label">
+		            		Name
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="consignee.consigneeName" class="form-control" />
+		            	</div>
+		            
+		            	<label class="col-xs-2 control-label">
+		            		Status
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="consignee.status" class="form-control ">
+		            			<option value="">-Select-</option>
+							    <option value="T">To Be Screened</option>
+							    <option value="A">Approved</option>
+							    <option value="H">On Hold</option>
+							    <option value="D">Denied</option>
+							    <option value="O">Overridden</option>
+		            		</select>
+		            	</div>
+		            			            	
+		            </div>
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Address 1
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="consignee.consigneeAddr1" class="form-control" />
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		City
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="consignee.consigneeCity" class="form-control" />
+		            	</div>
+		            </div>
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Address 2
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="consignee.consigneeAddr2" class="form-control" />
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		State
+		            	</label>
+		            	<div class="col-xs-3 autosuggest">
+		            		 <!-- <input ng-model="consignee.consigneeState" class="form-control" /> -->
+		            		 
+		            		 <input
+                                   type="text" name="consigneeStateName" id="consigneeStateName" uib-typeahead="state as state.stateCode for state in getStates($viewValue, consignee.consigneeCountry)"
+                                   data-toggle="tooltip" title="State is required"
+                                   class="form-control placeholder" ng-model="consignee.consigneeStateName"
+                                   typeahead-template-url="stateTmpl.html"
+                                   typeahead-editable="false" 
+                                   typeahead-min-length="0" 
+                                   typeahead-on-select="selectStateEvent($item, $model, $label, 'consigneeStateName', 'consigneeState', consignee)" autocomplete="off" />
+   		 		            		 
+		            	</div>
+		            	
+		            	<div class="col-xs-1">
+		            		 <label class="control-label">{{ exporter.consigneeState }}</label>
+		            		 <input ng-model="consignee.consigneeState" ng-show="false" />
+		            	</div>
+		            </div>
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Telephone
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="consignee.phone" class="form-control" />
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Country
+		            	</label>
+		            	<!-- <div class="col-xs-3">
+		            		 <input ng-model="consignee.consigneeCountry" class="form-control" />
+		            	</div> -->
+		            	
+		            	<div class="col-xs-3 autosuggest">										      	
+				      		<input
+                                  type="text" name="consigneeCountryName" id="consigneeCountryName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+                                  data-toggle="tooltip" title="Country is required"
+                                  class="form-control placeholder left-inp" ng-model="consignee.consigneeCountryName"
+                                  typeahead-template-url="countryTmpl.html"
+                                  typeahead-editable="false" 
+                                  typeahead-min-length="0" ng-blur="clearCountry('consigneeCountry', 'consigneeStateName', 'consigneeState', consignee.consigneeCountryName, consignee)"
+                                  typeahead-on-select="selectCountryEvent($item, $model, $label, 'consigneeCountryName', 'consigneeCountry', consignee)" autocomplete="off"/>
+	
+				      		<input name="consigneeCountry" ng-model="consignee.consigneeCountry" class="form-control right-inp" readonly="true"/>
+				      	</div>
+		            </div>
+		            
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Zip
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="consignee.zip" class="form-control" />
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Active
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="consignee.active" class="form-control ">
+			            		<option value="">-ALL-</option>
+							    <option value="Y">Active</option>
+							    <option value="N">Inactive</option>
+						    </select>
+		            	</div>
+		            </div>
+		            
+		            <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+		            	<div class="col-xs-12">
+		            		<input type="checkbox" class="" ng-model="consignee.useForDos" /> DOS <input type="checkbox" class="" ng-model="consignee.useForDoc" /> DOC <input type="checkbox" class="" ng-model="consignee.useForAes" /> AES  			
+		            	</div>		    
+		            </div>
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Type Of Consignee
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="consignee.typeOfConsignee" class="form-control">
+		            			<option value="">Select</option>
+		            			<option value="OE">Customer - OE</option>
+							    <option value="AR">Customer - AR Distributor</option>
+							    <option value="AG">Vendor - Agent (ie. Customs, travel, permit)</option>
+							    <option value="CN">Vendor - Consultant (ie. Legal, tax, finance)</option>
+							    <option value="DM">Vendor - Direct Materials</option>
+							    <option value="IM">Vendor - Indirect Materials</option>
+							    <option value="OS">Other - Services</option>
+		            		</select>
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Sales Person
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<input ng-model="consignee.salesPerson" class="form-control" />
+		            	</div>
+		            </div>
+		            
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Sort By
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="consignee.sortBy" class="form-control ">
+							    <option value="consigneeId">Consignee ID</option>
+							    <option value="consigneeName">Name</option>
+							    <option value="consigneeAddr1">Address 1</option>
+							    <option value="consigneeAddr2">Address 2</option>
+							    <option value="consigneeCity">City</option>
+							    <option value="consigneeState">State</option>
+							    <option value="consigneeCountryName">Country</option>
+						    </select>
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Direction
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="consignee.direction" class="form-control ">
+							    <option value="ASC">Ascending</option>
+							    <option value="DESC">Decending</option>
+						    </select>
+		            	</div>
+		            </div>
+		            
+		            
+		            <div class="row">
+		            	<label class="col-xs-2">
+		            		Is consignee fully or partially owned by government?
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="consignee.ownedByGovt" class="form-control">
+		            			<option value="">Select</option>
+		            			<option value="Y">Yes</option>
+		            			<option value="N">No</option>
+		            		</select>
+		            	</div>
+		            	<label class="col-xs-2">
+							Aviation, Military or Nuclear end-use?		            	
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="consignee.aviationMilNucEndUse" class="form-control">
+		            			<option value="">Select</option>
+		            			<option value="A">Aviation</option>
+							    <option value="N">Nuclear</option>
+							    <option value="M">Military</option>
+		            		</select>
+		            	</div>
+		            </div>
+		            
+		            <div class="row btn-row-bottom">
+		            	<div class="col-xs-6">
+		            		<button ng-click="searchConsignee('search')" class="btn btn-license">Search</button>
+		            		<button ng-click="editConsignee(consignee.consigneeId, 'New')" class="btn btn-license">Add Consignee</button>
+		            		<button type="reset" class="btn btn-black">Reset</button>
+		            	</div>
+		            </div>
+			   		
+		        </form> 
+                <!-- /Contact entity form -->
+             </div>                                
+		</div>
+      </div>
+	</div>
+</div>

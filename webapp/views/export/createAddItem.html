@@ -1,0 +1,643 @@
+<div ng-init="parentInit('listItemsCartons');initAddItem()" ng-controller="itemCartonController" class="container-fluid no_pad" id="addItemController">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		   <div ng-include src="'views/export/menu.html'"></div>
+		   
+			<div class="hidden_fields">
+				<input type="hidden" name="itemId" ng-model="item.id" />
+				<input type="hidden" name="shipmentId" ng-model="item.shipmentId" />
+			</div>   
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad response_info yello-div">
+            	      	
+            	 <!-- user form -->
+           	                <form name="itemForm" class="af-user row">
+								<div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Items Information</h4>
+		                        </div>
+		                        <div class="col-sm-6 col-md-6">
+		                        
+		                        	   <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            	<label for="port_num">Item Number:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+			                                            <input
+			                                                type="text" name="port_num" id="port_num" placeholder="" value="" size="30"
+			                                                data-toggle="tooltip" title="Item number is required"
+			                                                class="form-control placeholder" ng-model="item.itemNo" readonly="true"/>                            
+		                                             </div>
+		                                    </div>
+		                                </div>
+		                        
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="port_num">
+		                                            	<a href="javascript:void(0)" ng-click="searchProductPopup('shipment')">Part Number:</a>
+		                                            	
+		                                            </label> 
+		                                            </div>
+		                                            <div class="col-sm-7 autosuggest autosuggest115">
+		                                            <!-- <input
+		                                                type="text" name="port_num" id="port_num" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Port number is required"
+		                                                class="form-control placeholder" ng-model="item.partNo"/>  -->
+		                                                
+		                                                <input
+			                                                type="text" name="partNo" id="partNo" uib-typeahead="product as product.partNo for product in getProducts($viewValue) | limitTo:8"
+			                                                data-toggle="tooltip" title="Part No is required"
+			                                                class="form-control placeholder" ng-model="item.partNo"
+			                                                typeahead-template-url="productTmpl.html"
+			                                                typeahead-editable="true" 
+			                                                typeahead-min-length="0"
+			                                                typeahead-on-select="onProductSelect($item, $model, $label)" autocomplete="off"/>
+		                                                
+		                                                                           
+		                                             </div>
+		                                    </div>
+		                                </div>
+		                                            
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="hts_sch">HTS/Schdule B & Primary UOM:</label> 
+		                                            </div>
+		                                            <div class="col-sm-4">
+			                                            <input
+			                                                type="text" name="hts_sch" id="hts_sch" placeholder="" value="" size="30"
+			                                                data-toggle="tooltip" title="HTS/Schdule B is required"
+			                                                class="form-control placeholder" ng-model="item.htsSchedule"/>
+		                                            </div>
+		                                            <div class="col-sm-3">    
+			                                            <input
+			                                                type="text" name="hts_uom" id="hts_uom" value="" size="30"
+			                                                data-toggle="tooltip" title="UOM is required"
+			                                                class="form-control placeholder" placeholder="UOM" ng-model="item.htsScheduleUom"/>		                                                
+		                                                                      
+	                                             	</div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="import_hts">Import HTS/UOM:</label> 
+		                                            </div>
+		                                            <div class="col-sm-4">
+			                                            <input
+			                                                type="text" name="import_hts" id="import_hts" placeholder="" value="" size="30"
+			                                                data-toggle="tooltip" title="Import HTS/UOM is required"
+			                                                class="form-control placeholder" ng-model="item.importHts"/>                            
+		                                             </div>
+		                                             
+		                                             <div class="col-sm-3">
+		                                             	<input
+			                                                type="text" name="import_hts" id="import_hts" value="" size="30"
+			                                                data-toggle="tooltip" title="Import HTS/UOM is required"
+			                                                class="form-control placeholder" placeholder="UOM" ng-model="item.importHtsUom"/> 
+		                                             </div>
+                                     		 </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="count_origin">Country of Origin:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7 autosuggest">
+		                                            <!-- <input
+		                                                type="text" name="count_origin" id="count_origin" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Country of origin is required"
+		                                                class="form-control placeholder" ng-model="item.coo"/>  -->   
+		                                                
+		                                                <!-- <input
+			                                                type="text" name="count_origin" id="count_origin" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+			                                                data-toggle="tooltip" title="Country is required"
+			                                                class="form-control placeholder" ng-model="item.coo"
+			                                                typeahead-template-url="countryTmpl.html"
+			                                                typeahead-editable="false" 
+			                                                typeahead-min-length="0"
+			                                                typeahead-on-select="onCountrySelect($item, $model, $label)" autocomplete="off"/> -->
+			                                                
+			                                              <input
+			                                                type="text" name="count_origin" id="count_origin" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+			                                                data-toggle="tooltip" title="Country is required"
+			                                                class="form-control placeholder left-inp" ng-model="item.coo"
+			                                                typeahead-template-url="countryTmpl.html"
+			                                                typeahead-editable="false" 
+			                                                typeahead-min-length="0" ng-blur="clearCountry('cooCode', '', '', item.coo, item)"
+			                                                typeahead-on-select="onCountrySelectCodeItem($item, $model, $label, 'coo', 'cooCode')" autocomplete="off"/>
+											      	
+											      		<input name="cooCode" ng-model="item.cooCode" class="form-control right-inp" readonly="true"/>  
+			                                                
+			                                                
+		                                                                        
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                
+		                        </div>
+		                                                    
+		                        <div class="col-sm-6 col-md-6">
+		                                <!-- <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="usml_cate">USML Category:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="usml_cate" id="usml_cate" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="USML category is required"
+		                                                class="form-control placeholder" ng-model="item.usmlCategory"/>                            
+		                                             </div>
+		                                    </div>
+		                                </div> -->
+		                                            
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="eccn_tt">ECCN / USML:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="eccn_tt" id="eccn_tt" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="ECCN is required"
+		                                                class="form-control placeholder" ng-model="item.eccn"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="manufac_tt">Manufacturer:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="manufac_tt" id="manufac_tt" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Manufacturer is required"
+		                                                class="form-control placeholder" ng-model="item.manufacturer"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="serial_num">Serial Number:</label> 
+		                                        </div>
+		                                        <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="serial_num" id="serial_num" placeholder="" value=""
+		                                                data-toggle="tooltip" title="Serial number is required"
+		                                                class="form-control placeholder" ng-model="item.serialNos"/>                            
+		                                        </div>
+		                                        
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="controlling_agency">Controlling Agency:</label> 
+		                                        </div>
+		                                        <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="controllingAgency" id="controllingAgency" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Controlling Agency is required"
+		                                                class="form-control placeholder" ng-model="item.controllingAgency"/>                            
+		                                        </div>
+		                                     </div>
+		                                </div>
+		                                
+		                        </div>
+		                        
+					            <div class="col-sm-12 ">
+					            
+					                        <div class="col-sm-3 enti_tt_alig" style="width: 21.7%">
+					                        	<label for="products_desc">Products Desc.: </label>&nbsp;<span class="required">*</span>
+					                        </div>
+					                        <div class="col-sm-9 no_pad">
+					                        	<textarea name="products_desc" id="products_desc" rows="4" cols="50" data-toggle="tooltip" title="Products description is required" class="form-control placeholder products_desc" ng-model="item.partDescription" required></textarea>
+					                         </div>
+					                     
+					            </div>
+					
+		                        <div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Pricing</h4>
+		                        </div>
+		                        
+		                        <div class="col-sm-6 col-md-6">
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="aes_invoice">AES/Invoice Qty:</label>&nbsp;<span class="required">*</span>
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" step="any" name="aes_invoice" id="aes_invoice" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="AES/invoice qty is required"
+		                                                class="form-control placeholder" ng-model="item.invoiceQty" 
+		                                                ng-keyup="item.invoiceValue = (item.invoiceQty * item.unitePrice) - ((item.discount | replaceNullToZero) *  item.invoiceQty * item.unitePrice / 100);item.wholeSaleValue = item.invoiceQty * item.wholeSaleRate"  required/>                            
+		                                             </div>
+		                                    </div>
+		                                </div>
+		                                            
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="discount_tt">Discount %:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" step="any" name="discount_tt" id="discount_tt" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Discount is required"
+		                                                class="form-control placeholder" ng-model="item.discount"
+		                                                ng-keyup="item.invoiceValue = (item.invoiceQty * item.unitePrice) - (item.discount *  item.invoiceQty * item.unitePrice / 100)" />                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="convers_rate">Conversion Rate:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" step="any" name="convers_rate" id="convers_rate" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Conversion Rate is required"
+		                                                class="form-control placeholder" ng-model="item.conversionRate"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="unit_price">Unit Price:</label>&nbsp;<span class="required">*</span>
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" step="any" name="unit_price" id="unit_price" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Unit price is required"
+		                                                class="form-control placeholder" ng-model="item.unitePrice" 
+		                                                ng-keyup="item.invoiceValue = (item.invoiceQty * item.unitePrice) - ((item.discount | replaceNullToZero) *  item.invoiceQty * item.unitePrice / 100)"  required/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                
+		                        </div>
+		                                                    
+		                        <div class="col-sm-6 col-md-6">
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="invoice_value">Invoice value:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" step="any" name="invoice_value" id="invoice_value" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Invoice value is required"
+		                                                class="form-control placeholder" ng-model="item.invoiceValue" 
+		                                                readonly="true"/>                            
+		                                             </div>
+		                                    </div>
+		                                </div>
+		                                            
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="currency_tt">Currency:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7 autosuggest autosuggest100">
+			                                            <input
+			                                                type="text" name="currency_tt" id="currency_tt" placeholder="" value="" size="30"
+			                                                uib-typeahead="currency as currency.description for currency in getCurrency($viewValue)"
+			                                                typeahead-template-url="currencyTmpl.html"
+			                                                typeahead-editable="false" 
+				                                            typeahead-on-select="onCurrencySelect($item, $model, $label)" autocomplete="off"
+			                                                data-toggle="tooltip" title="Currency is required"
+			                                                class="form-control placeholder" ng-model="item.currency"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="wholesale_rate">Wholesale Rate:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" step="any" name="wholesale_rate" id="wholesale_rate" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Wholesale rate is required"
+		                                                class="form-control placeholder" ng-model="item.wholeSaleRate"
+		                                                ng-keyup="item.wholeSaleValue = item.invoiceQty * item.wholeSaleRate"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="wholesale_value">Wholesale Value:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" step="any" name="wholesale_value" id="wholesale_value" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Wholesale value is required"
+		                                                class="form-control placeholder" ng-model="item.wholeSaleValue" readonly="true"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                
+		                        </div>
+		
+		
+		                        <div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Weights</h4>
+		                        </div>
+		                        
+		                        <div>
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="gross_weight">Gross Weight:</label>&nbsp;<span class="required">*</span>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            <input
+			                                                type="number" step="any" name="gross_weight" id="gross_weight" placeholder="" value="" size="30"
+			                                                data-toggle="tooltip" title="Gross weight is required"
+			                                                class="form-control placeholder" ng-model="item.grossWeight" required/>                            
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="net_weight">Net Weight:</label>&nbsp;<span class="required">*</span>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            <input
+			                                                type="number" step="any" name="net_weight" id="net_weight" placeholder="" value="" size="30"
+			                                                data-toggle="tooltip" title="Net Weight is required"
+			                                                class="form-control placeholder" ng-model="item.netWeight" required/>                            
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		                        
+		                        <div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Export Authorization Information</h4>
+		                        </div>
+		                        <div>
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="bis_license_exception">BIS License Exception:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="bisLicenseException" class="form-control" ng-model="item.bisLicenseException" />                            
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="itar_exemption">ITAR Exemption:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="itarExemption" class="form-control" ng-model="item.itarExemption" />                            
+			                                            </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		                        
+		                        <div>
+			                        <div class="col-sm-6 col-md-6">
+			                                			                                
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="license_code">License Code:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="licenseCode" class="form-control" ng-model="item.licenseCode" />                            
+			                                            </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="license_no">License No:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="licenseNo" class="form-control" ng-model="item.licenseNo" />                            
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		                       
+		                       <div>
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="license_type">License Type:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="licenseType" class="form-control" ng-model="item.licenseType" />                            
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="license_item_no">License Expiry Date:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<!-- <input name="licenseExpDate" class="form-control" 
+			                                            		uib-datepicker-popup="dd/MM/yyyy" datepicker-options="dateOptions"
+			                                            		close-text="Close" alt-input-formats="altInputFormats" ng-model="item.licenseExpDate" />                            
+			                                            	<span class="input-group-btn">
+													           <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+													         </span> -->
+													         
+													         <input type="text" class="form-control date-inp" uib-datepicker-popup="{{dateFormat}}" 
+													         		ng-model="item.licenseExpDate" datepicker-options="dateOptions" 
+													         		is-open="popup1.opened" close-text="Close" alt-input-formats="altInputFormats" />
+													         <span class="input-group-btn">
+													            <button type="button" class="btn btn-default date-btn" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+													         </span>
+													         
+			                                            </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		                        
+		                        <div>
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="usml_category">USML Category:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="usmlCategory" class="form-control" ng-model="item.usmlCategory" />                            
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="sme_indicator">SME Indicator:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">			                                            
+			                                            	<select ng-model="item.smeIndicator" class="form-control" name="smeIndicator">
+						                                      	<option value="">Select</option>
+						                                      	<option value="Y">Yes</option>
+						                                      	<option value="N">No</option>
+					                                      	</select>			                                                                 
+			                                            </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		                        		                        
+		                        <div>
+			                       			                        
+			                        <div class="col-sm-6 col-md-6">
+			                               <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="ddtc_quantity">DDTC Quantity:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input type="number" step="any" name="ddtcQuantity" class="form-control" ng-model="item.ddtcQuantity" /> 			                                            	                      
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="ftrEffDate">FTR Eff. Date:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input type="date" name="ftrEffDate" class="form-control" ng-model="item.ftrEffDate" /> 			                                            	                      
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		                        
+		                        
+		                       <div>
+			                        <div class="col-sm-6 col-md-6">
+			                               		                                
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="ddtc_uom">DDTC UOM:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">			                                            
+			                                            	<select ng-model="item.ddtcUom" class="form-control" name="ddtcUom">
+						                                      	<option value="">Select</option>
+						                                      	<option value="11 - Millar">11 - Millar</option>
+						                                      	<option value="14 - Gramo">14 - Gramo</option>
+					                                      	</select>			                                                                 
+			                                            </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                         <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="ddtc_eligibility_party">DDTC Eligible Party:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<select ng-model="item.ddtcEligibilityParty" class="form-control" name="ddtcEligibilityParty">
+						                                      	<option value="">Select</option>
+						                                      	<option value="Y">Yes</option>
+						                                      	<option value="N">No</option>
+					                                      	</select>			                                            	                      
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		                       
+		
+								<div>
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="ddtc_registration_no">DDTC Registration No:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="ddtcRegistrationNo" class="form-control" ng-model="item.ddtcRegistrationNo" />                            
+			                                             </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+			                                                    
+			                        <div class="col-sm-6 col-md-6">
+			                                <div class=" af-outer af-required clearfix">
+			                                    <div class="form-group">
+			                                            <div class="col-sm-5 enti_tt_alig">
+			                                            <label for="approved_comm_member_no">Approved Community Member No:</label>
+			                                            </div>
+			                                            <div class="col-sm-7">
+			                                            	<input name="approvedCommMemberNo" class="form-control" ng-model="item.approvedCommMemberNo" />                            
+			                                            </div>
+			                                    </div>
+			                                </div>
+			                        </div>
+		                        </div>
+		
+		
+		
+		
+								<div class="col-sm-12 col-md-12 margin-20tb text-right clearfix">
+									<a href="javascript:void(0);" ng-click="saveItem('continue')" class="btn btn-entity  strong">add item  <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+								</div>
+		
+		                        <div class="col-sm-6 col-md-6 margin-10tb clearfix" >
+		                            <div>		                            	
+		                            	<input type="button" name="Next" value="Next" ng-click="saveItem('continue')" id=" " class="btn btn-license">
+		                                <input type="submit" name="Save Shipment" value="Save shipment" ng-click="saveItem('save')" id="btn-license" class="btn btn-license">
+		                                <input type="button" name="Cancel" value="Cancel" ng-click="cancelShipment(shipment.id, 'listItemCartons')" id=" " class="btn btn-black">
+		                           		         
+		                            </div>
+		                        </div>                             
+                            </form>
+                   <!-- /user form -->
+            	
+            </div>
+       			   
+			   <!-- <div>
+			   		<div ng-view></div>
+			   </div> -->
+			                        
+         </div>         
+       </div>
+     </div>
+</div>

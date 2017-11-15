@@ -1,0 +1,318 @@
+<div ng-app="dashboardApp" ng-controller="PublicationCtrl" ng-init="loadPublications()" class="container-fluid no_pad">
+
+           <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          		<!-- TOVAR INFORMATION -->
+			  <div class="tovar_information">
+								
+					<div class="box visible">
+			            <div class="">
+			                   
+			                   <div class="col-sm-12 col-md-12 text-left wel_div blue-div" >
+			                   <div class="" >
+				                     <h1 style="display: inline">Publications</h1>
+				                     <div style="float: right">
+				                     	<button class="btn btn-black" gtn-click="/publication">Back</button>
+				                     </div>
+				                </div>                 
+			                   
+			                   <hr>
+			                   
+			                   <!--<div class="row margin-top30 clearfix">&nbsp;</div> -->
+			                   
+			                   <div class="container-fluid no_pad">
+				                   	<div class="col-sm-12 col-md-12 text-left " >
+				                    
+	                                        
+	                      						<!-- ------------- New code start  ---------------- -->
+	                      						
+	                      							<!--  <div class="row margin-top20">
+												            <div class="col-sm-6 col-md-6 response_icon flt_r">
+									                            <div class="input-group stylish-input-group">
+									                                <input type="text" class="form-control empty" id="iconified" placeholder="&#xF002;">
+									                                <span class="input-group-addon">
+									                                     <button type="submit">Search</button>  
+									                                </span>
+									                            </div>
+									                       </div> 
+								           			 </div>
+									             -->
+									            <div class="row ">                   
+									                   <div class="col-sm-12 col-md-12 text-left wel_div" >
+										                   <div class="col-sm-6 col-md-6 wel_tt wel_colo text-l">
+										                   		<img src="img/{{ pub_url }}" width="140" height="140" class="pub_icon"> <span class="head2 strong">{{ pub_heading }}</span>
+										                   </div>                   
+										                   
+										                   <div class="col-sm-6 col-md-6 response_icon flt_r">
+									                            <div class="input-group stylish-input-group">
+									                                <input type="text" class="form-control empty" id="iconified" ng-keyup="searchSubPublication()" ng-model="subPubSearchQuery" placeholder="&#xF002;">
+									                                <span class="input-group-addon pub_sear">
+									                                     <button type="submit">Search</button>  
+									                                </span>
+									                            </div>
+									                       </div> 
+									                   
+									                   
+									                   <!--<div class="row margin-top30 clearfix">&nbsp;</div> -->
+									                   <!-- <hr> -->
+									                   <div class="container-fluid no_pad">
+									                   	<div class="col-sm-12 col-md-12 text-left " > 
+									                       
+									                       <div ng-if="publicationsData.length > 0" ng-repeat="publication in publicationsData">
+									                         <hr>  
+										                       <div class="clearfix margin-30b ">
+											                       <div class="col-sm-3 col-md-3 clearfix">
+										    	                       <div class="pub_icon">
+										        	                        <a href="javascript:void(0)"><span class="pub_big pub_icn_img flt_l" ></span></a>
+										            	               </div>
+										                          </div>
+										                          
+										                         <div class="col-sm-9 col-md-9 pub_bor">
+										    	                       <div class="pub_detail">
+										                                   <div class="head">{{publication.title}}</div>
+										                                   <div class="head">Price <strong>${{publication.price}}</strong></div>
+										                                   <div class="head">
+											                                   <p><em>Description : </em> {{publication.description}} </p>
+										                                   		
+										                                   		<a ng-if="publication.unlimitedAccess==true || publication.hasBeenIndividuallyPurchased==true"
+																					 ng-click="openPdf(publication.pubUrl)" class="btn btn-pub">Open</a>
+																				<a ng-if="publication.annotation==true" ng-click="annotatePdf(publication.pubUrl)"  class="btn btn-green">Annotate</a>
+																				
+																				<a ng-if="publication.buyNow=='true'" ng-click="buyNow(publication.title, publication.description,publication.price, 1,publication.id, publication)"  class="btn btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Buy Now</a>
+																					 
+																				<a ng-if="publication.hasBeenMarkedForPurchase==true" ng-click=""  class="btn btn-pub">Payment pending</a>
+										                                   		
+										                                   		<!-- <a href="javascript:void(0)" class="btn btn-pub">Open</a> &nbsp; <a href="javascript:void(0)" class="btn btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now!</a> -->
+										                                   </div>
+										                                   
+										                               </div>
+										                         </div>
+										                       </div>
+									                       </div>
+									                       
+									                       <div ng-if="publicationsData.length == 0" class="text_cent">
+									                       		<h4 style="color: black" id="msgDiv">{{ msgText }}</h4>
+									                       </div>
+									                         <!--  <hr>                  
+									                       <div class="clearfix margin-30b ">
+										                       <div class="col-sm-3 col-md-3 clearfix">
+									    	                       <div class="pub_icon">
+									        	                        <a href="javascript:void(0)"><span class="pub_big pub_icn_img flt_l" ></span></a>
+									            	               </div>
+									                          </div>
+									                          
+									                         <div class="col-sm-9 col-md-9 pub_bor">
+									    	                       <div class="pub_detail">
+									                                   <div class="head">Harmonized Tariff Schedule of the U.S</div>
+									                                   <div class="head">Price <strong>$100.00</strong></div>
+									                                   <div class="head">
+									                                   <p><em>Description : </em> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+									                                   <a href="javascript:void(0)" class="btn btn-pub">Open</a> &nbsp; <a href="javascript:void(0)" class="btn btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now!</a>
+									                                   </div>
+									                                   
+									                               </div>
+									                         </div>
+									                       </div>
+									                       
+									                       
+									                       <hr>                       
+									                       <div class="clearfix margin-30b ">
+										                       <div class="col-sm-3 col-md-3 clearfix">
+									    	                       <div class="pub_icon">
+									        	                        <a href="javascript:void(0)"><span class="pub_big pub_icn_img flt_l" ></span></a>
+									            	               </div>
+									                          </div>
+									                          
+									                         <div class="col-sm-9 col-md-9 pub_bor">
+									    	                       <div class="pub_detail">
+									                                   <div class="head">Harmonized Tariff Schedule of the U.S</div>
+									                                   <div class="head">Price <strong>$100.00</strong></div>
+									                                   <div class="head">
+									                                   <p><em>Description : </em> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+									                                   <a href="javascript:void(0)" class="btn btn-pub">Open</a> &nbsp; <a href="javascript:void(0)" class="btn btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now!</a>
+									                                   </div>
+									                                   
+									                               </div>
+									                         </div>
+									                       </div>
+									                       
+									                       <hr> 
+									                       <div class="clearfix margin-30b ">
+										                       <div class="col-sm-3 col-md-3 clearfix">
+									    	                       <div class="pub_icon">
+									        	                        <a href="javascript:void(0)"><span class="pub_big pub_icn_img flt_l" ></span></a>
+									            	               </div>
+									                          </div>
+									                          
+									                         <div class="col-sm-9 col-md-9 pub_bor">
+									    	                       <div class="pub_detail">
+									                                   <div class="head">Harmonized Tariff Schedule of the U.S</div>
+									                                   <div class="head">Price <strong>$100.00</strong></div>
+									                                   <div class="head">
+									                                   <p><em>Description : </em> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+									                                   <a href="javascript:void(0)" class="btn btn-pub">Open</a> &nbsp; <a href="javascript:void(0)" class="btn btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now!</a>
+									                                   </div>
+									                                   
+									                               </div>
+									                         </div>
+									                       </div>
+									                       
+									                       <hr>                       
+									                       <div class="clearfix margin-30b ">
+										                       <div class="col-sm-3 col-md-3 clearfix">
+									    	                       <div class="pub_icon">
+									        	                        <a href="javascript:void(0)"><span class="pub_big pub_icn_img flt_l" ></span></a>
+									            	               </div>
+									                          </div>
+									                          
+									                         <div class="col-sm-9 col-md-9 pub_bor">
+									    	                       <div class="pub_detail">
+									                                   <div class="head">Harmonized Tariff Schedule of the U.S</div>
+									                                   <div class="head">Price <strong>$100.00</strong></div>
+									                                   <div class="head">
+									                                   <p><em>Description : </em> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+									                                   <a href="javascript:void(0)" class="btn btn-pub">Open</a> &nbsp; <a href="javascript:void(0)" class="btn btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now!</a>
+									                                   </div>
+									                                   
+									                               </div>
+									                         </div>
+									                       </div>
+									                       
+									                       
+									                       <hr>                       
+									                       <div class="clearfix margin-30b ">
+										                       <div class="col-sm-3 col-md-3 clearfix">
+									    	                       <div class="pub_icon">
+									        	                        <a href="javascript:void(0)"><span class="pub_big pub_icn_img flt_l" ></span></a>
+									            	               </div>
+									                          </div>
+									                          
+									                         <div class="col-sm-9 col-md-9 pub_bor">
+									    	                       <div class="pub_detail">
+									                                   <div class="head">Harmonized Tariff Schedule of the U.S</div>
+									                                   <div class="head">Price <strong>$100.00</strong></div>
+									                                   <div class="head">
+									                                   <p><em>Description : </em> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type </p>
+									                                   <a href="javascript:void(0)" class="btn btn-pub">Open</a> &nbsp; <a href="javascript:void(0)" class="btn btn-green"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Buy Now!</a>
+									                                   </div>
+									                                   
+									                               </div>
+									                         </div>
+									                       </div> -->
+									                       
+									                       <div class="clearfix margin-20b"></div>
+									                       
+									                       <div class="clearfix margin-30b ">
+										                       <div class="col-sm-3 col-md-3 clearfix">
+									    	                       <div class="pub_icon">
+									        	                        &nbsp;
+									            	               </div>
+									                          </div>
+									                          
+									                          <div class="col-sm-9 col-md-9">
+									    	                       <div class="pub_detail ">
+									                               
+									                               <ul class="num_list">
+									                               <li><a href="javascript:void(0)" ng-click="buildPagination(pageinationIndex + 1)">Prev</a></li>
+									                               
+								                               		<!-- <li ng-repeat="n in range(1, origianlData.length/pageSize) track by $index">
+								                               			<a href="javascript:void(0)" ng-click="buildPagination($index + 1)">{{ $index + 1 }}</a>
+								                               		</li> -->
+									                               
+										                              
+									                                <li><a href="javascript:void(0)">1</a></li>
+										                               <li><a href="javascript:void(0)">2</a></li>
+										                               <li class="active"><a href="javascript:void(0)">3</a></li>
+										                               <li><a href="javascript:void(0)">4</a></li>
+										                               <li><a href="javascript:void(0)">5</a></li>
+										                               <li><a href="javascript:void(0)">6</a></li>
+										                               <li><a href="javascript:void(0)">7</a></li>
+										                               <li><a href="javascript:void(0)">8</a></li>
+										                               <li><a href="javascript:void(0)">9</a></li>
+										                               <li><a href="javascript:void(0)">10</a></li>
+										                               ...
+										                               <li><a href="javascript:void(0)">60</a></li>
+										                               <li><a href="javascript:void(0)">61</a></li>
+									                               
+									                               
+									                               
+									                               <li><a href="javascript:void(0)" ng-click="buildPagination(pageinationIndex - 1)">Next</a></li>
+									                               
+									                               
+									                               </ul>
+									                               
+									                                   
+									                               </div>
+									                          </div>
+									                       </div>
+									                       
+									                       
+									                   	</div>
+									                                      
+									                   
+									                   
+									                   </div>
+									                </div>
+									            </div>
+	                      						
+	                      						<!-- ------------ New code END -------------------- -->
+				                       
+				                   	</div>
+			                          
+			                   </div>
+			                </div>
+			            </div>
+            
+            
+            		</div>
+            	</div>
+            </div>
+            
+            
+            </div>
+          
+
+    <!-- /Content area -->
+
+    <!-- FOOTER -->
+<input id="registrationCityValue" type="hidden" value= "Select Your City"/>
+
+
+
+
+<!--  <script>
+    window.pageParams = {
+        'locale': 'en',
+        'universalCode': 'GTM-WRBD5L',
+        'yandexMetrikaAccount': '18776650',
+    };
+    window.strings = {
+        EN: {
+            goto: 'Go to the English version of the site?',
+            no: 'Close',
+            yes: 'Yes',
+            cookie: 'This website uses cookies: by&nbsp;continuing to&nbsp;browse this site you accept this <a href="privacy/">policy</a>',
+            url: '/'
+        }
+    }
+</script>-->
+
+<script src="js/web-grid.js"></script>
+
+<script>
+	var isSafari = navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') == -1;
+	if(isSafari) {
+		document.addEventListener("DOMContentLoaded", function () {
+			if ('classList' in document.createElement('div') &&
+					'querySelector' in document &&
+					'addEventListener' in window && Array.prototype.forEach) {
+				document.documentElement.classList.add('mdl-js');
+				componentHandler.upgradeAllRegistered();
+			} else {
+				componentHandler.upgradeElement = function() {};
+				componentHandler.register = function() {};
+			}
+			WG.initAllRegistered();
+			window.svg4everybody();
+		})
+	}
+</script>

@@ -1,0 +1,134 @@
+<div ng-init="initDplReasonHistoryPopup()" ng-controller="masterCtlr">
+	<div class="modal-dialog modal-lg">	
+		<div class="modal-content {{gtnClass}}">
+			<div class="modal-header">
+		            <h5 class="modal-title" id="modal-title" style="color: black !important">DPL Reason History for {{ type }} {{ code }}</h5>
+		        </div>
+		        <div class="modal-body" id="modal-body">
+		        			        	
+		        	<!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">			
+							<div class="col-xs-12">				
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						      
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+						      
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+		        
+		        <div class="row">
+		        	<div class="col-xs-12">
+		        		Total number of records : {{ wplReasonHistory.length }}
+		        	</div>
+		        	
+		        </div>
+		        
+		        <div ng-repeat="wplReason in wplReasonHistory track by $index" style="margin-top: 10px">		        	
+		        	<div class="row" >
+		        		<div class="col-xs-12">
+				            <table class="table table-bordered table-hover table-condensed" style="font-size: 12px">
+				            	
+				            	<thead>
+				            		<tr style="background-color: #ccc">
+				            			<th style="width: 12%">DPL Audit No</th>
+				            			<th>Entity Name</th>
+				            			<th>Old status</th>
+				            			<th>New status</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'O'">Overriden By</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'O'">Overriden On</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'D'">Denied By</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'D'">Denied On</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'A'">Approved By</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'A'">Approved On</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'H'">Screened By</th>
+				            			<th ng-if="wplReason.auditValue.newStatus == 'H'">Screened On</th>
+				            		</tr>
+				            	</thead>
+				            	
+				            	<tbody>
+				            		
+				            		<tr>
+				            			<td>{{wplReason.auditValue.dplAuditNo}}</td>
+				            			<td>{{wplReason.auditValue.partyName}}</td>
+				            			<td>{{wplReason.auditValue.oldStatus | dplStatus}}</td>
+				            			<td>{{wplReason.auditValue.newStatus | dplStatus}}</td>
+				            			<td>{{wplReason.auditValue.createdBy}}</td>
+				            			<td>{{wplReason.auditValue.createdOn | date:'dd/MM/yyyy'}}</td>
+				            			
+				            		</tr>
+				            	
+				            	</tbody>
+				            </table>
+			            </div>
+		        	</div>
+		        	
+		        	<div class="row" >
+		        		<div class="col-xs-12">
+				            <table class="table table-bordered table-hover table-condensed" style="font-size: 12px">
+				            	
+				            	<thead>
+				            		<tr style="background-color: #ccc">
+				            			<th style="width: 12%">Code</th>
+				            			<th>Description</th>
+				            		</tr>
+				            	</thead>
+				            	
+				            	<tbody>				            		
+				            		<tr ng-repeat="reason in wplReason.reasons track by $index">
+				            			<td>{{reason.reasonCode}}</td>
+				            			<td>{{reason.reason}}</td>
+				            		</tr>
+				            		<tr>
+				            			<td>Remarks</td>
+				            			<td>
+				            				<textarea class="form-control" rows="5" disabled>{{wplReason.auditValue.otherReason}}</textarea>
+				            			</td>
+				            		</tr>
+				            	</tbody>
+				            </table>
+			            </div>
+		        	</div>
+		        </div>
+		        
+		        
+		        </div>
+		        <div class="modal-footer">
+		            <button class="btn btn-black" type="button" ng-click="cancel()">Close</button>
+		        </div>
+		
+		</div>
+	</div>
+</div>	

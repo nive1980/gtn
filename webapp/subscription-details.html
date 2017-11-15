@@ -1,0 +1,232 @@
+ <div class="panel-grid-cell dashboard-rt" ng-app="restControllers" ng-init="getSubscription()">
+
+    <!-- <div class="panel-grid-cell "> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 text-left margin-top20" >
+                <div class="wel_tt">
+                    <span class="head wel_colo strong">Subscription </span>
+                    <hr>
+
+                    <div ng-if="freeTrail">Your free trial subscription on products of this site will be active for 15 days. Please confirm to proceed.
+                    	<div class="col-sm-12 col-md-12 text-right">
+                                             <a href ng-click="doFreeTrial()"  target="_self" data-animation="flipInY" data-animation-delay="100" class="btn btn-theme btn-theme-xs yello_btn_colo">
+                        										<i class="fa fa-arrow-circle-right"></i> Proceed </a>
+                    </div>
+                    </div>
+                    <!--<hr> -->
+                    <div class="col-sm-12 col-md-12 yello-div bill_info margin-top10" >
+						 <!-- Error Messages -->
+						    <div class="row ocr-error" ng-show="errors.length > 0">
+								<div class="">
+									<div class="alert fade in alert-danger">
+										<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+										<h4>Error</h4>
+										<ul class="msg-ul">
+											<li ng-repeat="error in errors track by $index">
+						            			{{ error.msg }}
+						            		</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+						      <!-- Warning Messages -->
+						      <div class="row ocr-warning" ng-show="warnings.length > 0">
+						        <div class="">
+						          <div class="alert fade in alert-warning"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+						            <strong>Warning!</strong>
+						            <ul class="msg-ul">
+						            	<li ng-repeat="warning in warnings track by $index">
+						            		{{ warning }}
+						            	</li>
+						            </ul>
+						          </div>
+						        </div>
+						      </div>
+
+						      <!-- Info Messages -->
+						      <div class="row ocr-info" ng-show="infos.length > 0">
+						        <div class="">
+						          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+						            <strong>Information!</strong>
+						            <ul class="msg-ul">
+						            	<li ng-repeat="info in infos track by $index">
+						            		{{ info }}
+						            	</li>
+						            </ul>
+						          </div>
+						        </div>
+						      </div>
+
+
+                        <div class="col-sm-12 col-md-12 yello-div" >
+                        <!-- user form -->
+                        <form name="user-form" id="user-form" method="post" action="" class="af-user af-user-sub row">
+                        	<!-- <div class="form-group af-inner">
+	                            <div class="col-sm-4 ">
+	                                <label for="users">Number of Users </label>
+	                            </div>
+	                            <div class="col-sm-8 ">
+									<input
+	                                    ng-model="sub.users" type="text" name="users" id="users" placeholder="" ng-value=subscription.noOfUsers size="3"
+	                                    data-toggle="tooltip" title="Enter Number of users to be subscribed" ng-keyup="getTotal()"
+	                                    class="form-control placeholder"/>
+	                            </div>
+                        	</div> -->
+
+							<!-- <div class="form-group af-inner">
+                            <div class="col-sm-4 ">
+                                <label for="countries">Number of Countries </label>
+                            </div>
+                            <div class="col-sm-8 ">
+								<input
+                                    ng-model="sub.countries" type="text" name="countries" id="countries" placeholder="" ng-value=subscription.noOfCountries size="3"
+                                    data-toggle="tooltip" title="Enter Number of countries to be subscribed"
+                                    class="form-control placeholder"/>
+                            </div>
+                        	</div> -->
+                        	<div class="row">
+	                        	<div class="col-sm-8 col-md-8 margin-20b">
+	                            	<!-- <ul> -->
+	                           		<div ng-repeat="products in productsData">
+
+		                                    <div class="margin-30b subs-background">
+														 <div class="bill_head strong margin-10b">{{products.product}}</div>
+					                                    <div class=" af-outer af-required clearfix card_exp margin-5b" ng-repeat="subproducts in products.subproduct">
+					                                        <div class="form-group" ng-if="subproducts.productId!=21">
+					                                        		<!-- <div class="col-sm-1 no_pad"></div> -->
+					                                                <div class="col-sm-3 no_pad">
+					                                                	<label  style="{{subproducts.style}}" for="watch_list">{{subproducts.displayName}}</label>
+					                                                </div>
+					                                                <div class="col-sm-8 ">
+					                                                 	<div class="col-sm-4 no_pad">
+					                                                    	<label style="{{subproducts.style}}" for="price">{{subproducts.cost}} {{subproducts.currencyCode}} /month</label>
+					  	                                                </div>
+					                                                    <div style="{{subproducts.style}}" class="col-sm-6 no_pad">
+
+					                                                        <a href="javascript:void(0)" ng-click="addToCart(subproducts)" ng-if="subproducts.active == 'P'" class="btn btn_addcart no_pad caps" style="padding: 0 5px !important; min-width: 100px;">
+					                                                        	<!-- <img src="img/cart_icon.png" alt="{{subproducts.labelText}}" title="{{subproducts.labelText}}"> -->
+					                                                        	<span>{{ subproducts.labelText }}</span>
+					                                                        </a>
+					                                                    	<a href="javascript:void(0)" ng-click="addToCart(subproducts)" ng-if="subproducts.active == 'A'" class="btn btn_addcart no_pad caps" style="padding: 0 5px !important; min-width: 100px;">
+					                                                        	<!-- <img src="img/cart_icon.png" alt="{{subproducts.labelText}}" title="{{subproducts.labelText}}"> -->
+					                                                        	<span >{{ subproducts.labelText }}</span>
+					                                                        </a>
+					                                                        <span ng-if="subproducts.active == 'A'" >
+					                                                        	<a class="btn btn_addcart no_pad caps lightgrey" style="padding: 0 5px !important; min-width: 100px;margin-left: 10px;"><span>Subscribed</span></a>
+					                                                        </span>
+					                                                    	<!-- style="color: lightgrey" -->
+					                                                    </div>
+					                                                </div>
+					                                        </div>
+					                                    </div>
+
+		                                   	</div>
+	                                 </div>
+
+		                                    <div ng-if="cart.items.length>0" class="margin-30b subs-background">
+														<div class="bill_head strong margin-10b">One Time Publications</div>
+					                                    <div ng-if="cart.items.length>0" class=" af-outer af-required clearfix card_exp margin-5b" ng-repeat="item in cart.items | orderBy:'name'">
+					                                        <div class="form-group">
+					                                        		<!-- <div class="col-sm-1 no_pad"></div> -->
+					                                                <div class="col-sm-3 no_pad">
+					                                                	<label  style="{{subproducts.style}}" for="watch_list">{{item.name}}</label>
+					                                                </div>
+					                                                <div class="col-sm-8 ">
+					                                                 	<div class="col-sm-4 no_pad">
+					                                                    	<label style="{{subproducts.style}}" for="price">{{item.price * item.quantity}} {{item.currency}} </label>
+					  	                                                </div>
+					                                                    <div style="{{subproducts.style}}" class="col-sm-4 no_pad">
+					                                                        <a href="javascript:void(0)" ng-click="cart.removeItem(item.itemId,item.sku, item.name,item.type, item.price,1)" class="btn btn_addcart btn-wid no_pad caps">
+					                                                        	<!--<img src="img/cart_icon.png" alt="REMOVE" title="REMOVE">-->
+					                                                        	<span>REMOVE</span>
+					                                                        </a>
+					                                                    </div>
+					                                                </div>
+					                                        </div>
+					                                    </div>
+
+		                                   	</div>
+
+
+	                            </div>
+
+                            <div class="col-sm-4 col-md-4 margin-20b">
+	                                <!-- <div class="col-sm-12 col-md-12 margin-10b no_pad ">
+	                                    <span class="bill_head strong">Order Summary</span>
+	                                </div> -->
+	                                <div class="clearfix"></div>
+
+		                             <div class="clearfix bor_summary pad10px">
+		                               <div class="bill_head pad_tb8px text-center">Order Summary </div>
+		                               <div class="pad_tb4px num_user text-center"><label for="num_user">Number of Users</label>
+		                               	<!-- <input type="text" name="shipment_num" id="num_user" value="" size="30" data-toggle="tooltip" title="Shipment Number is required" class="form-control placeholder"> -->
+		                               	<input onkeypress="return isNumber(event)"
+		                                    ng-model="sub.users" type="text" name="users" id="users" placeholder="" ng-value=subscription.noOfUsers size="3"
+		                                    data-toggle="tooltip" title="Enter Number of users to be subscribed" ng-keyup="getTotal()"
+		                                    class="form-control placeholder"/>
+		                               	</div>
+		                               <table class="odersum_table">
+		                                    <!-- <thead>
+		                                        <tr>
+		                                            <th class="fun-call">Function</th>
+		                                            <th class="user-call">Users</th>
+
+		                                            <th class="total-add">Total</th>
+
+												</tr>
+		                                    </thead> -->
+
+		                                    <tbody>
+		                                        <tr class="odersum_item" ng-repeat="cartItem in cartItems">
+		                                            <td class="fun-call"> <label>{{cartItem.displayName}}</label> </td>
+
+		                                            <td class="total-add"> <label>{{cartItem.cost*sub.users}} {{cartItem.currencyCode}} /month</label> </td>
+
+		                                        </tr>
+	                                           	<tr  ng-if="sub.users>0" class="odersum_item" ng-repeat="pubcartItem in pubCartItems">
+		                                            <td class="fun-call"> <label>Publication-{{pubcartItem.name}}</label> </td>
+		                                            <td class="total-add"><label>{{pubcartItem.price*sub.users}} USD</label> </td>
+
+	                                        	</tr>
+		                                    </tbody>
+
+		                                    <tfoot>
+		                                        <tr>
+		                                            <th class="fun-call"><label for="price">Total Price:  </label></th>
+
+		                                            <th class="total-add"><label for="price">{{getTotal()}} {{carTotalCurrency}} /month</label></th>
+		                                        </tr>
+		                                    </tfoot>
+
+		                                </table>
+
+		                                <div class=" text-center">
+				                                <input type="button" name="Checkout" value="Continue" ng-click="checkout(cartItems,carTotal,carTotalCurrency,'TRUE')" id="user_btn_pay_mod" class="wid_100 btn-blue margin-10tb strong">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                                <img src="img/pay_cards_img.png">
+			                                    <p><em>In the next step we will ask you for your billing information and payment method. You can still change your order during that step.</em></p>
+				                                <!-- <input type="button" name="delete" value="Delete" ng-click="deleteSubscription()" id="user_btn_pay_mod" class="wid_100 btn-blue margin-10tb strong"> -->
+		                                </div>
+		                            </div>
+
+
+                                </div>
+                            </div>
+                        </form>
+                        <!-- /user form -->
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top30 clearfix">
+    </div>
+</div>
+
+
+            <!-- </div> -->
+</div>
+
+
+

@@ -1,0 +1,121 @@
+<div class="panel-grid-cell dashboard-rt">
+    <div class="container" ng-app="restControllers" ng-controller="SubCtrl">                
+        <div class="row">
+            <div class="col-sm-12 col-md-12 text-left margin-top20">
+                <div class="wel_tt">
+                    <span class="head wel_colo strong">Users</span>                   
+                    <hr>
+                    <div class="col-sm-12 col-md-12 yello-div user_information" >
+                        <div class="clearfix margin-20tb"></div>
+                            <div class="mid_div_marg">
+                            <div ng-if="message">{{ message }}</div>
+                            <!-- Error Messages -->
+							<div class="row ocr-error" ng-show="errors.length > 0">
+								<div class="col-xs-12">
+									<div class="alert fade in alert-danger">
+										<a class="close close-error" style="font-size: 15px;"
+											href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+										<h4>Error</h4>
+										<ul class="msg-ul">
+											<li ng-repeat="error in errors track by $index">{{
+												error.msg }}</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!-- Warning Messages -->
+							<div class="row ocr-warning" ng-show="warnings.length > 0">
+								<div class="col-xs-12">
+									<div class="alert fade in">
+										<a class="close" style="font-size: 15px;"
+											href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+										<strong>Warning!</strong>
+										<ul class="msg-ul">
+											<li ng-repeat="warning in warnings track by $index">{{
+												warning }}</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<!-- Info Messages -->
+							<div class="row ocr-info" ng-show="infos.length > 0">
+								<div class="col-xs-12">
+									<div class="alert fade in alert-info">
+										<a class="close" style="font-size: 15px;"
+											href="javascript:void(0)" ng-click="infos.length = 0">x</a> <strong>Information!</strong>
+										<ul class="msg-ul">
+											<li ng-repeat="info in infos track by $index">{{ info }}
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+                                <div class="col-sm-6 col-md-6 yello-div table-bordered" >     
+                                <!-- user form -->
+                                <form name="user-form" id="user-form" method="post" action="" class="af-user row">                                    
+                                <div class="col-sm-12 col-md-12 margin-30tb">                                
+                                            <div class=" af-outer af-required clearfix">
+                                                <div class="form-group ">
+                                                    <div class="col-sm-5 enti_tt_alig">
+                                                        <label for="lastname">First Name:</label> 
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                        <input
+                                                            ng-model= "user.firstname" type="text" name="firstname" id="firstname" placeholder="" value="" size="30"
+                                                            data-toggle="tooltip" title="First name is required"
+                                                            class="form-control placeholder"/>														
+                                                    </div>
+                                                 </div>
+                                            </div> 
+                                            <div class=" af-outer af-required clearfix">                
+                                                <div class="form-group ">
+                                                    <div class="col-sm-5 enti_tt_alig">
+                                                        <label for="lastname">Last Name:</label> 
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                        <input
+                                                            ng-model= "user.lastname" type="text" name="lastname" id="lastname" placeholder="" value="" size="30"
+                                                            data-toggle="tooltip" title="Last name is required"
+                                                            class="form-control placeholder"/>														
+                                                    </div>
+                                                 </div>
+                                            </div>             
+                                            <div class=" af-outer af-required ">
+                                                <div class="form-group">
+                                                        <div class="col-sm-5 enti_tt_alig">
+                                                        <label for="email">Business Email Id:</label> 
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                        <input
+                                                            ng-model= "user.email" type="text" name="email" id="email" placeholder="" value="" size="30"
+                                                            data-toggle="tooltip" title="Business Email is required"
+                                                            class="form-control placeholder input-email"/>                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-sm-12 col-md-12 text-right" >
+                                                <div class=" margin-20tb text-right" >
+                                                    <input type="button" name="Save" value="ADD +" ng-click="addUser()" id="user1_btn" class="btn-license">
+                                                </div>
+                                            </div>
+                                <!-- /User form Left part -->
+                                </div>                                    
+                                        </form>
+                                         
+                                <!-- /user form -->
+                                </div> 
+                                								<div class="col-sm-12 col-md-12 text-right">
+                                             						<a href="/gtn/dashboard-index.html" target="_self" data-animation="flipInY" data-animation-delay="100" class="btn btn-theme btn-theme-xs yello_btn_colo">
+                        										<i class="fa fa-arrow-circle-right"></i> Proceed </a>
+                                        </div> 
+							</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top30 clearfix"></div>
+	</div>           
+</div>

@@ -1,0 +1,248 @@
+<div ng-init="init()" ng-controller="controller">
+	<div ng-init="initGenerateShipmentDocPopup()" ng-controller="exportOperationCtlr">
+		<div class="modal-dialog modal-md">	
+			<div class="modal-content {{gtnClass}}">
+				<div class="modal-header">						
+			            <h3 ng-show="docEmailParam" class="modal-title" id="modal-title">Generate Documents</h3>
+			            <h3 ng-hide="docEmailParam" class="modal-title" id="modal-title">Email Document</h3>
+			        </div>
+			        <div class="modal-body" id="modal-body">
+			        
+					        <!-- Error Messages -->
+						    <div class="row ocr-error" ng-show="errors.length > 0">			
+								<div class="col-xs-12">				
+									<div class="alert fade in alert-danger">
+										<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+										<h4>Error</h4>
+										<ul class="msg-ul">
+											<li ng-repeat="error in errors track by $index">
+						            			{{ error.msg }}
+						            		</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							      
+						      <!-- Warning Messages -->
+						      <div class="row ocr-warning" ng-show="warnings.length > 0">
+						        <div class="col-xs-12">
+						          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+						            <h4>Warning</h4>
+						            <ul class="msg-ul">
+						            	<li ng-repeat="warning in warnings track by $index">
+						            		{{ warning.msg }}
+						            	</li>
+						            </ul>
+						          </div>
+						        </div>
+						      </div>
+							      
+						      <!-- Info Messages -->
+						      <div class="row ocr-info" ng-show="infos.length > 0">
+						        <div class="col-xs-12">
+						          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+						            <h4>Information</h4>
+						            <ul class="msg-ul">
+						            	<li ng-repeat="info in infos track by $index">
+						            		{{ info.msg }}
+						            	</li>
+						            </ul>
+						          </div>
+						        </div>
+						      </div>
+			        	
+			        	
+		        		<div class="row margin-10tb af-user" >		        		
+		        		    <div ng-show="docEmailParam">     
+			         	      
+			         	      <!-- <mdt-table animate-sort-icon="true" ripple-effect="true"
+			            				selectable-rows = "false"
+			            				table-card="{visible: true, title: 'Documents', columnSelector: true}"	
+								        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}">
+								   <mdt-header-row>
+							            <mdt-column align-rule="left" column-sort="true" column-definition="No."><span>#</span></mdt-column>
+							            <mdt-column align-rule="left" column-sort="true" column-definition="Document Name"><span>Document Name</span></mdt-column>
+							            <mdt-column align-rule="left" column-definition="Download"><span>Download</span></mdt-column>
+							            <mdt-column align-rule="left" column-definition="Email"><span>Email</span></mdt-column>
+							            
+							        </mdt-header-row>
+										    									    
+								    <mdt-row ng-repeat="doc in docList track by $index">					    
+								    		
+							    		    <mdt-cell><span>{{ $index + 1 }}</span></mdt-cell>
+			                                <mdt-cell><span>{{ doc.docName }}</span></mdt-cell>
+			                                <mdt-cell><span>
+			                                
+			                                	<a href="getShipmentReport?shipId={{shipmentId}}&type={{doc.docType}}" style="color: black">
+			                                		<i class="fa fa-download fa-2" aria-hidden="true" ></i>
+			                                	</a>
+			                                	
+			                                	
+			                                </span></mdt-cell>
+			                                <mdt-cell>
+			                                		<span>
+			                                			<i class="fa fa-envelope fa-2" aria-hidden="true" ng-click="showEmailDiv(doc.docType)"></i>
+						                             </span> 
+						                               
+			                               	</mdt-cell>
+			                                
+								    </mdt-row>
+					  			</mdt-table> -->
+			         	      
+			         	      <table class="table table-bordered table-hover table-condensed table-stripe">
+			                        <thead>
+			                            <tr style="background-color: #f9f9f9">
+			                                <th class="" style="width: 5%">#</th>
+			                                <th class="" style="width: 70%">Document Name</th>
+			                                <th class="" style="width: 10%">Download</th>
+			                                <th class="" style="width: 10%">Email</th>
+			                            </tr>
+			                        </thead>
+			                        
+			                        <tbody>
+			                        
+			                        	<tr class="cart_item" ng-repeat="doc in docList track by $index">
+			                                <td class="">{{ $index + 1 }}</td>
+			                                <td class="">{{ doc.docName }}</td>
+			                                <td class="">
+			                                	<div ng-switch="doc.active">
+												  <div ng-switch-when="true">
+													    <a href="getShipmentReport?shipId={{shipmentId}}&type={{doc.docType}}" style="color: black">
+					                                		<i class="fa fa-download fa-2" aria-hidden="true" ></i>
+					                                	</a>
+					                                
+												  </div>
+												  <div ng-switch-when="false">
+													  	<a href="javascript:void(0)" style="color: black;opacity: 0.5">
+					                                		<i class="fa fa-download fa-2" aria-hidden="true" ></i>
+					                                	</a>
+												  </div>
+												</div>
+			                                	
+			                                </td>
+			                                <td class="">
+			                                	<div ng-switch="doc.active">
+												  <div ng-switch-when="true">
+													  	<i class="fa fa-envelope fa-2" aria-hidden="true" ng-click="showEmailDiv(doc.docType)"></i>
+												  </div>
+												  <div ng-switch-when="false">
+													  	<i class="fa fa-envelope fa-2" aria-hidden="true" style="opacity: 0.5"></i>
+												  </div>
+												</div>
+			                                	
+			                                </td>
+			                            </tr>
+			                                    
+			                        </tbody>
+								</table> 
+			                           <!-- <tr class="cart_item">
+			                                <td class=""><span class="m-num">#</span> 2.</td>
+			                                <td class="">Proforma Invoice</td>
+			                                <td class="">
+			                                	<a href="getShipmentReport?shipId={{shipmentId}}&type=proformaInvoice" style="color: black">
+			                                		<i class="fa fa-download fa-2" aria-hidden="true" ng-click="downloadShipmentDoc(shipmentId, 'proformaInvoice')"></i>
+			                                	</a>
+			                                </td>
+			                                <td class=""><i class="fa fa-envelope fa-2" aria-hidden="true"></i></td>
+			                            </tr>
+			                            
+			                            <tr class="cart_item">
+			                                <td class=""><span class="m-num">#</span> 3.</td>
+			                                <td class="">Summary Commercial Invoice</td>
+			                                <td class="">
+			                                	<a href="getShipmentReport?shipId={{shipmentId}}&type=summaryCommercial" style="color: black">
+			                                		<i class="fa fa-download fa-2" aria-hidden="true"  ng-click="downloadShipmentDoc(shipmentId, 'summaryCommercial')"></i>
+			                                	</a>
+			                                </td>
+			                                <td class=""><i class="fa fa-envelope fa-2" aria-hidden="true"></i></td>
+			                            </tr>
+			                            
+			                            <tr class="cart_item">
+			                                <td class=""><span class="m-num">#</span> 4.</td>
+			                                <td class="">WholeSaler Commercial Invoice</td>
+			                                <td class="">
+			                                	<a href="getShipmentReport?shipId={{shipmentId}}&type=wholesalerCommercial" style="color: black">
+			                                		<i class="fa fa-download fa-2" aria-hidden="true"  ng-click="downloadShipmentDoc(shipmentId, 'wholesalerCommercial')"></i>
+			                                	</a>	
+			                                </td>		                                	
+			                                <td class=""><i class="fa fa-envelope fa-2" aria-hidden="true"></i></td>
+			                            </tr> -->
+			                              
+							</div>
+							
+							<div ng-hide="docEmailParam">
+								<div class="row">
+									<label class="col-xs-2">
+										Email To <span class="required">*</span>
+									</label>
+									<div class="col-xs-8">
+										<input type="text" name="" ng-model="docEmail.email" class="form-control" placeholder="a@xyz.com, b@xyz.com"/>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-xs-2">
+										Subject <span class="required">*</span>
+									</label>
+									<div class="col-xs-8">
+										<input type="text" name="" ng-model="docEmail.subject" class="form-control"/>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-xs-2">
+										Message <span class="required">*</span>
+									</label>
+									<div class="col-xs-9">
+										<textarea name="spec_ins" ng-model="docEmail.message" id="spec_ins" rows="4" cols="50" 
+											data-toggle="tooltip" title="Special Instructions is required" class="form-control placeholder">
+										</textarea>
+									</div>
+								</div>
+								
+								<div class="row">
+									<label class="col-xs-2">
+										Attachment 
+									</label>
+									<div class="col-xs-8">
+										
+										<a href="getShipmentReport?shipId={{shipmentId}}&type={{docEmail.docType}}" style="color: blue">
+	                                		{{ docEmail.attachement }} 
+	                                	</a>&nbsp;<i class="fa fa-paperclip" aria-hidden="true"></i>										
+									</div>
+								</div>
+								
+								<!-- <div class="row" style="margin-top: 10px;">
+									<div class="col-xs-12">
+										<button class="btn btn-license" type="button" ng-click="sendDocEmail()">Send Email</button>
+										<button class="btn btn-black" type="button" ng-click="showDocsDiv()">Back</button>
+									</div>
+								</div> -->
+							</div>
+		                </div>    
+			        	
+			        </div>
+			        <div class="modal-footer">
+			            <!-- <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button> -->
+			            <div ng-hide="docEmailParam" style="display: inline">
+				            <button class="btn btn-license" type="button" ng-click="sendDocEmail()">Send Email</button>
+							<button class="btn btn-black" type="button" ng-click="showDocsDiv(); adjustCols()">Back</button>
+						</div>			
+			            <button class="btn btn-license" type="button" ng-click="cancel()">Close</button>
+			        </div>
+			
+			</div>
+		</div>
+	</div>	
+</div>
+
+<script>
+
+	function adjustCols(){
+		var widthArr = [{index: 1, width: '6%'}, {index: 2, width: '70%'}, {index: 3, width: '13%'}, {index: 4, width: '11%'}];
+		
+		adjustColumns(widthArr);
+	}
+
+	$(document).ready(function(){
+		adjustCols();
+	});
+</script>

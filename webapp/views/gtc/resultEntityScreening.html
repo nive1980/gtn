@@ -1,0 +1,206 @@
+<div ng-init="init()" ng-controller="entityScreeningResultCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="row af-user" >
+                     <h1 style="display: inline" class="col-xs-8">Screening Results</h1>
+                     
+                     <!-- <div ng-show="resultType">
+	                     <label class="col-xs-1 control-label" style="margin-top: 5px;text-align: right">
+	                     	Hits: 
+	                     </label>
+	                     <div class="col-xs-1" style="margin-top: 5px">
+	                     	<input type="number" step="1" ng-model="fromHits" class="form-control" placeholder="From"/>
+	                     </div>
+	                     <div class="col-xs-1" style="margin-top: 5px">
+	                     	<input type="number" step="1" ng-model="toHits" class="form-control" placeholder="To"/>
+	                     </div>
+	                 </div> -->
+	                     <div class="col-xs-1" style="margin-top: 5px;padding-left: 0px;float: right;">
+	                     	<div toggle-switch class="switch-small switch-info" 
+	                     		html="true"
+	                     		ng-model="resultType" 
+	                     		on-label="<i class='fa fa-table fa-sm'></i>" 
+	                     		off-label="<i class='fa fa-bar-chart-o'>" >
+	                     	</div>
+	                     </div>
+                     
+                     <!-- <div style="float: right;margin-top: 5px" class="af-user col-xs-9">
+                     	
+                     	
+                     </div> -->
+                     
+                     <!-- <div style="float: right;">
+                     	
+                     </div> -->
+                     <!-- <div layout-gt-sm="row" style="float: right;">
+				          <md-input-container class="md-block" flex-gt-sm>
+				            <label>Min. Hits</label>
+				            <input ng-model="user.firstName">
+				          </md-input-container>
+				
+				          <md-input-container class="md-block" flex-gt-sm>
+				            <label>Max. Hits</label>
+				            <input ng-model="theMax">
+				          </md-input-container>
+			        </div> -->
+                </div>
+                <hr>
+				<!-- Contact login form -->
+				<!--<form id="registration-form" name="registration-form" class="registration-form" action="#" method="post"> -->
+					<div ng-hide="resultType">
+				        <form name="entity-form" id="entity-form" method="post" action="#entity-form" class="af-entity row" novalidate>
+					       <div class=" ">
+					          <div class="col-sm-12 form-alert"></div>
+					          			          		
+					          		<div class="col-sm-12 col-md-12 margin-10b" >                
+						         	       <table class="shop_table" id="hits-table">
+						         	       		<caption style="text-align: left">Screened Entities</caption>
+						                        <thead>
+						                            <tr>
+						                                <th class="product-num">Sr.</th>
+						                                <th class="product-num">Hits</th>
+						                                <th class="product-thumbnail">Type</th>
+						                                <th class="product-thumbnail">Code</th>
+						                                <th class="product-quantity">Name</th>
+						                                <th class="product-subtotal">Status</th>
+						                                <th class="product-subtotal">Audit</th>    
+						                            </tr>
+						                        </thead>				                        
+						                        <tbody>		                        	
+						                        	<tr ng-repeat="screening in wlsScreenings.screeningInp track by $index">
+													    <td>{{ $index + 1 }}</td>
+													    <td>{{ screening.hits }}</td>											    
+													    <td>{{ screening.entityType }}</td>
+													    <td>{{ screening.entityCode }}</td>
+													    <td>{{ screening.name }}</td>
+													    <td>
+													    	<i class="fa fa-flag" ng-class="{red: (screening.hits > 0), green: (screening.hits == 0)}" aria-hidden="true"></i>
+													    </td>
+													    <td ng-if="screening.entityCode != ''" ><a href="javascript:void(0)" ng-click="showAudit(screening.entityType, screening.entityCode)"><i class="fa fa-list-ul" aria-hidden="true"></i></a></td>
+													    <td ng-if="screening.entityCode == ''"><a href="javascript:void(0)" ><i class="fa fa-list-ul" aria-hidden="true"></i></a></td>								    
+													 </tr>          
+						                        </tbody>
+											</table>
+						                </div>
+					    			      	
+					          	
+					          	<BR />
+					          	<div class="col-sm-12 col-md-12" >
+					          		<HR />
+					          	</div>
+					          	            
+					            <div ng-repeat="wlsResult in wlsScreenings.screeningResponse track by $index">	            	
+							            <div class="col-sm-12 col-md-12" >
+							            	<span class="bold-text">Name : </span> {{wlsScreenings.screeningInp[$index].name}}, &nbsp;
+						                	<span class="bold-text">Hits : </span> {{wlsResult.httsReturned.hits}}
+						                </div>
+				                        
+						                <div class="col-sm-12 col-md-12 margin-20b" style="min-height: 230px;">
+						                
+						                	<mdt-table 
+						                		 table-card="{visible: true, title: 'Screening', columnSelector: true}"	
+						                		 alternate-headers="'contextual'"
+						                		 paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,100]}"
+									             mdt-row="{
+									                      data: wlsResult.httsReturned.wlsList.wlsScreenings,
+									                      'column-keys': [
+									                          'id',
+									                          'dpl_name',
+									                          'dpl_score',
+									                          'city',
+									                          'country',
+									                          'dpl_agency',
+									                          'dpl_eff_date',
+									                          'dpl_fr_date',
+									                          
+									                          'dpl_citant',
+									                          'dpl_category'
+									                      ]
+									                      }">
+											    <mdt-header-row>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="ID"><span>ID</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="Name"><span>Name</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="Score"><span>Score</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="City"><span>City</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="Country"><span>Country</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="Agency"><span>Agency</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="Eff. Date"><span>Eff. Date</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="FR Date"><span>FR Date</span></mdt-column>
+											      
+											      <mdt-column align-rule="left" column-sort="true" column-definition="Citatn"><span>Citatn</span></mdt-column>
+											      <mdt-column align-rule="left" column-sort="true" column-definition="DPL Category"><span>DPL Category</span></mdt-column>
+											    </mdt-header-row>
+										 	</mdt-table>
+						                
+						                                
+						         	       <!-- <table class="shop_table" id="hits-table">
+						                        <thead>
+						                            <tr>
+						                                <th class="product-num">ID</th>
+						                                <th class="product-thumbnail">Name</th>
+						                                <th class="product-thumbnail">Score</th>
+						                                <th class="product-name">City</th>
+						                                <th class="product-price">Country</th>
+						                                <th class="product-quantity">Agency</th>
+						                                <th class="product-subtotal">Eff. Date</th>
+						                                <th class="product-subtotal">FR Date</th>
+						                                <th class="product-subtotal">Citatn</th>
+						                                <th class="product-subtotal">DPL Category</th>                
+						                            </tr>
+						                        </thead>
+						                        
+						                        <tbody>		                        	
+						                        	<tr ng-repeat="wlsResultEntity in wlsResult.httsReturned.wlsList.wlsScreenings">
+													    <td>{{ $index + 1 }}</td>
+													    <td>{{ wlsResultEntity.dpl_name }}</td>
+													    <td>{{ wlsResultEntity.dpl_score }}</td>
+													    <td>{{ wlsResultEntity.city }}</td>
+													    <td>{{ wlsResultEntity.country }}</td>
+													    <td>{{ wlsResultEntity.dpl_agency }}</td>
+													    <td>{{ wlsResultEntity.dpl_eff_date }}</td>
+													    <td>{{ wlsResultEntity.dpl_fr_date }}</td>
+													    <td>{{ wlsResultEntity.dpl_citant }}</td>
+													    <td>{{ wlsResultEntity.dpl_category }}</td>								    
+													 </tr>          
+						                        </tbody>
+											</table> -->
+						                </div>        
+				                </div>
+					                
+				                <div class="col-sm-12 col-md-12 margin-20b text-center" >
+					                <input type="button" name="screen" value="RE SCREEN" gtn-click="/createEntityScreening" class="btn btn-black">			                    
+				                </div>        
+					        </div>
+				        </form> 
+				     </div>
+				     
+				     <div ng-show="resultType">
+				     	
+				     	<nvd3 id="wlsGraphPlot" options="wlsGraphOption" data="wlsGraphData"></nvd3>
+				     	<!-- <div class="nvd3-tooltip-wls">
+					     	<div class="toolTip-div"><span class="tooltip-color-span" style="backround-color: blue"></span><b>Name</b> : Naveen</div>
+					     	<div class="toolTip-div"><b>DPL Score</b> : 89</div>
+					     	<div class="toolTip-div"><b>Group</b> : 1</div>
+				     	</div> -->
+				     	
+				     </div>
+                <!-- /Contact entity form -->
+             </div>                                
+		</div>
+      </div>
+	</div>
+</div>
+<!-- <script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '10%'}, {index: 2, width: '20%'}, {index: 3, width: '7%'}, {index: 4, width: '7%'}, 
+		                {index: 5, width: '10%'}, {index: 6, width: '10%'}, {index: 7, width: '10%'}, {index: 8, width: '10%'},
+		                {index: 9, width: '10%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script> -->

@@ -1,0 +1,162 @@
+    <!-- Content area -->
+<div ng-app="restControllers" class="panel-grid-cell dashboard-rt" ng-init="securityInit();">
+  
+   
+ <div class="container">                
+        <div class="row">
+            <div class="col-sm-12 col-md-12 text-left margin-top20">
+                <div class="wel_tt">
+                    <span class="head wel_colo strong">Security </span>    
+ 					<div id="security-errors"></div>
+               
+                    <hr>
+                    
+                      <!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">
+							<div class="col-xs-12">
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+					
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+      
+                    <div class="col-sm-12 col-md-12 yello-div user_information" >
+                        <div class="clearfix margin-20tb"></div>
+                            <div class="mid_div_marg">
+                                <div class="col-sm-8 col-md-8 yello-div table-bordered" >     
+                                <!-- user form -->
+                                <form name="user-form" id="user-form" method="post" action="#user-form" class="af-user row">                                    
+                                <div class="col-sm-12 col-md-12 ">
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <h3>Password Information</h3>
+                                    </div>
+                                
+                                            <div class=" af-outer af-required clearfix">                
+                                                <div class="form-group ">
+                                                    <div class="col-sm-5 enti_tt_alig">
+                                                        <label for="passwordfield">Old Password:</label> 
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                            <div class="password">
+                                                                <input type="password" ng-model="user.oldPassword"  id="passwordfield" placeholder="" value="" size="30"
+                                                                data-toggle="tooltip" title="Old password is required"
+                                                                class="form-control placeholder"/>
+                                                                <span class="glyphicon glyphicon-eye-open"></span>
+                                                            </div>
+                                                            <div class="font_11px lineht-11">(Your password is required to change your password)</div>
+                                                    </div>
+                                                 </div>
+                                            </div>              
+                                            <div class=" af-outer af-required margin-20tb">
+                                                <div class="form-group">
+                                                        <div class="col-sm-5 enti_tt_alig">
+                                                        <label for="passwordfield2">New Password:</label> 
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                        	<div class="password">
+                                                                <input type="password" id="passwordfield2" placeholder="" value="" size="30"
+                                                                data-toggle="tooltip" title="New password is required"
+                                                               ng-model="user.newPassword" class="form-control placeholder"/>
+                                                                <span class="glyphicon  glyphicon-eye-open2"></span>
+                                                            </div>                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-sm-12 col-md-12 margin-20b text-right" >
+                                                <div class=" margin-20tb text-right" >
+                                                    <button type="button" name="Save" value="Save" ng-click="changePassword($event)" id="user_secur_btn" class="btn-license">Save</button> &nbsp;
+                                                    
+                                                    <!-- <md-button class="md-primary md-raised" ng-click="changePassword($event)" >
+												      Confirm Dialog
+												    </md-button> -->
+                                                    
+                                                    
+                                                    <!-- <button type="button" name="Cancel" value="Cancel" onclick="return this);" id="user_secur_btn" class="btn-license">Cancel</button>
+                                                     -->
+                                                </div>
+                                            </div>
+                                <!-- /User form Left part -->
+                                </div>                                    
+                                        </form>
+                                <!-- /user form -->
+                                </div> 
+							</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-top30 clearfix"></div>
+	</div>           
+</div>
+
+        <!-- /PAGE ABOUT -->
+
+<script type="text/javascript">
+$("#passwordfield").on("keyup",function(){
+    if($(this).val())
+        $(".glyphicon-eye-open").show();
+    else
+        $(".glyphicon-eye-open").hide();
+    });
+$(".glyphicon-eye-open").mousedown(function(){
+	$("#passwordfield").attr('type','text');
+}).mouseup(function(){
+	$("#passwordfield").attr('type','password');
+}).mouseout(function(){
+	$("#passwordfield").attr('type','password');
+});
+		
+
+$("#passwordfield2").on("keyup",function(){
+    if($(this).val())
+        $(".glyphicon-eye-open2").show();
+    else
+        $(".glyphicon-eye-open2").hide();
+    });
+$(".glyphicon-eye-open2").mousedown(function(){
+	//alert("hh");
+	$("#passwordfield2").attr('type','text');
+}).mouseup(function(){
+	$("#passwordfield2").attr('type','password');
+}).mouseout(function(){
+	$("#passwordfield2").attr('type','password');
+});
+</script>
+
+
+

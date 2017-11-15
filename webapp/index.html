@@ -1,0 +1,576 @@
+<!DOCTYPE html >
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en" ng-app="gtn" ><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Global Tradenet</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <!-- CSS Global -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/plugins/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="assets/plugins/owlcarousel2/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="assets/plugins/owlcarousel2/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="assets/plugins/prettyphoto/css/prettyPhoto.css" rel="stylesheet">
+    <link href="assets/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="assets/plugins/countdown/jquery.countdown.css" rel="stylesheet">
+	<link href="assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/theme.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
+
+    <!-- <link href="assets/css/custom-user.css" rel="stylesheet"> -->
+
+<link rel="stylesheet" href="assets/expand-collapse-with-plus-minus.css" type="text/css" media="screen" />
+
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/iesupport/html5shiv.js"></script>
+    <script src="assets/plugins/iesupport/respond.min.js"></script>
+    <![endif]-->
+
+<link href="assets/css/screen.css" rel="stylesheet">
+
+<!--Top menu-->
+<link href="assets/css/web-grid.css" rel="stylesheet">
+<link href="assets/css/common.css" rel="stylesheet">
+
+<link href="css/gtn.css" rel="stylesheet" type="text/css" />
+
+<script type='text/javascript' src='js/jquery-1.9.1.js'></script>
+<!-- Angular JS libs -->
+<script src="lib/angular.js"></script>
+
+<script type='text/javascript' src='lib/angular-route.js'></script>
+<script type='text/javascript' src='lib/angular-sanitize.js'></script>
+<script type='text/javascript' src='lib/angular-animate.js'></script>
+<script type='text/javascript' src='lib/angular-touch.js'></script>
+<script type='text/javascript' src='lib/angular-resource.js'></script>
+<script type='text/javascript' src="lib/angular-cookies.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-2.5.0.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-tpls-2.5.0.min.js"></script>
+
+<script type='text/javascript' src="lib/angular-animate.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-aria.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-material.js"></script>
+
+<script src="lib/angular-route.js"></script>
+
+<script src="lib/angular-route.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script src="lib/angular-cookies.js"></script>
+<script type='text/javascript' src='lib/angular-resource.js'></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-2.5.0.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-tpls-2.5.0.min.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-aria.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-material.js"></script>
+<script type='text/javascript' src="lib/angular-animate.js"></script>
+<script type='text/javascript' src='js/directive/navigate.js'></script>
+
+<script type='text/javascript' src='js/factory/factory.js'></script>
+
+<script type="text/javascript" src="js/store.js"></script>
+<script type="text/javascript" src="js/shoppingCart.js"></script>
+<script type='text/javascript' src='js/controller/controller.js'></script>
+<script type='text/javascript' src='js/service/service.js'></script>
+<script src="js/controller/homeController.js" type="text/javascript"></script>
+<script src="js/service/productService.js" type="text/javascript"></script>
+<script src="js/controller/subscriptionController.js" type="text/javascript" ></script>
+<script src="js/service/subscriptionService.js" type="text/javascript"></script>
+<script src="js/service/publicationService.js" type="text/javascript"></script>
+<script src="js/service/userService.js" type="text/javascript"></script>
+<script src="js/service/alertService.js" type="text/javascript"></script>
+<script src="js/service/messageService.js" type="text/javascript"></script>
+<script type='text/javascript' src='js/service/service.js'></script>
+<script type="text/javascript" src="js/controller/controller.js"></script>
+
+<script type="text/javascript" src="js/angular-toggle-switch.min.js"></script>
+<link href="css/angular-toggle-switch-bootstrap-3.css" rel="stylesheet" type="text/css" />
+
+<!-- NVD3 Charts -->
+<link rel="stylesheet" href="lib/ndv3-charts/nv.d3.css">
+
+<!-- angular md data table -->
+<!-- <link href="assets/plugins/md-data-table-master/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="assets/plugins/md-data-table-master/dist/md-data-table.min.js"></script>
+ -->
+<link href="assets/plugins/mdDataTable-master/dist/md-data-table-style.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/angular-material-icons.min.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/md-data-table-templates.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/md-data-table.js"></script>
+
+<script type='text/javascript' src='lib/ndv3-charts/d3.min.js' charset="utf-8"></script>
+<script type='text/javascript' src='lib/ndv3-charts/nv.d3.js' charset="utf-8"></script>
+<script type='text/javascript' src='lib/ndv3-charts/angular-nvd3.min.js' charset="utf-8"></script>
+<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> -->
+<script src="lib/angular-md5/angular-md5.js"></script>
+
+
+
+<!-- <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet"> -->
+
+<link href="assets/css/front.css" rel="stylesheet">
+<link href="assets/css/builder.css" rel="stylesheet">
+<!--Top menu-->
+
+<!-- <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"> -->
+
+</head>
+
+<body id="home" class="wide body-light" ng-app="gtn" ng-controller="HomeCtrl">
+<!-- Preloader -->
+				<div id="preloader" class="loading-spiner-holder" data-gtn-loading>
+					<img src="assets/img/loading.gif" >
+				</div>
+
+<!-- Wrap all content -->
+<div class="wrapper">
+   <!-- HEADER -->
+        <!--Top menu-->
+        <header class="wg-header" role="banner">
+
+    <div class="wg-header__mobile">
+    <div class="wg-header__mobile-content">
+    <div class="wg-header__mobile-left">
+    <div class="wg-header__mobile-controls">
+        <span role="button" class="wg-header__mobile-burger"><i></i><i></i><i></i></span>
+        <a href="index.html" title="Global Tradenet"><span role="img" class="wg-header__logo"></span> </a>
+    </div>
+    </div>
+    <div class="wg-header__mobile-right">
+    <form action="/" class="wg-header__free-trial-form wg-form" data-wg-validate data-signup-form novalidate data-hash="sticky_header">
+        <span class="wg-field-error wg-tooltip wg-tooltip--error wg-tooltip--input wg-tooltip--bottom">Enter your business email</span>
+        <input class="wg-header__free-trial-input wg-input" type="email" placeholder="Enter your business email" name="email" required>
+        <button class="wg-header__free-trial-button wg-btn wg-btn--green" type="submit" data-wg-button>Get started <em>for free</em></button>
+
+        <a href="index.html#/login" class="wg-header__login-button wg-btn wg-btn--white wg-btn--hollow log_btn">Login</a>
+    </form>
+    </div>
+    </div><!--.wg-header__mobile-content-->
+    <div class="wg-header__mobile-overlay-color" role="button"></div>
+    <div class="wg-header__mobile-overlay-mask"></div>
+    <div class="wg-header__mobile-logo-mask"></div>
+    <div class="wg-header__mobile-overlay">
+    <nav class="wg-header__mobile-overlay-nav">
+    <ul class="wg-header__mobile-overlay-menu-primary">
+        <li class="wg-header__mobile-overlay-menu-primary-item">
+            <a href="javascript:void(0);" class="wg-header__mobile-overlay-menu-primary-link">
+                Product<i class="arrow"></i>
+            </a>
+        </li>
+        <li class="wg-header__mobile-overlay-menu-primary-item wg-header__mobile-overlay-menu-primary-item--parent">
+                <span class="wg-header__mobile-overlay-menu-primary-span">
+                    Solutions<i class="arrow"></i>
+                </span>
+            <ul class="wg-header__mobile-overlay-submenu">
+                <li class="wg-header__mobile-overlay-submenu-item">
+                    <a href="javascript:void(0);" class="wg-header__mobile-overlay-submenu-link">
+
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <div class="wg-header__mobile-overlay-submenu-label">
+                           Global <br>Tradenet M1</div>
+                    </a>
+                </li>
+                <li class="wg-header__mobile-overlay-submenu-item">
+                    <a href="javascript:void(0);" class="wg-header__mobile-overlay-submenu-link">
+
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+
+                        <div class="wg-header__mobile-overlay-submenu-label">
+                            Global <br>Tradenet M2</div>
+                    </a>
+                </li>
+                <li class="wg-header__mobile-overlay-submenu-item">
+                    <a href="javascript:void(0);" class="wg-header__mobile-overlay-submenu-link">
+
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <div class="wg-header__mobile-overlay-submenu-label">
+                            Global <br>Tradenet M3</div>
+                    </a>
+                </li>
+                <li class="wg-header__mobile-overlay-submenu-item">
+                    <a href="javascript:void(0);" class="wg-header__mobile-overlay-submenu-link">
+
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+
+                        <div class="wg-header__mobile-overlay-submenu-label">
+                            Global <br>Tradenet M4 </div>
+                    </a>
+                </li>
+                <li class="wg-header__mobile-overlay-submenu-item">
+                    <a href="javascript:void(0);" class="wg-header__mobile-overlay-submenu-link">
+
+                        <i class="fa fa-users" aria-hidden="true"></i>
+
+                        <div class="wg-header__mobile-overlay-submenu-label">
+                            All Teams</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="wg-header__mobile-overlay-menu-primary-item">
+            <a href="index.html#/subscription" class="wg-header__mobile-overlay-menu-primary-link">
+                Pricing<i class="arrow"></i>
+            </a>
+        </li>
+
+    </ul>
+    </nav>
+    </div><!--.wg-header__mobile-overlay-->
+
+    </div><!--.wg-header__mobile-->
+
+    <div class="wg-header__desktop">
+  <!--.wg-header__top-menu-->
+
+
+    <div class="wg-header__sticky-menu">
+    <div class="wg-header__sticky-mainmenu">
+    <div class="wg-grid">
+        <div class="wg-cell wg-cell--xs-3 wg-cell--sm-6 wg-cell--md-7 wg-cell--xl-7">
+            <nav class="wg-header__desktop-primary-nav">
+                <a href="index.html" title="Global Tradenete"><span role="img" class="wg-header__logo"></span></a>
+                <ul class="wg-header__desktop-primary-nav-menu">
+
+
+                        <li class="wg-header__desktop-primary-nav-item wg-header__desktop-primary-nav-item--solutions wg-header__desktop-primary-nav-item--no-link wg-header__desktop-primary-nav-item--parent">
+                        <span class="wg-header__desktop-primary-nav-span">
+                        Solutions
+                        </span>
+                        </li>
+
+
+                        <li class="wg-header__desktop-primary-nav-item wg-header__desktop-primary-nav-item--tour">
+                        <a href="javascript:void(0);" class="wg-header__desktop-primary-nav-link">Product </a>
+                        </li>
+
+                        <li class="wg-header__desktop-primary-nav-item wg-header__desktop-primary-nav-item--price">
+                        <a href ="index.html#/subscription" class="wg-header__desktop-primary-nav-link">Pricing </a>
+                        </li>
+
+
+
+                </ul>
+            </nav>
+        </div><!--.wg-cell-->
+        <div class="wg-cell wg-cell--xs-3 wg-cell--sm-6 wg-cell--md-5 wg-cell--xl-5">
+            <div class="r">
+                <form action="/" class="wg-header__free-trial-form wg-form" data-hash="sticky_header" data-wg-validate data-signup-form novalidate>
+                    <span class="wg-field-error wg-tooltip wg-tooltip--error wg-tooltip--input wg-tooltip--bottom">Enter your business email</span>
+                    <input class="wg-header__free-trial-input wg-input" type="email" placeholder="Enter your business email" name="email" required>
+                    <button class="wg-header__free-trial-button wg-btn wg-btn--green" type="submit" data-wg-button>Get started <em>for free</em></button>
+                    <a href="index.html#/login" class="wg-header__login-button wg-btn wg-btn--white wg-btn--hollow log_btn">Login</a>
+                </form>
+            </div>
+        </div>
+        <!--.wg-cell-->
+    </div><!--.wg-grid-->
+    </div><!--.wg-header__sticky-mainmenu-->
+    <div class="wg-header__sticky-submenu">
+    <div class="wg-grid">
+        <div class="wg-cell">
+            <div class="wg-header__sticky-submenu-content">
+                <div class="wg-header__sticky-submenu-list">
+
+
+
+                               <a href="javascript:void(0);" class="wg-header__sticky-submenu-item wg-header__sticky-submenu-item--marketing">
+                              <div class="wg-header__sticky-submenu-item-wrap">
+                              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+
+                                <div class="wg-header__sticky-submenu-label">
+                                    <span>Global <br>Tradenet M1</span>
+                                </div>
+                            </div>                                </a>
+
+
+
+                         <a href="javascript:void(0);" class="wg-header__sticky-submenu-item wg-header__sticky-submenu-item--creative">
+                           <div class="wg-header__sticky-submenu-item-wrap">
+                           <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+
+                                <div class="wg-header__sticky-submenu-label">
+                                    <span>Global <br>Tradenet M2</span>
+                                </div>
+                            </div>                                </a>
+
+
+
+                         <a href="javascript:void(0);" class="wg-header__sticky-submenu-item wg-header__sticky-submenu-item--pm">
+                           <div class="wg-header__sticky-submenu-item-wrap">
+                           <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+
+                                <div class="wg-header__sticky-submenu-label">
+                                    <span>Global <br>Tradenet M3</span>
+                                </div>
+                            </div>                                </a>
+
+
+
+                            <a href="javascript:void(0);" class="wg-header__sticky-submenu-item wg-header__sticky-submenu-item--dev">
+                            <div class="wg-header__sticky-submenu-item-wrap">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+
+                                <div class="wg-header__sticky-submenu-label">
+                                    <span>Global <br>Tradenet M4</span>
+                                </div>
+                            </div>                                </a>
+
+
+
+                        <a href="javascript:void(0);" class="wg-header__sticky-submenu-item wg-header__sticky-submenu-item--all">
+                            <div class="wg-header__sticky-submenu-item-wrap">
+                                <div class="wg-header__sticky-submenu-img">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+
+                                </div>
+
+                                <div class="wg-header__sticky-submenu-label">
+                                    <span>All Teams</span>
+                                </div>
+                            </div>                                </a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div><!--.wg-header__sticky-menu-->
+    </div><!--.wg-header__desktop-->
+
+    </header>
+        <!--//End top menu-->
+    <!-- /HEADER -->
+
+    <!-- Content area -->
+
+
+<!-- PAGE login -->
+
+<!-- /PAGE login -->
+
+        <!-- PAGE ABOUT -->
+    <div ng-view></div>
+        <!-- /PAGE ABOUT -->
+
+
+        <!-- PAGE bottom link -->
+<!--         <section class="page-section color_skyblue" id="team">
+            <div class="container">
+                    <div class="row btm_link clear">
+                        <div class="col-sm-3 col-md-2" data-animation="fadeInUp" data-animation-delay="100">
+                            <ul>
+                                <li>About</li>
+                                <li><a href="javascript:void();">Company</a></li>
+                                <li><a href="javascript:void();">Careers</a></li>
+                                <li><a href="javascript:void();">Blog</a></li>
+                                <li><a href="javascript:void();">Newsroom</a></li>
+                                <li><a href="javascript:void();">Contact Us</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-3 col-md-2" data-animation="fadeInUp" data-animation-delay="300">
+                        <ul>
+                            <li>Global Trade Net</li>
+                            <li><a href="javascript:void();">Product</a></li>
+                            <li><a href="javascript:void();">Pricing</a></li>
+                            <li><a href="javascript:void();">Customers</a></li>
+                            <li><a href="javascript:void();">Integrations</a></li>
+                            <li><a href="javascript:void();">API</a></li>
+                            <li><a href="javascript:void();">Security</a></li>
+                        </ul>
+                        </div>
+
+                        <div class="col-sm-3 col-md-3" data-animation="fadeInUp" data-animation-delay="500">
+                        <ul>
+                            <li>Solutions</li>
+                            <li><a href="javascript:void();">Global Trade Control</a></li>
+                            <li><a href="javascript:void();">Export Operations</a></li>
+                            <li><a href="javascript:void();">Import Operations</a></li>
+                            <li><a href="javascript:void();">License and Permits</a></li>
+                        </ul>
+                        </div>
+
+                        <div class="col-sm-3 col-md-2" data-animation="fadeInUp" data-animation-delay="700">
+                        <ul>
+                            <li>For customers</li>
+                            <li><a href="javascript:void();">Help Center</a></li>
+                            <li><a href="javascript:void();">Webinars</a></li>
+                            <li><a href="javascript:void();">Consultation Services</a></li>
+                            <li><a href="javascript:void();">Translation Portal</a></li>
+                        </ul>
+                        </div>
+
+                        <div class="col-sm-3 col-md-3" data-animation="fadeInUp" data-animation-delay="800">
+                        <ul>
+                            <li>Resources</li>
+                            <li><a href="javascript:void();">For Project Managers</a></li>
+                            <li><a href="javascript:void();">For Marketers</a></li>
+                            <li><a href="javascript:void();">For Productivity</a></li>
+                            <li><a href="javascript:void();">For Collaboration</a></li>
+                            <li><a href="javascript:void();">Project Management Guide</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+        </section>  -->
+        <!-- /PAGE team -->
+
+    </div>
+    <!-- /Content area -->
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-meta">
+            <div class="container no_pad">
+
+    <div class="copyright" >
+        <div class="col-sm-6 col-md-4 text-l">
+            <ul class="social-line social-wohex list-inline mobile_f">
+            <li>Follow us</li>
+            <li data-animation="flipInY" data-animation-delay="300"><a href="javascript:void();" class="facebook"><i class="fa fa-facebook"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="100"><a href="javascript:void();" class="twitter"><i class="fa fa-twitter"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="200"><a href="javascript:void();" class="google"><i class="fa fa-google"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="400"><a href="javascript:void();" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+
+            </ul>
+            </div>
+            <div class="col-sm-6 col-md-8 text-r">
+            <div class="pad_tb20px">&copy; 2016 Global Trade net. All rights reserved. Patented. <span class="mobile_f"> |  <a href="javascript:void();" >Privacy Policy</a> & <a href="javascript:void();" >Terms of Service</a></span></div>
+            </div>
+    </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
+    <!--<div class="to-top"><i class="fa fa-angle-up"></i></div> -->
+
+
+<div class="wg-modal modal-form-trial wg-modal--col-1 wg-modal--pro wg-modal--size-1 wg-modal--builder" id="modal-pro" data-hash="start-trial" data-wg-modal>
+
+    <form action="/" class="wg-form modal-form-trial__form js-signup-modal " data-hash="header_button_form" method="post" data-wg-validate novalidate data-plan-id="pro" data-signup-form>
+        <div class="modal-form-trial__icon">
+                <img src="assets/img/free-icon.png" >
+        </div>
+
+        <div class="modal-form-trial__title">Start Free trial</div>
+
+        <label class="modal-form-trial__label">
+            <span class="wg-field-error wg-tooltip wg-tooltip--error wg-tooltip--input">Enter your business email</span>
+            <input id="freeTrialEmail" class="wg-input modal-form-trial__input" name="email" type="email" placeholder="Enter your business email" pattern="email" required>
+        </label>
+        <label class="modal-form-trial__label">
+            <button ng-click="startFreeTrail()" class="wg-btn wg-btn--blue modal-form-trial__submit" data-wg-button type="button">Create my Global Tradenet account</button>
+        </label>
+    </form>
+
+    <button class="modal-form-trial__close" data-wg-hide type="button" title="Close"></button>
+
+</div>
+
+</div>
+
+<div class="wg-modal modal-exit-popup" id="modal-exit-popup" data-hash="exit-popup" data-wg-modal>
+    <div class="modal-exit-popup__wrap">
+
+        <div class="modal-exit-popup__title">Like our stories? We have more!</div>
+        <div class="modal-exit-popup__subtitle">Once a week you'll get one of our tips about marketing management, work productivity, and successful campaign launches. No spam, just weekly tips</div>
+
+        <script id="mkto_form_localization">
+            window.mkto_form_localization = {
+                form_id: '1407',
+                lang_field_val: 'en',
+                email_placeholder: "Enter your business email",
+                subscribe_button: "Send me more!",
+                subscribe_ty_heading: "Check your inbox, the first tips are already delivered",
+                subscribe_ty_text: "Have a great day!<br>Your Global Tradenet team",
+                error_message: "Enter your business email"
+            }
+        </script>
+        <form id="mktoForm_1407"><span class="mkto_form_preloader">Please wait...</span></form>
+        <button class="modal-exit-popup__close" data-wg-hide type="button" title="Close"></button>
+
+    </div>
+</div>
+
+<!-- JS Global -->
+<script src="js/start.js" type="text/javascript"></script>
+
+<!-- JS Global -->
+<!--[if lt IE 9]><script src="assets/plugins/jquery/jquery-1.11.1.min.js"></script><![endif]-->
+<!--[if gte IE 9]><!--><script src="assets/plugins/jquery/jquery-2.1.1.min.js"></script><!--<![endif]-->
+<script src="assets/plugins/modernizr.custom.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="assets/plugins/superfish/js/superfish.js"></script>
+<script src="assets/plugins/prettyphoto/js/jquery.prettyPhoto.js"></script>
+<script src="assets/plugins/placeholdem.min.js"></script>
+<script src="assets/plugins/jquery.smoothscroll.min.js"></script>
+<script src="assets/plugins/jquery.easing.min.js"></script>
+
+<!-- JS Page Level -->
+<script src="assets/plugins/owlcarousel2/owl.carousel.min.js"></script>
+<script src="assets/plugins/waypoints/waypoints.min.js"></script>
+<script src="assets/plugins/countdown/jquery.plugin.min.js"></script>
+<script src="assets/plugins/countdown/jquery.countdown.min.js"></script>
+
+<script src="assets/js/theme-ajax-mail.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/custom.js"></script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="assets/plugins/jquery.cookie.js"></script>
+<script src="assets/js/theme-config.js"></script>
+<!--<![endif]-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        theme.init();
+     theme.initMainSlider();
+
+    });
+   jQuery(window).load(function () {
+        theme.initAnimation();
+    });
+  jQuery(window).load(function () { jQuery('body').scrollspy({offset: 100, target: '.navigation'}); });
+    jQuery(window).load(function () { jQuery('body').scrollspy('refresh'); });
+    jQuery(window).resize(function () { jQuery('body').scrollspy('refresh'); });
+
+    jQuery(document).ready(function () { theme.onResize(); });
+    jQuery(window).load(function(){ theme.onResize(); });
+    jQuery(window).resize(function(){ theme.onResize(); });
+jQuery(window).load(function() {
+        if (location.hash != '') {
+            var hash = '#' + window.location.hash.substr(1);
+
+            if (hash.length) {
+                jQuery('html,body').delay(0).animate({
+                    scrollTop: 0
+                }, {
+                    duration: 1200,
+                    easing: "easeInOutExpo"
+                });
+            }
+        }
+    });
+
+
+
+
+</script>
+</body>
+<script src="js/web-grid.js"></script>
+<script src="js/common.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+</html>

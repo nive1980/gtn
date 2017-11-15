@@ -1,0 +1,173 @@
+<div ng-init="init()" ng-controller="businessIntelligenceCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible af-user">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>Business Intelligence</h1>
+                </div>
+                <hr>
+            </div>
+            
+         <!-- <div class="row">
+            	<div class="col-xs-6">
+            		<nvd3 options="options" data="data"></nvd3>
+            	</div>
+            	
+            	<div class="col-xs-6">
+            		<nvd3 options="options" data="data"></nvd3>
+            	</div>
+           </div> -->
+           <div ng-hide="angularChart">
+		        <div class="row form-group">
+				    <div class="col-md-4">
+				         <div class="panel panel-default">
+				             <div class="panel-heading">
+				             	Shipment By Status
+				             	<span style="font-weight: normal; float: right">
+					             	<input type="radio" class="" ng-model="shipStats" ng-change='getShipmentByStatus()' value="gtn"><span class="graph-header-radio">GTN</span>
+									<input type="radio" class="" ng-model="shipStats" ng-change='getShipmentByStatus()' value="aes"><span class="graph-header-radio">AES</span>
+									<i class="fa fa-refresh graph-header-radio" style="margin-left: 10px;" ng-click="getShipmentByStatus()"></i>
+								</span>
+				             </div>
+				                <div class="panel-body" style="min-height: 230px">
+				                      <span id="graph-content"><nvd3 options="options" data="data"></nvd3></span>
+				                      <!-- <div id='ajax_loader' style="position: relative; display: none;z-index: 10001">
+										    <img src="http://localhost:8080/gtn/images/loading3.gif"></img>
+									  </div> -->
+				                </div>
+				          </div>
+				    </div>
+				    
+				    <div class="col-md-4">
+				         <div class="panel panel-default">
+				             <div class="panel-heading">
+				             	Shipment By Country
+				             
+				             	<span style="font-weight: normal; float: right">
+					             	<i class="fa fa-refresh graph-header-radio" style="margin-left: 10px;top: 0px;" ng-click="getShipmentByCountry()"></i>
+								</span>
+				             </div>
+				                <div class="panel-body">
+				                      <nvd3 options="optionsByCountry" data="dataByCountry"></nvd3>
+				                </div>
+				          </div>
+				    </div>		
+				    		   
+				    <div class="col-md-4">
+				         <div class="panel panel-default">
+				             <div class="panel-heading">
+				             	Shipment By Value
+				             
+				             	<span style="font-weight: normal; float: right">
+					             	<i class="fa fa-refresh graph-header-radio" style="margin-left: 10px;top: 0px;" ng-click="getShipmentByValue()"></i>
+								</span>
+				             </div>
+				                <div class="panel-body">
+				                      <nvd3 options="optionsByValue" data="dataByValue"></nvd3>
+				                </div>
+				          </div>
+				    </div>			   
+				    		   
+			   </div>	
+			   
+			  <!-- <div class="row">
+			   	
+				    <div class="col-md-8">
+				         <div class="panel panel-default">
+				             <div class="panel-heading">
+				             	Shipment By Country
+				             
+				             	<span style="font-weight: normal; float: right">
+					             	<i class="fa fa-refresh graph-header-radio" style="margin-left: 10px;top: 0px;" ng-click="getShipmentByCountry()"></i>
+								</span>
+				             </div>
+				                 <div class="panel-body" id="world-map" style="height: 250px;width: 570px">
+				                      
+				                </div> 
+				          </div>
+				    </div>	
+			   
+			   </div>-->
+	   
+			   <div class="row">				    
+				    <div class="col-md-4">
+				         <div class="panel panel-default">
+				             <div class="panel-heading">
+				             	Shipment And Invoice
+				             
+				             	<span style="font-weight: normal; float: right">
+					             	<i class="fa fa-refresh graph-header-radio" style="margin-left: 10px;top: 0px;" ng-click="shipmentByInvoice()"></i>
+								</span>
+				             </div>
+				                <div class="panel-body">
+				                      <nvd3 options="optionsInvoice" data="dataInvoice"></nvd3>
+				                </div>
+				                
+				                
+				          </div>
+				    </div>
+				   <div class="col-md-4">
+				         <div class="panel panel-default">
+				             <div class="panel-heading">Shipment By Timeline</div>
+				                <div class="panel-body">
+				                      <nvd3 options="optionsTimeline" data="dataTimline"></nvd3>
+				                </div>
+				          </div>
+				    </div>
+			   </div>
+        
+            	
+            	<div class="row" style="height: 400px">
+            	 	<div class="col-md-8">
+				           <div class="panel panel-default">
+				             <div class="panel-heading">
+				             	Shipment By Country
+				             	<span style="font-weight: normal; float: right">
+					             	<i class="fa fa-refresh graph-header-radio" style="margin-left: 10px;top: 0px;" ng-click="getShipmentByCountryMap()"></i>
+								</span>
+				             </div>
+				                <div class="panel-body" id="world-map" style="height: 380px">
+				                      
+				                </div>
+				          </div>
+				     </div>           
+                </div>
+            
+          </div>     
+          	
+              <div class="row">
+              	<div class="col-xs-12">
+              		<a href="javascript:void(0)" ng-click="showAngularCharts()">angular-charts</a>
+              	</div>
+              </div>
+          
+              <!-- angular charts -->
+              <div ng-show="angularChart">              	
+              		<div class="row">
+              			<div class="col-md-6">
+				         <div class="panel panel-default">
+				             <div class="panel-heading">Shipment By Status</div>
+				                <div class="panel-body">
+				                      
+				                </div>
+				          </div>
+					    </div>
+					    
+					    <div class="col-md-6">
+					         <div class="panel panel-default">
+					             <div class="panel-heading">Shipment By Country</div>
+					                <div class="panel-body">
+					                      
+					                </div>
+					          </div>
+					    </div>
+              		</div>              
+              </div>  	
+                        
+         </div>
+       </div>
+     </div>
+</div>

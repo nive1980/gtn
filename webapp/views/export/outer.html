@@ -1,0 +1,495 @@
+<div ng-init="parentInit('');init()" ng-controller="exportOperationCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		   <!-- <div ng-include src="'views/export/menu.html'"></div> -->
+		   
+		  <!--  <div class="row">			
+						<div class="col-xs-9">	
+							<ul class="nav2">
+								<li class="active">
+									<a href="#createNewShipment">Shipment</a>
+								</li>
+								<li ng-class="{'hover':hovering}" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false"><a href="#" class="parent2" style="margin-right: 7px">Parties</a>
+									<ul class="parent2-content">
+										<li class="active" ><a href="Exporter.html" >Exporter </a></li>
+										<li><a href="Exporter_Ultimate_Consignee.html" >Ultimate Consignee</a></li>
+										<li><a href="Exporter_Intermediate_Consignee.html" >Intermediate Consignee</a></li>
+							            <li><a href="Exporter_Freight_Forwarder.html" >Freight Forwarder</a></li>
+									</ul>
+								</li>
+								<li><a href="Exporter_Billing.html">Billing & Terms</a></li>
+								<li ng-class="{'hover':itemshovering}" ng-mouseenter="itemshovering=true" ng-mouseleave="itemshovering=false"><a href="Exporter_item_cartons.html" class="parent2" style="margin-right: 7px">Item & Cartons</a>
+									<ul class="parent2-content">
+										<li><a href="Exporter_Items.html" >Item</a></li>
+										<li><a href="Exporter_Cartons.html" >Cartons</a></li>
+									</ul>
+								</li>
+								<li><a href="Exporter_documents.html" >Documents</a></li>
+							</ul>
+							
+							<div class="col-sm-6 col-md-6 wel_tt wel_colo margin-top10 no_pad" style="margin-top: 20px">
+				                <div class="">
+				                     <span class="head strong">Export Shipment</span>
+				                </div>
+				               
+				            </div>
+						</div>
+						
+						<div class="col-sm-3 col-md-3 text-right">
+								<div class="ship_icon">
+		  	                        <a href="javascript:void(0)"><span class="ship_big ship_icn_img flt_l" ></span>
+		                            	WLS
+		                            </a>		                            
+							    </div>
+		                        
+		                        <div class="ship_icon">
+		  	                        <a href="javascript:void(0)"><span class="ship_big ship_icn_img2 flt_l" ></span>
+		                            	LS
+		                            </a>		                            
+							    </div>
+						</div>
+								   		
+			   </div> -->
+			   
+		   <!-- 
+		   <hr class="margin0-bottom">  -->
+			   
+            <div class="col-sm-12 col-md-12 no_pad response_info">
+            
+            	    <!-- Error Messages -->
+				    <div class="row ocr-error" ng-show="errors.length > 0">			
+						<div class="col-xs-12">				
+							<div class="alert fade in alert-danger">
+								<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+								<h4>Error</h4>
+								<ul class="msg-ul">
+									<li ng-repeat="error in errors track by $index">
+				            			{{ error.msg }}
+				            		</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					      
+				      <!-- Warning Messages -->
+				      <div class="row ocr-warning" ng-show="warnings.length > 0">
+				        <div class="col-xs-12">
+				          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+				            <strong>Warning!</strong>
+				            <ul class="msg-ul">
+				            	<li ng-repeat="warning in warnings track by $index">
+				            		{{ warning }}
+				            	</li>
+				            </ul>
+				          </div>
+				        </div>
+				      </div>
+					      
+				      <!-- Info Messages -->
+				      <div class="row ocr-info" ng-show="infos.length > 0">
+				        <div class="col-xs-12">
+				          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+				            <strong>Information!</strong>
+				            <ul class="msg-ul">
+				            	<li ng-repeat="info in infos track by $index">
+				            		{{ info }}
+				            	</li>
+				            </ul>
+				          </div>
+				        </div>
+				      </div>
+				     
+            
+            
+            	<div class="row">
+            		<div class="col-xs-12">
+            			<fieldset>
+            				<legend>New Shipment</legend>
+            			
+            	<!-- <h4 class="margin10-top strong"></h4> -->            	
+            	 <!-- user form -->
+			                 <form name="shipment-form" class="af-user row">
+			                         <div class="col-sm-12 col-md-12">
+			                                     <div class=" af-outer af-required clearfix">
+			                                         <div class="form-group">
+			                                                 <div class="col-sm-3 enti_tt_alig">
+			                                                 <label for="shipment_num">Shipment Number:</label> 
+			                                                 </div>
+			                                                 <div class="col-sm-3">
+			                                                 <input
+			                                                     type="text" name="shipment_num" id="shipment_num" placeholder="" value="" size="30"
+			                                                     data-toggle="tooltip" title="Shipment Number is required"
+			                                                     class="form-control placeholder" ng-model="shipment.shipmentNo" />                            
+			                                                  </div>
+			                                                  
+			                                                  <div class="col-sm-3 enti_tt_alig">
+			                                                 	<label for="date_export">Date of Export:</label> 
+			                                                 </div>
+			                                                 <div class="col-sm-3">
+			                                                 <input
+			                                                     type="date" name="date_export" id="date_export" placeholder="" value="" size="30"
+			                                                     data-toggle="tooltip" title="Date of Export is required"
+			                                                     class="form-control placeholder" ng-model="shipment.exportDate"/>                            
+			                                                  </div>
+			                                         </div>
+			                                     </div>            
+			                                     <!-- <div class=" af-outer af-required clearfix">
+			                                         <div class="form-group">
+			                                             
+			                                          </div>
+			                                     </div>   -->          
+			                                     <!--<div class=" af-outer af-required clearfix">
+			                                         <div class="form-group">                
+			                                                 <div class="col-sm-5 enti_tt_alig">
+			                                                 <label for="country_shipped">Country Shipped From:</label> 
+			                                                 </div>
+			                                                 <div class="col-sm-7">
+			                                                 <input
+			                                                     type="text" name="country_shipped" id="country_shipped" placeholder="" value="" size="30"
+			                                                     data-toggle="tooltip" title="Country is required"
+			                                                     class="form-control placeholder input-email"/>                            
+			                                                  </div>
+			                                         </div>
+			                                     </div> -->
+			                                     <div class=" af-outer af-required clearfix">                
+			                                         <div class="col-sm-3 enti_tt_alig">
+			                                         	<label for="shipped_country">Country Shipped From: </label> 
+			                                         </div>
+			                                         <div class="col-sm-3 autosuggest autosuggest115">                                                    
+			                                                 <div class="form-group selectpicker-wrapper">
+			                                                   
+			                                                    <input
+						                                                type="text" name="countryOfExportName" id="countryOfExportName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+						                                                data-toggle="tooltip" title="Country is required"
+						                                                class="form-control placeholder left-inp" ng-model="shipment.countryOfExportName"
+						                                                typeahead-template-url="countryTmpl.html"
+						                                                typeahead-editable="false" 
+						                                                typeahead-min-length="0" ng-blur="clearCountry('countryOfExportCode', '', '', shipment.countryOfExportName, shipment)"
+						                                                typeahead-on-select="selectCountryEvent($item, $model, $label, 'countryOfExportName', 'countryOfExportCode', shipment)" autocomplete="off"/>
+														     
+														      	<input name="countryOfExportCode" ng-model="shipment.countryOfExportCode" class="form-control right-inp" readonly="true" />
+														         
+			                                                 </div>
+			                                         </div>
+			                                         
+			                                           <div class="col-sm-3 enti_tt_alig">
+				                                       		<label for="desti_country">Country of Ultimate destination: </label> 
+				                                       </div>
+			                                       <div class="col-sm-3 autosuggest autosuggest115">
+			                                           		
+		                                           	   <input
+				                                                type="text" name="countryOfUltConsigneeName" id="countryOfUltConsigneeName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+				                                                data-toggle="tooltip" title="Country is required"
+				                                                class="form-control placeholder left-inp" ng-model="shipment.countryOfUltConsigneeName"
+				                                                typeahead-template-url="countryTmpl.html"
+				                                                typeahead-editable="false" 
+				                                                typeahead-min-length="0" ng-blur="clearCountry('countryOfUltConsigneeCode', '', '', shipment.countryOfUltConsigneeName, shipment)"
+				                                                typeahead-on-select="selectCountryEvent($item, $model, $label, 'countryOfUltConsigneeName', 'countryOfUltConsigneeCode', shipment)" autocomplete="off"/>
+												     
+												      	<input name="countryOfUltConsigneeCode" ng-model="shipment.countryOfUltConsigneeCode" class="form-control right-inp" readonly="true" />
+												         	
+			                                           		
+			                                           		
+			                                               <!-- <div class="form-group selectpicker-wrapper">
+			                                                   <select class="form-control " id="desti_country" data-live-search="false" data-width="100%"
+			                                                       data-toggle="tooltip" title="Day" ng-model="shipment.countryOfUltConsigneeCode">
+			                                                       <option value="">Select Country</option>
+			                                                       <option value="AU">Australia </option>
+			                                                        <option value="US">USA </option>
+			                                                        <option value="IN">India </option>
+			                                                      	<option value="PK">Pakistan</option>
+			                                                   </select>
+			                                               </div> -->
+			                                       </div>
+			                                 </div>
+			                                 <div class=" af-outer af-required clearfix">
+			                                      
+			                                       <div class="col-xs-3">
+			                                       	<div class="" >
+					                                     <input type="button" name="Next" value="Next" ng-click="saveShipment('continue', 'new')" id=" " class="btn btn-license">
+					                                     <input type="submit" name="Save Shipment" value="Save shipment" ng-click="saveShipment('save', 'new')" id="btn-license" class="btn btn-license">
+					                                     <!-- <input type="button" name="Cancel" value="Cancel" onclick="return this);" id=" " class="btn-license"> -->
+					                                 </div>
+			                                       </div>
+			                                       
+			                                 </div>
+			                                     
+			                                     
+			                         </div>             
+			                                                     
+			                    </form>
+                 		</fieldset>
+            		</div>
+            	</div>
+                   <!-- /user form -->
+            	
+            </div>
+            <!-- <hr class="margin0-bottom">
+            <BR /> -->
+              <div class="row af-user">
+              	<div class="col-xs-12">
+              	
+              		<!-- <h4 class="margin10-top strong">Search</h4>   -->
+              		<fieldset>
+					  <legend>Search</legend>
+					  
+					  				<div class=" af-outer af-required clearfix">
+                                         <div class="form-group">
+                                             <div class="col-sm-3 enti_tt_alig">
+                                                 <label for="date_export">Shipment No:</label> 
+                                                 </div>
+                                                 <div class="col-sm-3">
+	                                                 <input
+	                                                     type="text" name="shipment_no" placeholder="" value="" size="30"
+	                                                     class="form-control placeholder" ng-model="searchShip.shipmentNo"/>                            
+                                                  </div>
+                                          </div>
+                                          
+                                         <div class="form-group">
+                                             <div class="col-sm-3 enti_tt_alig">
+                                                 <label for="date_export">ITN No:</label> 
+                                                 </div>
+                                                 <div class="col-sm-3">
+	                                                 <input
+	                                                     type="text" name="shipment_no" placeholder="" value="" size="30"
+	                                                     class="form-control placeholder" ng-model="searchShip.itn"/>                            
+                                                  </div>
+                                          </div>
+                                          
+                                     </div>     
+                                     
+                                     <div class=" af-outer af-required clearfix">
+                                         <div class="form-group">
+                                             <div class="col-sm-3 enti_tt_alig">
+                                                 <label for="date_export">Date of Export:</label> 
+                                                 </div>
+                                                 <div class="col-sm-3">
+	                                                 <input
+	                                                     type="date" name="date_export" placeholder="" value="" size="30"
+	                                                     data-toggle="tooltip" title="Date of Export is required"
+	                                                     class="form-control placeholder" ng-model="searchShip.exportDate"/>                            
+                                                  </div>
+                                          </div>
+                                          
+                                         <div class="form-group">
+                                             <div class="col-sm-3 enti_tt_alig">
+                                                 <label for="sbu">SBU:</label> 
+                                                 </div>
+                                                 <div class="col-sm-3">
+	                                                 <select id="searchShipSbu"  class="form-control ">
+								            			<option ng-repeat="sbu in sbuList" value="{{sbu}}"> {{ sbu }} </option>
+								            		</select> 
+								            		<!-- <select ng-model="searchShip.sbu" ng-init="searchShip.sbu='var1'" ng-options="o as o for o in sbuList" class="form-control ">
+    												</select> -->   
+    												<!-- <select class="form-control ">
+													    <option ng-repeat="o in sbuList" ng-selected="{{o==searchShip.sbu}}" value="{{o}}">
+													        {{o}}
+													    </option>
+													</select>  -->                     
+                                                  </div>
+                                          </div>
+                                          
+                                     </div>            
+                                   
+                                     <div class="form-group af-required">                
+                                         <div class="col-sm-3 enti_tt_alig">
+                                         <label for="shipped_country">Country Shipped From: </label> 
+                                         </div>
+                                         <div class="col-sm-3 ">                                                    
+                                                 <div class="form-group autosuggest autosuggest115">
+                                                     <!-- <select class="form-control input-shipped" id="shipped_country" data-live-search="false" data-width="100%"
+                                                         data-toggle="tooltip" title="Day" ng-model="searchShip.countryOfExportCode">
+                                                         <option value="">Select Country</option>
+                                                         <option value="IN">India </option>
+                                                         <option value="PK">Pakistan</option>
+                                                     </select> -->
+                                                     
+                                                     <input
+				                                                type="text" name="countryOfExportName" id="countryOfExportName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+				                                                data-toggle="tooltip" title="Country is required"
+				                                                class="form-control placeholder left-inp" ng-model="searchShip.countryOfExportName"
+				                                                typeahead-template-url="countryTmpl.html"
+				                                                typeahead-editable="false" 
+				                                                typeahead-min-length="0" ng-blur="clearCountry('countryOfExportCode', '', '', searchShip.countryOfExportName, searchShip)"
+				                                                typeahead-on-select="selectCountryEvent($item, $model, $label, 'countryOfExportName', 'countryOfExportCode', searchShip)" autocomplete="off"/>
+												     
+												      	<input name="countryOfExportCode" ng-model="searchShip.countryOfExportCode" class="form-control right-inp" readonly="true" />
+												         	
+                                                 </div>
+                                         </div>
+                                 	</div>
+                                 <div class=" af-outer af-required clearfix">
+                                     <div class="form-group af-required">                
+                                       <div class="col-sm-3 enti_tt_alig">
+                                       <label for="desti_country">Country of Ultimate destination: </label> 
+                                       </div>
+                                       <div class="col-sm-3 ">
+                                           
+                                               <div class="form-group autosuggest autosuggest115">
+                                                   <!-- <select class="form-control" id="desti_country" data-live-search="false" data-width="100%"
+                                                       data-toggle="tooltip" title="Day" ng-model="searchShip.countryOfUltConsigneeCode">
+                                                       <option value="">Select Country</option>
+                                                       <option value="IN">India </option>
+                                                       <option value="PK">Pakistan</option>
+                                                   </select> -->
+                                                   <input
+			                                                type="text" name="countryOfUltConsigneeName" id="countryOfUltConsigneeName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+			                                                data-toggle="tooltip" title="Country is required"
+			                                                class="form-control placeholder left-inp" ng-model="searchShip.countryOfUltConsigneeName"
+			                                                typeahead-template-url="countryTmpl.html"
+			                                                typeahead-editable="false" 
+			                                                typeahead-min-length="0" ng-blur="clearCountry('countryOfUltConsigneeCode', '', '', searchShip.countryOfUltConsigneeName, searchShip)"
+			                                                typeahead-on-select="selectCountryEvent($item, $model, $label, 'countryOfUltConsigneeName', 'countryOfUltConsigneeCode', searchShip)" autocomplete="off"/>
+											     
+											      	<input name="countryOfUltConsigneeCode" ng-model="searchShip.countryOfUltConsigneeCode" class="form-control right-inp" readonly="true" />
+												         	
+                                               </div>
+                                       </div>
+                                       <div class="col-sm-3">
+                                       		<button type="button" class="btn btn-license" ng-click="searchShipment()">Search</button>
+                                       		<button type="reset" class="btn btn-black" ng-click="resetSearchShipment()">Reset</button>
+                                       </div>
+                               		</div>
+                                 </div>
+                                                                        
+                         <!-- </div>   -->
+					  
+				   </fieldset>
+              	</div>
+              </div>
+                 
+             
+             <div class="col-sm-12 col-md-12 no_pad response_info" >
+                   
+                  <!--  <h4 class="margin10-top strong">Current Shipments</h4> -->
+                   <!-- theme-flatwhite -->
+                   
+                   <fieldset>
+					  <legend>Current Shipments</legend>
+                   <!-- <div class="info_div "> -->
+                                          
+                           <div class="col-sm-12 col-md-12 margin-10tb" id="">                
+                           
+                           <mdt-table animate-sort-icon="true" ripple-effect="true"
+		            				selectable-rows = "false"
+		            				table-card="{visible: true, title: 'Shipments', columnSelector: true}"	
+							        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+							        mdt-row-paginator="getShipmentList(page, pageSize, options)"
+							        mdt-row-paginator-error-message="Error happened during loading shipments."
+							        mdt-row="{
+							            'table-row-id-key': 'id',
+							            'column-keys': shipmentColumns
+							        }">
+						        <mdt-header-row>
+						        
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Shipment Number"><span>Shipment Number</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Export Date"><span>Export Date</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Status"><span>Status</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Ultimate Destination"><span>Ultimate Destination</span></mdt-column>
+						            
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Created Date"><span>Created On</span></mdt-column>						            
+						            <mdt-column align-rule="left" column-sort="true" column-definition="AES Status"><span>AES Status</span></mdt-column>
+						        	<mdt-column align-rule="left" column-definition="Rates"><span>Get Rates</span></mdt-column>
+						        	<mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+						        </mdt-header-row>
+						        
+						        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+						        <mdt-custom-cell column-key="shipmentNo">
+						        	<a ng-click="clientScope.editShipment(value)" style="color: blue">{{value}}</a>
+						        </mdt-custom-cell>
+						        
+						        <mdt-custom-cell column-key="createdOn">
+						        	{{ value | date:'dd/MM/yyyy' }}
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="exportDate">
+						        	{{ value | date:'dd/MM/yyyy' }}
+						        </mdt-custom-cell>
+						        
+						        <mdt-custom-cell column-key="status">
+						        	<span ng-class="{red: (value == 'H' || value =='C'), green: (value == 'S' || value == 'B')}">{{ value | shipmentStatusDescription }}</span>
+						        </mdt-custom-cell>
+						        
+						        <mdt-custom-cell column-key="aesStatus">
+						        	{{ value | aesStatus }}
+						        </mdt-custom-cell>
+						        
+						        
+						        <mdt-custom-cell column-key="rates">
+						        	<!-- <button class="md-raised md-primary md-button md-ink-ripple" type="button"
+					        			ng-click="getShipmentRate({value})" tabindex="0">
+						        			Get Rates
+						        	<div class="md-ripple-container" style=""></div></button> -->
+						        	<button class="btn btn-black" style="font-size: 12px; padding:4px 8px;">Get Rates</button>
+						        </mdt-custom-cell>
+						        
+						        <!-- <mdt-custom-cell column-key="exporterCode">
+						        	<a href="javascript:void(0);" ng-click="clientScope.editExporter(value, 'Edit')" style="text-decoration: underline">{{ value }}</a>
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="status">
+						        	{{ value | dplStatus }}
+						        </mdt-custom-cell> -->
+						        
+						        <mdt-custom-cell column-key="delete">						            
+						            <a href="javascript:void(0)" ng-click="clientScope.deleteShipment(value, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						        </mdt-custom-cell>
+        
+						    </mdt-table>
+                           
+                           <!-- <table class="exp_ship_table">
+                                <thead>
+                                    <tr>
+                                        <th class="">No.</th>
+                                        <th class="">Shipment Number</th>
+                                        <th class="">Export Date</th>
+                                        <th class="">Status</th>
+                                        <th class="">Ultimate Consignee</th>
+                                        <th class="">Ultimate  Destination</th>
+                                        <th class="">Get Rates</th>
+                                        <th class="">Delete</th>
+                                        <th>AES Filing</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>                                    
+                                    <tr ng-repeat="shipment in shipments track by $index" class="exp_ship_item">
+	                                        <td class="">{{ $index+1 }}</td>	                                        
+	                                        <td class=""><a ng-click="editShipment(shipment.id)" style="color: blue">{{shipment.shipmentNo}}</a></td>
+	                                        <td class="">{{shipment.exportDate | date:'dd/MM/yyyy'}}</td>
+	                                        <td class="">{{shipment.status | shipmentStatusDescription}}</td>
+	                                        <td class="">{{shipment.countryOfUltConsigneeCode}}</td>
+	                                        <td class=""></td>
+	                                        <td class=""></td>	                                        
+	                                        <td class=""><a href="javascript:void(0)" ng-click='deleteShipment(shipment, $index)'><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+	                                        <td><button ng-click="createShipmentInEase(shipment.id)" class="btn-sm">AES</button></td>
+                                    </tr>                                                
+                                </tbody>
+                            </table> -->
+                        </div>
+                        
+                       <!--  <div class="margin-50tb clearfix"></div> -->
+
+                   <!-- </div> -->
+                   </fieldset>
+                  </div>
+			   
+			   <!-- <div>
+			   		<div ng-view></div>
+			   </div> -->
+			                        
+         </div>         
+       </div>
+     </div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '11%'}, {index: 2, width: '8%'}, {index: 3, width: '11%'}, {index: 4, width: '15%'}, 
+		                {index: 5, width: '12%'}, {index: 6, width: '10%'}, {index: 7, width: '10%'}, {index: 8, width: '4%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>

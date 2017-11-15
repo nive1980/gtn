@@ -1,0 +1,353 @@
+<div ng-init="parentInit('bookingCustoms');initBookingCustoms()" ng-controller="exportOperationCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		    <div ng-include src="'views/export/menu.html'"></div>
+			   
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad response_info yello-div">
+            	      	
+            	 <!-- user form -->
+           	               <form name="bookingCustoms-form" class="af-user row">
+								
+								
+									<div class="col-xs-12">
+										<uib-accordion close-others="oneAtATime">
+											<div uib-accordion-group class="panel-default" is-open="status.bookingOpen">
+										      <uib-accordion-heading>
+										        Booking Details 
+										        	<i class="pull-right glyphicon col_arrow" ng-class="{'glyphicon-chevron-down': status.bookingOpen, 'glyphicon-chevron-right': !status.bookingOpen}"></i>
+										      </uib-accordion-heading>
+										      
+										      <div class="row">
+												  <div class="page-header col-xs-12" style="margin-top: 10px;">
+												    <h6>Header Information</h6>      
+												  </div>
+												      
+											  </div>
+										      <div class="row">
+										      	<div class="col-xs-12">
+										      	 	<HR style="margin: 5px 0px 20px 0px"/>
+										      	 </div>
+										      </div>
+										      
+										      <div class="row">
+											      	<label class="col-xs-2 control-label">
+											      		Booking No
+											      	</label>
+											      	<div class="col-xs-3">
+											      		<input name="bookingNo" ng-model="shipment.bookingNo" class="form-control" />
+											      	</div>
+											      
+											      	<label class="col-xs-2 control-label">
+											      		Shipper Ref. No.
+											      	</label>
+											      	<div class="col-xs-3">
+											      		<input name="shipmentRefNo" ng-model="shipment.shipmentRefNo" class="form-control" />
+											      	</div>
+										      </div>
+										      
+										       <div class="row">
+											      	<label class="col-xs-2 control-label">
+											      		Tracking No
+											      	</label>
+											      	<div class="col-xs-3">
+											      		<input name="trackingNo" ng-model="shipment.trackingNo" class="form-control" />
+											      	</div>
+											      
+											      	<label class="col-xs-2 control-label">
+											      		Transport Ref. No.
+											      	</label>
+											      	<div class="col-xs-3">
+											      		<input name="transportRefNo" ng-model="shipment.transportRefNo" class="form-control" />
+											      	</div>
+										      </div>
+										      
+										      <div class="row">
+											      	<label class="col-xs-2 control-label">
+											      		Hazardous
+											      	</label>
+											      	<div class="col-xs-3">
+											      		<select ng-model="shipment.hazdarous" class="form-control" name="hazdarous">
+					                                      	<option value="">Select</option>
+					                                      	<option value="Y">Yes</option>
+					                                      	<option value="N">No</option>
+				                                      	</select>
+											      	</div>
+											      	
+											      	<label class="col-xs-2 control-label">
+											      		Conveyance Name
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<input name="conveyanceName" ng-model="shipment.conveyanceNamet" class="form-control" />
+											      	</div>
+											      	
+										      </div>
+										      
+										      <div class="row">
+												  <div class="page-header col-xs-12" style="margin-top: 10px;">
+												    <h6 style="margin: 0px">Transport Information</h6>      
+												  </div>
+												      
+											  </div>
+										      <div class="row">
+										      	<div class="col-xs-12">
+										      	 	<HR style="margin: 5px 0px 20px 0px"/>
+										      	 </div>
+										      </div>
+										      
+										      <div class="row">
+											      	<label class="col-xs-2 control-label">
+											      		Country Of Origin
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<!-- <input name="countryOfOriginName" ng-model="shipment.countryOfOriginName" class="form-control" /> -->
+											      	
+											      		<input
+			                                                type="text" name="countryOfOriginName" id="countryOfOriginName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+			                                                data-toggle="tooltip" title="Country is required"
+			                                                class="form-control placeholder left-inp" ng-model="shipment.countryOfOriginName"
+			                                                typeahead-template-url="countryTmpl.html"
+			                                                typeahead-editable="false" 
+			                                                typeahead-min-length="0"
+			                                                typeahead-on-select="onCountrySelectCode($item, $model, $label, 'countryOfOriginName', 'countryOfOriginCode')" autocomplete="off"/>
+											      	
+											      		<input name="countryOfOriginCode" ng-model="shipment.countryOfOriginCode" class="form-control right-inp" readonly="true"/>
+											      	</div>
+											       
+											      	<label class="col-xs-2 control-label">
+											      		Port Of Export
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<!-- <input name="portOfExportName" ng-model="shipment.portOfExportName" class="form-control left-inp" />
+											      		 -->
+											      		<input
+			                                                type="text" name="portOfExportName" id="portOfExportName" uib-typeahead="port as port.portCode for port in getPorts($viewValue, shipment.countryOfExportCode) | limitTo:8"
+			                                                data-toggle="tooltip" title="Port is required"
+			                                                class="form-control placeholder left-inp" ng-model="shipment.portOfExportName"
+			                                                typeahead-template-url="portsTmpl.html"
+			                                                typeahead-editable="false" 
+			                                                typeahead-min-length="0"
+			                                                typeahead-on-select="selectPortsEvent($item, $model, $label, 'portOfExportName', 'portOfExportCode', shipment)" autocomplete="off"/>
+											      	
+											      		
+											      		<input name="portOfExportCode" ng-model="shipment.portOfExportCode" class="form-control right-inp" readonly="true"/>
+											      	</div>
+										      </div>
+										      
+										      <div class="row">
+										      		<label class="col-xs-2 control-label">
+											      		Port Of Unloading
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<input name="portOfUnloadName" ng-model="shipment.portOfUnloadName" class="form-control left-inp" />
+											      		<input name="portOfUnloadCode" ng-model="shipment.portOfUnloadCode" class="form-control right-inp" readonly="true"/>
+											      	</div>
+											      	<label class="col-xs-2 control-label">
+											      		Port Of Arrival
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<input name="portOfArrivalName" ng-model="shipment.portOfArrivalName" class="form-control left-inp" />
+											      		<input name="portOfArrivalCode" ng-model="shipment.portOfArrivalCode" class="form-control right-inp" readonly="true"/>
+											      	</div>
+										      </div>
+										      
+										      <div class="row">
+										      		<label class="col-xs-2 control-label">
+											      		Air/ Ocean carrier.
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<input name="shipmentCarrierName" ng-model="shipment.shipmentCarrierName" class="form-control left-inp" />
+											      		<input name="shipmentCarrierCode" ng-model="shipment.shipmentCarrierCode" class="form-control right-inp" readonly="true"/>
+											      	</div>
+											      	
+											      	<label class="col-xs-2">
+											      		Airport of Final Destination
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<input name="finalDestAirport" ng-model="shipment.finalDestAirport" class="form-control" />
+											      	</div>
+											      	
+										      </div>
+										      
+										      <div class="row">
+										      		<label class="col-xs-2 control-label">
+											      		Vessel/ Flight Number
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<input name="vesseFlightNo" ng-model="shipment.vesseFlightNo" class="form-control" />
+											      	</div>
+											      	
+											      	<label class="col-xs-2 control-label">
+											      		Transport DOC Number
+											      	</label>
+											      	<div class="col-xs-3 autosuggest">
+											      		<input name="transportDocNo" ng-model="shipment.transportDocNo" class="form-control" />
+											      	</div>
+											      	
+										      </div>
+										    </div>
+										 
+										 
+										 	<div uib-accordion-group class="panel-default" is-open="status.customsOpen">
+											      <uib-accordion-heading>
+											        Custom Filings 
+											        	<i class="pull-right glyphicon col_arrow" ng-class="{'glyphicon-chevron-down': status.customsOpen, 'glyphicon-chevron-right': !status.customsOpen}"></i>
+											      </uib-accordion-heading>
+											      
+											      <div class="row">
+												      	<label class="col-xs-2 control-label">
+												      		EEI No.
+												      	</label>
+												      	<div class="col-xs-3">
+												      		<input name="eeiNo" ng-model="shipment.eeiNo" class="form-control" />
+												      	</div>
+												      
+												      	<label class="col-xs-2 control-label">
+												      		AES Status
+												      	</label>
+												      	<div class="col-xs-3">
+												      		<select name="aesStatus" ng-model="shipment.aesStatus" class="form-control">
+												      			<option value="">Select</option>
+												      			<option value="O">Open</option>
+															    <option value="C">Cancelled</option>
+															    <option value="D">Deleted</option>
+															    <option value="I">In Progress</option>
+															    <option value="J">Rejected</option>
+															    <option value="Y">Reported</option>
+															    <option value="E">Released</option>
+															    <option value="N">To Be Reported</option>
+															    <option value="T">Not To Be Reported</option>
+												      		</select>
+												      	</div>
+											      </div>
+											      
+											    
+											      
+											      
+											      <div class="row">
+												      	
+												      	<label class="col-xs-2 control-label">
+												      		Routed Export Txn
+												      	</label>
+												      	<div class="col-xs-3">
+												      		<select ng-model="shipment.routedExpTxn" class="form-control" name="routedExpTxn">
+						                                      	<option value="">Select</option>
+						                                      	<option value="Y">Yes</option>
+						                                      	<option value="N">No</option>
+					                                      </select>
+												      	</div>
+												      	<label class="col-xs-2 control-label">
+												      		AES Option
+												      	</label>
+												      	<div class="col-xs-3">
+												      		<select ng-model="shipment.aesOption" class="form-control" name="aesOption">
+												      			<option value="">Select</option>
+						                                      	<option value="2">Option 2</option>
+						                                      	<option value="4">Option 4</option>
+					                                      </select>
+												      	</div>
+											      </div>
+											      
+											      <div class="row">
+												      													      
+												      	<label class="col-xs-2 control-label">
+												      		Related Party Txn
+												      	</label>
+												      	<div class="col-xs-3">
+												      		<select ng-model="shipment.relatedPrtyTxn" class="form-control" name="relatedPrtyTxn">
+						                                      	<option value="">Select</option>
+						                                      	<option value="Y">Yes</option>
+						                                      	<option value="N">No</option>
+					                                      </select>
+												      	</div>
+												      	
+												      	
+												      	<label class="col-xs-2 control-label">
+												      		FTZ No
+												      	</label>
+												      	<div class="col-xs-3">
+												      		<input name="ftzNo" ng-model="shipment.ftzNo" class="form-control" />
+												      	</div>
+											      </div>
+											      
+											      
+											      <div class="row">
+												      	<label class="col-xs-2 control-label">
+												      		State Of Origin
+												      	</label>
+												      	<div class="col-xs-3 autosuggest">
+												      		<input uib-typeahead="state as state.stateCode for state in getStates($viewValue, shipment.countryOfExportCode)"
+												      				typeahead-template-url="stateTmpl.html"
+												      				typeahead-editable="false" 
+				                                                	typeahead-min-length="0"
+				                                                	typeahead-on-select="selectStateEvent($item, $model, $label, '', 'stateOfOrigin', shipment)"
+												      				name="stateOfOrigin" ng-model="shipment.stateOfOrigin" class="form-control" />
+												      	</div>
+												      
+											      </div>
+											      
+											    </div>
+											    
+											    <!-- AES Response -->
+											    <div uib-accordion-group class="panel-default" is-open="status.responseOpen">
+												      <uib-accordion-heading>
+												        AES Response 
+												        	<i class="pull-right glyphicon col_arrow" ng-class="{'glyphicon-chevron-down': status.responseOpen, 'glyphicon-chevron-right': !status.responseOpen}"></i>
+												      </uib-accordion-heading>
+												      
+												      <div class="row">
+													      	<label class="col-xs-2 control-label">
+													      		ITN Number
+													      	</label>
+													      	<div class="col-xs-3">
+													      		<input name="iten" ng-model="shipment.itn" class="form-control" readonly="true"/>
+													      	</div>
+												      		
+												      		<label class="col-xs-2 control-label">
+													      		Correction Code
+													      	</label>
+													      	<div class="col-xs-3">
+													      		<input name="correctionCode" ng-model="shipment.correctionCode" class="form-control" readonly="true"/>
+													      	</div>
+												      </div>
+												      
+												      <div class="row">
+													      	<label class="col-xs-2 control-label">
+													      		XTN Number
+													      	</label>
+													      	<div class="col-xs-3">
+													      		<input name="xtn" ng-model="shipment.xtn" class="form-control" readonly="true"/>
+													      	</div>
+												      		
+												      		
+												      </div>
+											      
+										        </div>
+											    
+										 
+										 </uib-accordion>
+									</div>								
+								
+								
+																
+								<div class="clearfix"></div>
+		
+		                        <div class="col-sm-6 col-md-6 margin-10tb clearfix" >
+		                            <div>		                            	
+		                            	<input type="button" name="Next" value="Next" ng-click="saveShipment('continue', 'shipmentBookingCustom')" id=" " class="btn btn-license">
+		                                <input type="submit" name="Save Shipment" value="Save shipment" ng-click="saveShipment('save', 'shipmentBookingCustom')" id="btn-license" class="btn btn-license">
+		                                <input type="button" name="Cancel" value="Cancel" ng-click="cancelShipment(shipment.id, 'listItemCartons')" id=" " class="btn btn-black">
+		                            </div>
+		                        </div>  	                         
+                           </form>
+                   <!-- /user form -->
+            	
+            </div>
+       			   
+			                        
+         </div>         
+       </div>
+     </div>
+</div>

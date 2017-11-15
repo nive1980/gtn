@@ -1,0 +1,394 @@
+<div ng-init="init()" ng-controller="controller">
+
+	<div ng-init="parentInit('parties');initSearchConsigneePopup()"
+		ng-controller="exportOperationCtlr">
+		<div class="modal-dialog modal-lg ">
+			<div class="modal-content af-entity {{gtnClass}}">
+				<div class="modal-header">
+					<h3 class="modal-title" id="modal-title">Search Consignee</h3>
+				</div>
+				<div class="modal-body" id="modal-body">
+
+					<form novalidate>
+						<div style="display: none"></div>
+						<div ng-include src="'views/masters/message.html'"></div>
+
+						<div class="search-container" ng-show="searchPage">
+
+							<div class="row">
+
+								<label class="col-xs-2 control-label"> Consignee ID </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.consigneeId" class="form-control" />
+								</div>
+
+								<label class="col-xs-2 control-label"> SBU Code </label>
+								<div class="col-xs-3">
+									<!-- <select ng-model="consignee.sbuCode" class="form-control ">
+						            			<option value="">-Select-</option>
+						            		</select> -->
+
+									<select ng-model="consignee.sbuCode" class="form-control ">
+										<option value="">Select</option>
+										<option ng-repeat="sbu in sbuList" value="{{sbu}}">
+											{{ sbu }}</option>
+									</select>
+								</div>
+
+
+							</div>
+
+							<div class="row">
+
+								<label class="col-xs-2 control-label"> Name </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.consigneeName" class="form-control" />
+								</div>
+
+								<label class="col-xs-2 control-label"> Status </label>
+								<div class="col-xs-3">
+									<select ng-model="consignee.status" class="form-control ">
+										<option value="">-Select-</option>
+										<option value="T">To Be Screened</option>
+										<option value="A">Approved</option>
+										<option value="H">On Hold</option>
+										<option value="D">Denied</option>
+										<option value="O">Overridden</option>
+									</select>
+								</div>
+
+							</div>
+
+							<div class="row">
+								<label class="col-xs-2 control-label"> Address 1 </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.consigneeAddr1" class="form-control" />
+								</div>
+
+								<label class="col-xs-2 control-label"> City </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.consigneeCity" class="form-control" />
+								</div>
+							</div>
+
+							<div class="row">
+								<label class="col-xs-2 control-label"> Address 2 </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.consigneeAddr2" class="form-control" />
+								</div>
+
+								<label class="col-xs-2 control-label"> State </label>
+								<div class="col-xs-3 autosuggest">
+									<!-- <input ng-model="consignee.consigneeState" class="form-control" /> -->
+
+									<input type="text" name="consigneeStateName"
+										id="consigneeStateName"
+										uib-typeahead="state as state.stateCode for state in getStates($viewValue, consignee.consigneeCountry)"
+										data-toggle="tooltip" title="State is required"
+										class="form-control placeholder"
+										ng-model="consignee.consigneeStateName"
+										typeahead-template-url="stateTmpl.html"
+										typeahead-editable="false" typeahead-min-length="0"
+										typeahead-on-select="selectStateEvent($item, $model, $label, 'consigneeStateName', 'consigneeState', consignee)"
+										autocomplete="off" />
+
+								</div>
+
+								<div class="col-xs-1">
+									<label class="control-label">{{ exporter.consigneeState
+										}}</label> <input ng-model="consignee.consigneeState" ng-show="false" />
+								</div>
+							</div>
+
+							<div class="row">
+								<label class="col-xs-2 control-label"> Telephone </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.phone" class="form-control" />
+								</div>
+
+								<label class="col-xs-2 control-label"> Country </label>
+								<!-- <div class="col-xs-3">
+						            		 <input ng-model="consignee.consigneeCountry" class="form-control" />
+						            	</div> -->
+
+								<div class="col-xs-3 autosuggest">
+									<input type="text" name="consigneeCountryName"
+										id="consigneeCountryName"
+										uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+										data-toggle="tooltip" title="Country is required"
+										class="form-control placeholder left-inp"
+										ng-model="consignee.consigneeCountryName"
+										typeahead-template-url="countryTmpl.html"
+										typeahead-editable="false" typeahead-min-length="0"
+										ng-blur="clearCountry('consigneeCountry', 'consigneeStateName', 'consigneeState', consignee.consigneeCountryName, consignee)"
+										typeahead-on-select="selectCountryEvent($item, $model, $label, 'consigneeCountryName', 'consigneeCountry', consignee)"
+										autocomplete="off" /> <input name="consigneeCountry"
+										ng-model="consignee.consigneeCountry"
+										class="form-control right-inp" readonly="true" />
+								</div>
+							</div>
+
+
+							<div class="row">
+								<label class="col-xs-2 control-label"> Zip </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.zip" class="form-control" />
+								</div>
+
+								<label class="col-xs-2 control-label"> Active </label>
+								<div class="col-xs-3">
+									<select ng-model="consignee.active" class="form-control ">
+										<option value="">-ALL-</option>
+										<option value="Y">Active</option>
+										<option value="N">Inactive</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+								<div class="col-xs-12">
+									<input type="checkbox" class="" ng-model="consignee.useForDos" />
+									DOS <input type="checkbox" class=""
+										ng-model="consignee.useForDoc" /> DOC <input type="checkbox"
+										class="" ng-model="consignee.useForAes" /> AES
+								</div>
+							</div>
+
+							<div class="row">
+								<label class="col-xs-2 control-label"> Type Of Consignee
+								</label>
+								<div class="col-xs-3">
+									<select ng-model="consignee.typeOfConsignee"
+										class="form-control">
+										<option value="">Select</option>
+										<option value="OE">Customer - OE</option>
+										<option value="AR">Customer - AR Distributor</option>
+										<option value="AG">Vendor - Agent (ie. Customs,
+											travel, permit)</option>
+										<option value="CN">Vendor - Consultant (ie. Legal,
+											tax, finance)</option>
+										<option value="DM">Vendor - Direct Materials</option>
+										<option value="IM">Vendor - Indirect Materials</option>
+										<option value="OS">Other - Services</option>
+									</select>
+								</div>
+
+								<label class="col-xs-2 control-label"> Sales Person </label>
+								<div class="col-xs-3">
+									<input ng-model="consignee.salesPerson" class="form-control" />
+								</div>
+							</div>
+
+
+							<div class="row">
+								<label class="col-xs-2 control-label"> Sort By </label>
+								<div class="col-xs-3">
+									<select ng-model="consignee.sortBy" class="form-control ">
+										<option value="consigneeId">Consignee ID</option>
+										<option value="consigneeName">Name</option>
+										<option value="consigneeAddr1">Address 1</option>
+										<option value="consigneeAddr2">Address 2</option>
+										<option value="consigneeCity">City</option>
+										<option value="consigneeState">State</option>
+										<option value="consigneeCountryName">Country</option>
+									</select>
+								</div>
+
+								<label class="col-xs-2 control-label"> Direction </label>
+								<div class="col-xs-3">
+									<select ng-model="consignee.direction" class="form-control ">
+										<option value="ASC">Ascending</option>
+										<option value="DESC">Decending</option>
+									</select>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<label class="col-xs-2"> Is consignee fully or partially
+									owned by government? </label>
+								<div class="col-xs-3">
+									<select ng-model="consignee.ownedByGovt" class="form-control">
+										<option value="">Select</option>
+										<option value="Y">Yes</option>
+										<option value="N">No</option>
+									</select>
+								</div>
+								<label class="col-xs-2"> Aviation, Military or Nuclear
+									end-use? </label>
+								<div class="col-xs-3">
+									<select ng-model="consignee.aviationMilNucEndUse"
+										class="form-control">
+										<option value="">Select</option>
+										<option value="A">Aviation</option>
+										<option value="N">Nuclear</option>
+										<option value="M">Military</option>
+									</select>
+								</div>
+							</div>
+
+
+
+
+
+
+
+
+							<div class="row btn-row-bottom">
+								<div class="col-xs-6">
+									<button class="btn btn-license" type="button"
+										ng-click="searchConsignee()">Search</button>
+									<button type="reset" class="btn btn-black">Reset</button>	
+									<button class="btn btn-black" type="button" ng-click="cancel()">Close</button>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="result-conatiner" ng-hide="searchPage">
+
+							<div class="row btn-row">
+								<div class="col-xs-6">
+									<button class="btn btn-license" type="button"
+										ng-click="selectConsignee(type)">Select</button>
+									<button class="btn btn-black" type="button"
+										ng-click="searchPage = true; consigneeResults=[];">New
+										Search</button>
+									<button class="btn btn-black" type="button"
+										ng-click="cancel(); consigneeResults=[];">Close</button>
+								</div>
+
+							</div>
+
+							<!-- <div class="row" style="margin-bottom: 5px">
+								<div class="col-xs-6">Total Records : {{
+									consigneeResults.length }}</div>
+							</div> -->
+
+							<div class="row">
+								<div class="col-xs-12">
+									
+								<mdt-table animate-sort-icon="true" ripple-effect="true"
+			            				selectable-rows = "false"
+			            				table-card="{visible: true, title: 'Consignee', columnSelector: true}"	
+								        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+								        mdt-row-paginator="getConsigneeList(page, pageSize, options)"
+								        mdt-row-paginator-error-message="Error happened during loading consignee."
+								        mdt-row="{
+								            'table-row-id-key': 'consigneeId',
+								            'column-keys': [
+				 			                            'delete',
+				 			                           	'consigneeId',
+										                'consigneeName',
+										                'consigneeCountryName',
+										                'salesPerson',
+										                'typeOfConsignee',
+										                'sbuCode',
+										                'status'
+										               ]
+							        }">
+						        <mdt-header-row>
+						        	<mdt-column column-definition="Select"><span>Select</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Consignee Code"><span>Consignee Code</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Name"><span>Name</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Country"><span>Country</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Sales Person"><span>Sales person</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Consignee Type"><span>Type of consignee</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="SBU"><span>SBU Code</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Status"><span>Status</span></mdt-column>
+						        </mdt-header-row>
+						        
+						        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+						        <mdt-custom-cell column-key="delete">
+						        	<input type="radio" name="selectedConsignee"
+													ng-model="selectedConsignee"
+													ng-value="value" />
+						        </mdt-custom-cell>
+						       
+        
+						    </mdt-table>
+									
+									<!-- <table class="table table-bordered table-hover table-condensed"
+										style="font-size: 12px">
+
+										<thead>
+											<tr style="background-color: #f9f9f9">
+												<th style="width: 5%">Select</th>
+												<th>Sr</th>
+												<th class="">Consignee Code</th>
+												<th class="">Name</th>
+												<th class="">Country</th>
+												<th class="">Sales person</th>
+												<th class="">Type of consignee</th>
+												<th class="">SBU Code</th>
+												<th class="">Status</th>
+												<th style="width: 10%">Created On</th>
+											</tr>
+										</thead>
+
+										<tbody>
+
+											<tr ng-repeat="consignee in consigneeResults track by $index">
+												<td><input type="radio" name="selectedConsignee"
+													ng-model="selectedConsignee"
+													ng-value="consignee.consigneeId" /></td>
+												<td>{{$index+1}}</td>
+												<td>{{ consignee.consigneeId }}</td>
+												<td>{{ consignee.consigneeName }}</td>
+												<td>{{ consignee.consigneeCountryName }}</td>
+												<td>{{ consignee.salesPerson }}</td>
+												<td>{{ consignee.typeOfConsignee }}</td>
+												<td>{{ consignee.sbuCode }}</td>
+												<td>{{ consignee.status | dplStatus }}</td>
+
+												<td>{{exporter.createdOn | date:'MM/dd/yyyy'}}</td>
+											</tr>
+
+										</tbody>
+
+
+									</table> -->
+								</div>
+							</div>
+
+							<BR />
+							<div class="row">
+								<div class="col-xs-6">
+									<button class="btn btn-license" type="button"
+										ng-click="selectConsignee(type)">Select</button>
+									<button class="btn btn-black" type="button"
+										ng-click="searchPage = true; consigneeResults=[];">New
+										Search</button>
+									<button class="btn btn-black" type="button"
+										ng-click="cancel(); consigneeResults=[];">Close</button>
+								</div>
+
+							</div>
+
+						</div>
+
+					</form>
+
+					<BR />
+				</div>
+				<!-- <div class="modal-footer">
+		            
+		           
+		        </div> -->
+
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<script>
+	$(document).ready(function(){
+		var widthArr = [{index: 1, width: '7%'}, {index: 2, width: '14%'}, {index: 3, width: '28%'}, {index: 4, width: '18%'}, 
+		                {index: 5, width: '10%'}, 
+		                {index: 6, width: '12%'}, {index: 7, width: '10%'}, {index: 8, width: '10%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>

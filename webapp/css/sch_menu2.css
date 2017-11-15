@@ -1,0 +1,68 @@
+body{counter-reset: headings;}
+.bor1px{border:solid #000 1px;}
+/*-----------------------------------------------------------------------------------*/
+/*	GENERAL STYLING
+/*-----------------------------------------------------------------------------------*/
+
+
+/*top menu*/
+a {text-decoration: none;}
+.container {width: 100%;/*max-width:990px;*/ margin:0px auto; border:solid #f00 0px;}
+.toggleMenu {display:  none; background:rgba(67,67,67,1); margin:4px 0 0 0; padding: 10px 15px; color: #fff; text-align:right !important;}
+.toggleMenu:hover {background:rgba(241,77,150,1);}
+
+/*2nd menu*/
+.toggleMenu2 {display:  none; background:rgba(249,176,30,1); padding:4px 8px; color: #fff; margin:4px 0 0 0; }
+.nav2 { list-style: none;*zoom: 1; background:rgba(37,170,225,0.001); margin:0px 0 !important;}
+.nav2:before,
+.nav2:after {content: " "; display: table; }
+.nav2:after {clear: both;}
+.nav2 ul {list-style: none; /**/width:18em;}
+.nav2 ul{list-style: none; margin:0px}
+.nav2 li{list-style: none; padding:10px 6px; margin:0 4px;}
+
+.nav2 li {position: relative;}
+.nav2 > li {float: left;border-bottom:1px solid rgba(71,120,164,0.001);}
+.nav2 > li > .parent2 {background: url(../img/downArrow.png)no-repeat right; background-repeat: no-repeat;}
+.nav2 > li > a {display: block;}
+.nav2 li  ul {position: absolute;left: -9999px; background:rgba(255,255,255,1) !important; margin:0px; padding:0px; z-index:1;}
+.nav2 li  ul li{}
+.nav2 > li.hover > ul {left: 0;}
+.nav2 li li.hover ul {left: 100%;top: 0;}
+/*2nd sub menu*/
+.nav2 li li {background:rgba(71,120,164,0.001); border-top: 1px solid #1d7a62; display:inline-block;} 
+.nav2 li.active {background:rgba(71,120,164,1); border-top: 1px solid rgba(0,0,0, 0.001);} 
+
+.nav2 li li.active {background:rgba(71,120,164,0.001); border-top: 1px solid rgba(204,204,204, 1);} 
+.nav2 li li.active a{color:rgba(71,120,164,1);}
+.nav2 li li:hover{ background:none;}
+
+.nav2 li li a:hover{color:rgba(71,120,164,1) !important;}
+
+.nav2 li li a{text-decoration:none; color:#000;}
+
+.nav2 li li{color:#000 ;display:block;position: relative;z-index:100; border-top:1px solid #ccc; margin:0px 0px !important;}
+.nav2 li li a img{float:left; display:block; padding:0 0px 0 0;}
+.nav2 li li a .title{color:rgba(241,77,150,1);}
+
+/*3rd sub menu*/
+.nav2 li li li {background:rgba(37,170,225,0.75); border-top: 1px solid #1d7a62;/**/ z-index:200;} 
+.nav2 li li li:hover {background:rgba(241,77,150,1); border-top: 1px solid #1d7a62;/**/ z-index:200;} 
+
+.nav2 li li li a {/*background:#249578; border-top: 1px solid #1d7a62;*/ z-index:200;}
+.nav2 li li li a:hover { /*border-top: 1px solid #1d7a62;*/ z-index:200;}
+/*/End 2nd menu*/
+
+
+@media screen and (max-width: 768px) {   
+/*2nd menu*/
+    .nav2 > li { float: none; display:list-item; width:210px;border-bottom:1px solid rgba(71,120,164,1);}
+    .nav2 li a{ float: none; display:list-item; padding:4px 10px;}
+    .nav2 li { float: none; display:list-item; margin:4px 0px;}
+    .nav2 > li > .parent2 {background-position: 95% 50%;}
+    .nav2 li li  .parent2 {background-image: url("../img/downArrow.png");background-repeat: no-repeat;background-position: 95% 50%; }
+    .nav2 ul {display: block;width: 100%;}
+    .nav2 > li.hover > ul , .nav2 li li.hover ul {position: static;}
+	.nav2 li li.hover ul {left: 100%;top: 0;}
+/*/End 2nd menu*/  
+}

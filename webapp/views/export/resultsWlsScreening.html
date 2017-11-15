@@ -1,0 +1,200 @@
+<div ng-init="init(); initWlsScreenPopup()" ng-controller="controller">
+
+	<!-- <div ng-init="initWlsScreenPopup()" ng-controller="controller"> -->
+		<div class="modal-dialog modal-lg">	
+			<div class="modal-content {{gtnClass}}">
+				<div class="modal-header">
+			            <h3 class="modal-title" id="modal-title">Result Consignee Screening</h3>
+			        </div>
+			        <div class="modal-body" id="modal-body">
+			        	
+			        	<div style="display: none">
+			        		
+			        	</div>
+						<div ng-switch on="visibleDiv">
+								<div ng-switch-when="showHits">
+									<div class="row">							
+										<div class="col-xs-12">
+											<button class="btn btn-license" ng-click="showReasonDiv('D')" ng-disabled="screenResponse.oldStatus == 'D'">Deny</button>
+											<button class="btn btn-license" ng-click="showReasonDiv('O')" ng-disabled="screenResponse.oldStatus == 'O'">Override</button>
+											<!-- <button class="btn btn-license" ng-click="showReasonDiv('A')" ng-disabled="screenResponse.oldStatus == 'A'">Approve</button>
+											<button class="btn btn-license" ng-click="showReasonDiv('H')" ng-disabled="screenResponse.oldStatus == 'H'">On Hold</button>
+											 -->
+											<button class="btn btn-black" ng-click="wlsResultPopupBack('showAuditDiv')">Audit</button>
+											
+										</div>							
+									</div>
+									
+									<div class="row margin-10tb">
+										<!-- <div class="" >
+							                	<span class="bold-text">Hits : </span> {{screenResponse.wlsResponse.httsReturned.hits}}
+						                </div> -->
+							                
+										<div class="">
+											
+											<mdt-table animate-sort-icon="true" ripple-effect="true"
+								            				selectable-rows = "false"
+								            				table-card="{visible: true, title: 'Hits', columnSelector: true}"	
+													        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}">
+												   <mdt-header-row>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Name"><span>Name</span></mdt-column>
+											            <mdt-column align-rule="left" 
+											            	column-sort="true" 
+											            	column-definition="Score"><span>Score</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="City"><span>City</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Country"><span>Country</span></mdt-column>
+											            
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Agency"><span>Agency</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Eff. Date"><span>Eff. Date</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="FR Date"><span>FR Date</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Citatn"><span>Citatn</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="DPL Category"><span>DPL Category</span></mdt-column>
+											            
+											        </mdt-header-row>
+														    
+														    
+												    <mdt-row ng-repeat="wlsResultEntity in screenResponse.wlsResponse.httsReturned.wlsList.wlsScreenings">
+												    
+												    
+														    <mdt-cell><span>{{ wlsResultEntity.dpl_name }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.dpl_score }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.city }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.country }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.dpl_agency }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.dpl_eff_date }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.dpl_fr_date }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.dpl_citant }}</span></mdt-cell>
+														    <mdt-cell><span>{{ wlsResultEntity.dpl_category }}</span></mdt-cell>	
+														    
+												    </mdt-row>
+										  </mdt-table>
+											
+											
+											
+											<!-- <table class="table table-bordered table-hover table-condensed" >
+							                        <thead>
+							                            <tr style="background-color: #f9f9f9">
+							                                <th class="product-num">ID</th>
+							                                <th class="product-thumbnail">Name</th>
+							                                <th class="product-thumbnail">Score</th>
+							                                <th class="product-name">City</th>
+							                                <th class="product-price">Country</th>
+							                                <th class="product-quantity">Agency</th>
+							                                <th class="product-subtotal">Eff. Date</th>
+							                                <th class="product-subtotal">FR Date</th>
+							                                <th class="product-subtotal">Citatn</th>
+							                                <th class="product-subtotal">DPL Category</th>                
+							                            </tr>
+							                        </thead>
+							                        
+							                        <tbody>		                        	
+							                        	<tr ng-repeat="wlsResultEntity in screenResponse.wlsResponse.httsReturned.wlsList.wlsScreenings">
+														    <td>{{ $index + 1 }}</td>
+														    <td>{{ wlsResultEntity.dpl_name }}</td>
+														    <td>{{ wlsResultEntity.dpl_score }}</td>
+														    <td>{{ wlsResultEntity.city }}</td>
+														    <td>{{ wlsResultEntity.country }}</td>
+														    <td>{{ wlsResultEntity.dpl_agency }}</td>
+														    <td>{{ wlsResultEntity.dpl_eff_date }}</td>
+														    <td>{{ wlsResultEntity.dpl_fr_date }}</td>
+														    <td>{{ wlsResultEntity.dpl_citant }}</td>
+														    <td>{{ wlsResultEntity.dpl_category }}</td>								    
+														 </tr>          
+							                        </tbody>
+												</table> -->
+											
+											
+										</div>
+									</div>
+								</div>	        
+								
+								<div ng-switch-when="showReasonSubmit" class="margin-10tb">
+									<div class="row">
+										<label class="col-xs-2 control-label">
+											Reason : 
+										</label>    
+										<div class="col-xs-6">
+											<textarea rows="5" class="form-control" ng-model="$parent.auditReason">
+											
+											</textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<button class="btn btn-license" ng-click="changeShipmentWlsStatus()">{{ submitBtnText }}</button>
+											<button class="btn btn-black" ng-click="wlsResultPopupBack('showHits')">Cancel</button>
+										</div>
+									</div>
+								</div>
+						
+								<div ng-switch-when="showAuditDiv" class="">
+									<div class="row">
+										<div class="col-xs-12">
+											<span class="bold-text">Audit history for shipment consignee</span>
+										</div>
+									</div>
+									<div class="row margin-10tb">
+										
+											<table class="table table-bordered table-hover table-condensed" style="font-size: 12px">		            	
+								            	<thead>
+								            		<tr style="background-color: #ccc">
+								            			<!-- <th>Sr.</th> -->
+								            			<th>Screened On</th>
+								            			<th>Screened By</th>
+								            			<th>DPL Audit No</th>
+								            			<th>Entity Name</th>
+								            			<th>Old Status</th>   
+								            			<th>New Status</th>
+								            		</tr>
+								            	</thead>
+								            	
+								            	<tbody>
+								            		
+								            		<tr ng-repeat="wplAudit in screenResponse.audits track by $index">
+								            			<!-- <td>{{ $index + 1 }}</td> -->
+								            			<td>{{wplAudit.createdOn | date:'dd/MM/yyyy'}}</td>
+								            			<td>{{wplAudit.createdBy}}</td>
+								            			<td>{{wplAudit.dplAuditNo}}</td>
+								            			<td>{{wplAudit.partyName}}</td>
+								            			<td>{{wplAudit.oldStatus}}</td>
+								            			<td>{{wplAudit.newStatus}}</td>
+								            		</tr>
+								            	
+								            	</tbody>
+								            	
+								            </table>
+							          
+									</div>
+									<div class="row margin-10tb">
+										
+											<button class="btn btn-black" ng-click="wlsResultPopupBack('showHits')">Back</button>
+										
+									</div>
+								</div>
+					</div><!-- switch div -->
+			            
+			        </div>
+			        <div class="modal-footer">
+			            <!-- <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button> -->
+			            <button class="btn btn-license" type="button" ng-click="cancel()">Close</button>
+			        </div>
+			
+			</div>
+		</div>
+	<!-- </div>	 -->
+	
+</div>
+
+<script>
+	function adjustCols(){
+		var widthArr = [{index: 1, width: '20%'}, {index: 2, width: '5%'}, {index: 3, width: '6%'}, {index: 4, width: '10%'}, 
+		                {index: 5, width: '7%'}, {index: 6, width: '7%'}, {index: 7, width: '7%'}, {index: 8, width: '15%'},
+		                {index: 9, width: '20%'}];
+		
+		adjustColumns(widthArr);
+	}	
+
+	$(document).ready(function(){
+		adjustCols();		
+	});
+</script>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en" ><!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+<meta name="_csrf" content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Global Tradenet</title>
+<script type='text/javascript' src='js/jquery-1.9.1.js'  type="text/javascript"></script>
+
+<script type='text/javascript' src='js/gtn.js'></script>
+
+<!-- Angular JS libs -->
+<script src="lib/angular.js" type="text/javascript" ></script>
+<script src="lib/angular.min.js" type="text/javascript" ></script>
+<script src="js/app.js" type="text/javascript"></script>
+
+
+<script type='text/javascript' src='lib/angular-route.js'></script>
+<script type='text/javascript' src='lib/angular-sanitize.js'></script>
+<script type='text/javascript' src='lib/angular-animate.js'></script>
+<script type='text/javascript' src='lib/angular-touch.js'></script>
+<script type='text/javascript' src='lib/angular-resource.js'></script>
+<script type='text/javascript' src="lib/angular-cookies.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-2.5.0.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-tpls-2.5.0.min.js"></script>
+
+<script src="lib/angular-route.js"></script>
+<script src="lib/angular-route.min.js"></script>
+<script type='text/javascript' src='lib/angular-resource.js'></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-2.5.0.js"></script>
+<script type='text/javascript' src="lib/angular-ui/ui-bootstrap-custom-tpls-2.5.0.min.js"></script>
+<!-- <script type='text/javascript' src="assets/plugins/angular-material/angular-aria.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-material.js"></script> -->
+<script type='text/javascript' src="lib/angular-animate.js"></script>
+
+
+<script type='text/javascript' src='js/controller/controller.js'></script>
+
+
+<script type='text/javascript' src="lib/angular-animate.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-aria.js"></script>
+<script type='text/javascript' src="assets/plugins/angular-material/angular-material.js"></script>
+
+<script type="text/javascript" src="js/stripe.js"></script>
+<script type="text/javascript">
+  Stripe.setPublishableKey('pk_test_Cr1ZoJdQSszF8673thfU104o');
+</script>
+<script src="lib/angular-md5/angular-md5.js"></script>
+
+<script type="text/javascript" 
+    src="lib/angular-payments/lib/angular-payments.min.js">
+</script>
+<script src="js/product.js" type="text/javascript"></script>
+<script src="js/store.js" type="text/javascript"></script>
+<script src="js/shoppingCart.js" type="text/javascript"></script>
+<script src="js/app.js" type="text/javascript"></script>
+<script type='text/javascript' src='js/service/validationService.js'></script>
+
+
+<script src="js/controller/homeController.js" type="text/javascript"></script>
+<script src="js/service/publicationService.js" type="text/javascript"></script>
+<script src="js/controller/subscriptionController.js" type="text/javascript" ></script>
+<script src="js/controller/profileController.js" type="text/javascript" ></script>
+<script src="js/controller/securityController.js" type="text/javascript" ></script>
+
+
+<script type='text/javascript' src='js/factory/factory.js'></script>
+<script type='text/javascript' src='js/service/service.js'></script>
+
+
+<!-- angular md data table -->
+<!-- <link href="assets/plugins/md-data-table-master/dist/md-data-table.min.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="assets/plugins/md-data-table-master/dist/md-data-table.min.js"></script>
+ -->
+<link href="assets/plugins/mdDataTable-master/dist/md-data-table-style.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/lodash.min.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/angular-material-icons.min.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/md-data-table-templates.js"></script>
+<script type="text/javascript" src="assets/plugins/mdDataTable-master/dist/md-data-table.js"></script>
+
+<script src="js/service/subscriptionService.js" type="text/javascript"></script>
+<script src="js/controller/userController.js" type="text/javascript"></script>
+<script src="js/controller/casemgtController.js" type="text/javascript"></script>
+<script src="js/service/productService.js" type="text/javascript"></script>
+<script src="js/service/caseService.js" type="text/javascript"></script>
+<script src="js/controller/activityController.js" type="text/javascript"></script>
+<script src="js/controller/billingController.js" type="text/javascript"></script>
+<script src="js/service/paymentService.js" type="text/javascript"></script>
+
+<script src="js/controller/paymentController.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/controller/controller.js"></script>
+<script src="js/service/userService.js" type="text/javascript"></script>
+<script src="js/service/alertService.js" type="text/javascript"></script>
+<script src="js/service/messageService.js" type="text/javascript"></script>
+<!-- <script type='text/javascript' src='js/service/service.js'></script>
+ -->
+<script type='text/javascript' src='js/directive/navigate.js'></script>
+<script type='text/javascript' src='js/filter/gtnFilter.js'></script>
+
+<script type="text/javascript" src="js/angular-toggle-switch.min.js"></script>
+<link href="css/angular-toggle-switch-bootstrap-3.css" rel="stylesheet" type="text/css" />
+
+<!-- NVD3 Charts -->
+<link rel="stylesheet" href="lib/ndv3-charts/nv.d3.css">
+
+<script type='text/javascript' src='lib/ndv3-charts/d3.min.js' charset="utf-8"></script>
+<script type='text/javascript' src='lib/ndv3-charts/nv.d3.js' charset="utf-8"></script>
+<script type='text/javascript' src='lib/ndv3-charts/angular-nvd3.min.js' charset="utf-8"></script>
+
+<script type='text/javascript' src='js/jquery-1.9.1.js'  type="text/javascript"></script> 
+
+  <script src="js/creditcard.js"></script>
+    <!-- CSS Global -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/plugins/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+   
+  <!-- build:css css/style.css -->
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+  
+    <!-- endbuild -->
+
+<link href="assets/plugins/angular-material/angular-material.css" rel="stylesheet">
+
+<!-- injector:css -->
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<!-- endinjector -->
+<link rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/css/theme-dashboard.css" rel="stylesheet">
+    <link href="assets/css/custom-user.css" rel="stylesheet">
+
+    
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/iesupport/html5shiv.js"></script>
+    <script src="assets/plugins/iesupport/respond.min.js"></script>
+    <![endif]-->
+    
+
+<!--Top menu--> 
+<link href="css/menu.css" rel="stylesheet" type="text/css" />
+<link href="css/gtn.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/web-grid-user.css" rel="stylesheet">
+<script type='text/javascript' src='js/jquery-1.9.1.js'></script> 
+<!--Top menu--> 
+
+<!--User menu--> 
+<!--<link href="frontend/assets/all.css"rel="stylesheet">
+<link href="frontend/assets/-i/Ext/4.1.1/resources/css/ext-all-gray.css"rel="stylesheet"> -->
+<!--User menu--> 
+    <!-- Favicons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="assets/ico/favicon.ico">
+<link href="fontawesome/css/font-awesome.css" rel="stylesheet">
+<link href="fontawesome/css/font-awesome.min.css" rel="stylesheet">
+<!--collapse.css-->
+<link href="css/collapse.css" rel="stylesheet" type="text/css" media="all"/>
+<script type="text/javascript" src="js/ddaccordion.js"></script>
+<script type="text/javascript" src="js/collapse.js"></script>
+
+
+<!--collapse.css-->
+
+<link href="css/gt.message.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="css/gt.messages.v3.css" rel="stylesheet" type="text/css" media="all"/>
+  <script id="mkto_form_localization">
+            window.mkto_form_localization = {
+                form_id: '1407',
+                lang_field_val: 'en',
+                email_placeholder: "Enter your business email",
+                subscribe_button: "Send me more!",
+                subscribe_ty_heading: "Check your inbox, the first tips are already delivered",
+                subscribe_ty_text: "Have a great day!<br>Your Global Tradenet team",
+                error_message: "Enter your business email"
+            }
+        </script>
+      
+</head>
+
+<!-- <body id="home" class="wide body-light" ng-app="gtn" ng-controller="storeCtrl"> -->
+<body id="home" class="wide body-light" ng-app="gtn" ng-controller="HomeCtrl" ng-init = "homeinit()" ng-cloak>
+				<!-- Preloader -->
+				<div id="preloader" class="loading-spiner-holder" data-scroll="true" data-load="true" data-gtn-loading>
+					<img src="assets/img/loading.gif" >
+				</div>
+<!-- Wrap all content -->
+<div class="wrapper">
+   <!-- HEADER -->                
+        <!--Top menu-->
+        <header class="wg-header" role="banner">
+    
+    <div class="wg-header__mobile">
+    <div class="wg-header__mobile-content">
+    <div class="wg-header__mobile-left">
+    <div class="wg-header__mobile-controls">
+        <span role="button" class="wg-header__mobile-burger"><i></i><i></i><i></i></span>
+        <a href="javascript:void(0);" title="Global Tradenet"><span role="img" class="wg-header__logo"></span> </a>
+    </div>
+    </div>
+    
+    <div class="wg-header__mobile-right">
+    <div class="wg-header__free-trial-form wg-form">
+ 
+ <ul class="nav navbar-nav navbar-right black_color">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+                       <span class="gb_8a gbii gb_b gb_db gb_R" ></span>
+                         Raaz Das2 
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="navbar-login1">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="text-center">
+                                            <!--<span class="glyphicon glyphicon-user icon-size"></span> -->                                            
+                                            <a class="gb_b gb_db gb_R" href="javascript:void(0)" title="" >
+                                            <span class="gb_8a gbii"></span></a>
+                                            
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="text-left"><strong>Raaz Das3</strong></p>
+                                        <span class="text-left">
+                                            <a href="usermgt-index.html#/profile" class=" ">View profile</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+            <li><a href="usermgt-index.html#/activity">User Management <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+            <!-- <li class="divider"></li> -->
+            <li style="border-top: 1px solid #b7b7b7!important"><a href ng-click= "logout()">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+                    </ul>
+                </li>
+                
+            </ul> 
+     </div>
+    
+    </div>
+    </div><!--.wg-header__mobile-content-->
+    
+    <div class="wg-header__mobile-overlay-color" role="button"></div>
+    <div class="wg-header__mobile-overlay-mask"></div>
+    <div class="wg-header__mobile-logo-mask"></div>
+    <div class="wg-header__mobile-overlay">
+    
+    <nav class="wg-header__mobile-overlay-nav">
+
+<div class="left-grid-m">
+<div id="wrapper">
+    <div id="scrollable_menu">
+    	<ul>
+        	<li><a href="usermgt-index.html#/activity"><img src="img/nav/activity_icon.png">Activity</a></li>
+            <li><a href="usermgt-index.html#/profile"><img src="img/nav/profile_icon.png">Profile</a></li>
+            <li><a href="usermgt-index.html#/security"><img src="img/nav/security_icon.png">Security</a></li>            
+            <li><a href="usermgt-index.html#/billing"><img src="img/nav/billing_icon.png">Billing</a></li>
+           <li><a href="usermgt-index.html#/subscriptionDetails"><img src="img/nav/subscription_icon.png">Subscription</a></li>
+            <li><a href="usermgt-index.html#/usersList"><img src="img/nav/user_icon.png">User</a></li>            
+		  <li class="active"><a href="usermgt-index.html#/CaseMgt"><img src="img/nav/support_icon.png">Support</a></li>          
+        </ul>
+    </div>
+    <input value="activate scrollator" id="activate_scrollator1" type="button">
+
+</div>
+</div>
+    
+    </nav>
+    
+    </div><!--.wg-header__mobile-overlay-->
+    
+    </div><!--.wg-header__mobile-->
+    
+    <div class="wg-header__desktop">
+    <!--.wg-header__top-menu-->
+    
+    
+    <div class="wg-header__sticky-menu">
+    <div class="wg-header__sticky-mainmenu">
+    <div class="wg-grid">
+    <div class="logo_gt" ng-cloak>
+        <div class="wg-cell wg-cell--xs-3 wg-cell--md-1 wg-cell--xl-1 flt_l">
+            <nav class="wg-header__desktop-primary-nav">
+                <a href="dashboard-index.html" title="Global Tradenete1"><span role="img" class="wg-header__logo"></span></a>
+            </nav>
+        </div>        
+        
+        <div class="flt_r">
+        <div class="wg-cell wg-cell--xs-3 wg-cell--sm-6 wg-cell--md-12 wg-cell--xl-5 text-right">
+            <div class="r ">                
+              <ul class="nav navbar-nav navbar-right  black_color">        
+				<li class="pad_tb2px dropdown" style="top: 3px">
+                    <a href="#" class="dropdown-toggle link-icon" data-toggle="dropdown">
+						<span class="user_name flt_l"></span>
+						<i class="fa fa-bell font_14px" aria-hidden="true"></i>
+						<span class="badge--darkRed jsCount" data-type="activity" data-count={{alertCount}}>{{alertCount}}</span>
+					</a>
+	                    <ul class="dropdown-menu" ng-if="alerts.length > 0">						 
+							<li ng-repeat="alert in alerts"><strong>{{alert.alertDescription}} </strong></li>  
+											
+	                    </ul>
+                </li>
+				
+                <li class="pad_tb2px" style="top: 3px">
+	                <a href="usermgt-index.html#/activity" class="link-icon"><i class="fa fa-envelope font_14px" aria-hidden="true"></i>
+	                	<span class="badge--darkYellow jsCount" data-type="activity" data-count="messageCount">{{obj.messageCount}}</span>
+	                </a>
+                </li>
+                
+                <li class="pad_tb2px" style="top: 3px">
+	                <a href="usermgt-index.html#/subscriptionDetails" class="link-icon"><i class="fa fa-shopping-cart font_14px" aria-hidden="true"></i>
+	         
+	                	<span class="badge--darkYellow jsCount" data-type="cart" data-count="cartCount">
+	                	<!-- <span class="badge--darkYellow jsCount" data-type="activity" data-count="messageCount" ng-if="obj.messageCount == 0"> -->
+	                	
+	                		{{ finalCart.getTotalCount }}
+	                	</span>
+	                </a>
+                </li>
+			                
+                <li class="pad_tb2px">
+					<a href="usermgt-index.html#/subscriptionDetails" title="go to shopping cart" ng-disabled="finalCart.getTotalCount < 1" class="txt-price">
+		                <!-- <img src="img/cart_icon.png"/> -->
+		                <!-- <b>{{cart.getTotalCount()}}</b> items, --> <b>{{finalCart.getTotalPrice | currency}}</b>
+            		</a>
+             	</li>   
+                 <li class="dropdown">
+			                    <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+		     <span class="">
+		     	
+			     <!-- <div ng-if="!test.view">1</div>
+				<div ng-if="!!test.view">2</div> -->
+		     	<img class="gb_8a gbii gb_b gb_db gb_R flt_l" ng-if="!!LoggedInUser.image" ng-src="data:image/JPEG;base64,{{LoggedInUser.image}}"/> 
+		     
+		     
+		     </span>
+
+                         <span class="user_name flt_l">{{LoggedInUser.firstName}} {{LoggedInUser.lastName}}</span>
+        <i class="fa fa-ellipsis-v ellipsis_t" aria-hidden="true"></i>
+
+                	                    </a>
+			                    <ul class="dropdown-menu dropdown-menu-user">
+			                        <li>
+			                            <div class="navbar-login">
+			                                <div class="row">
+			                                    <div class="col-lg-4">
+			                                        <p class="text-center">
+			                                            <!--<span class="glyphicon glyphicon-user icon-size"></span> -->
+			                                            <a class="gb_b gb_db gb_R" href="javascript:void(0)" title="" >
+			                                            <span ><img class="gb_8a gbii gb_b gb_db gb_R flt_l" ng-if="!!LoggedInUser.image" ng-src="data:image/JPEG;base64,{{LoggedInUser.image}}"/> </span></a>
+
+			                                        </p>
+			                                    </div>
+			                                    <div class="col-lg-8">
+			                                       <p class="text-left"><strong>{{LoggedInUser.firstName}} {{LoggedInUser.lastName}}</strong>
+			                                       <br>
+			                                       <a href="usermgt-index.html#/profile" class=" ">View profile</a>
+			                                       
+			                                       </p>
+
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </li>
+
+			                          <li><a href="usermgt-index.html#/activity">User Management <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+									  <!-- <li><a href="#sbuParams">Global Variable <span class="glyphicon glyphicon-star pull-right"></span></a></li> -->
+									  <!-- <li><a href="#themes">Themes <span class="glyphicon glyphicon-user pull-right"></span></a></li> -->
+
+            						<!-- <li class="divider"></li> -->
+            						<li style="border-top: 1px solid #b7b7b7!important"><a href ng-click= "logout()">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+			                    </ul>
+			                </li>
+                
+            </ul>
+             </div>
+        </div>
+        </div>
+        <!--.wg-cell-->
+        
+        </div>
+        <!--.wg-cell-->
+        
+    </div><!--.wg-grid-->
+    </div><!--.wg-header__sticky-mainmenu-->
+        
+    </div><!--.wg-header__sticky-menu-->
+    </div><!--.wg-header__desktop-->
+    
+    </header>
+        <!--//End top menu-->    
+    <!-- /HEADER -->
+
+    <!-- Content area -->
+    <div class="content-area">
+
+        
+
+        <!-- PAGE ABOUT -->
+        <section class="page-section sec_6p" >
+            <div class="container-fluid">
+                        
+<div class="row clearfix">         
+<!--nav sidebar --> 
+<div class="left-grid">
+
+<div id="wrapper">
+    <div id="scrollable_menu">
+    	<ul class="usermgt-lhs-ul">
+        	<li class="activity-li"><a href="usermgt-index.html#/activity"><img src="img/nav/activity_icon.png">Activity</a></li>
+            <li class="profile-li"><a href="usermgt-index.html#/profile"><img src="img/nav/profile_icon.png">Profile</a></li>
+            <li class="security-li"><a href="usermgt-index.html#/security"><img src="img/nav/security_icon.png">Security</a></li>            
+            <li class="billing-li"><a href="usermgt-index.html#/billing"><img src="img/nav/billing_icon.png">Billing</a></li>
+         	<li class="subscription-li"><a href="usermgt-index.html#/subscriptionDetails"><img src="img/nav/subscription_icon.png">Subscription</a></li>
+            <li class="user-li"><a href="usermgt-index.html#/usersList"><img src="img/nav/user_icon.png">User</a></li>
+            <li class="support-li"><a href="usermgt-index.html#/CaseMgt"><img src="img/nav/support_icon.png">Support</a></li>
+        </ul>
+    </div>
+    
+</div>
+</div>
+<!--/End nav sidebar --> 
+</div>
+                
+ <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <div ng-view></div>
+            </div>
+        </div>
+    </div>
+        </section><!-- -->
+        <!-- /PAGE ABOUT -->
+        
+        
+        
+
+    </div>
+    <!-- /Content area -->
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-meta">
+            <div class="container no_pad">
+               
+    <div class="copyright" >
+        <div class="col-sm-6 col-md-4 text-l">
+            <ul class="social-line social-wohex list-inline mobile_f">
+            <li>Follow us</li>
+            <li data-animation="flipInY" data-animation-delay="300"><a href="javascript:void();" class="facebook"><i class="fa fa-facebook"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="100"><a href="javascript:void();" class="twitter"><i class="fa fa-twitter"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="200"><a href="javascript:void();" class="google"><i class="fa fa-google"></i></a></li>
+            <li data-animation="flipInY" data-animation-delay="400"><a href="javascript:void();" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                
+            </ul>
+            </div>
+            <div class="col-sm-6 col-md-8 text-r">
+            <div class="pad_tb4px">&copy; 2016 Global Trade net. All rights reserved. Patented. <span class="mobile_f"> |  <a href="javascript:void();" >Privacy Policy</a> & <a href="javascript:void();" >Terms of Service</a></span></div>
+            </div>
+    </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
+    <!--<div class="to-top"><i class="fa fa-angle-up"></i></div> -->
+    
+</div>
+
+<!--  <script>
+    window.pageParams = {
+        'locale': 'en',        
+        'universalCode': 'GTM-WRBD5L',
+        'yandexMetrikaAccount': '18776650',        
+    };
+    window.strings = {
+        EN: {
+            goto: 'Go to the English version of the site?',
+            no: 'Close',
+            yes: 'Yes',
+            cookie: 'This website uses cookies: by&nbsp;continuing to&nbsp;browse this site you accept this <a href="privacy/">policy</a>',
+            url: '/'
+        }
+    }
+</script>-->
+
+<script src="js/web-grid.js"></script>
+
+<script>
+	var isSafari = navigator.userAgent.indexOf('Safari') > -1 && navigator.userAgent.indexOf('Chrome') == -1;
+	if(isSafari) {
+		document.addEventListener("DOMContentLoaded", function () {
+			if ('classList' in document.createElement('div') &&
+					'querySelector' in document &&
+					'addEventListener' in window && Array.prototype.forEach) {
+				document.documentElement.classList.add('mdl-js');
+				componentHandler.upgradeAllRegistered();
+			} else {
+				componentHandler.upgradeElement = function() {};
+				componentHandler.register = function() {};
+			}
+			WG.initAllRegistered();
+			window.svg4everybody();
+		})
+	}
+</script>
+<!-- /Wrap all content -->
+
+
+<script src="js/web-grid.js"></script>
+<script src="js/common.min.js"></script>
+
+<script src="js/start.js" type="text/javascript"></script>
+
+<!-- JS Global -->
+<!--[if lt IE 9]><script src="assets/plugins/jquery/jquery-1.11.1.min.js"></script><![endif]-->
+<!--[if gte IE 9]><!--><script src="assets/plugins/jquery/jquery-2.1.1.min.js"></script><!--<![endif]-->
+<script src="assets/plugins/modernizr.custom.js"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="assets/plugins/superfish/js/superfish.js"></script>
+<script src="assets/plugins/prettyphoto/js/jquery.prettyPhoto.js"></script>
+<script src="assets/plugins/placeholdem.min.js"></script>
+<script src="assets/plugins/jquery.smoothscroll.min.js"></script>
+<script src="assets/plugins/jquery.easing.min.js"></script>
+
+<!-- JS Page Level -->
+<script src="assets/plugins/owlcarousel2/owl.carousel.min.js"></script>
+<script src="assets/plugins/waypoints/waypoints.min.js"></script>
+<script src="assets/plugins/countdown/jquery.plugin.min.js"></script>
+<script src="assets/plugins/countdown/jquery.countdown.min.js"></script>
+
+<script src="assets/js/theme-ajax-mail.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/custom.js"></script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="lib/angular-cookies.js"></script>
+<script src="assets/plugins/jquery.cookie.js"></script>
+<script src="assets/js/theme-config.js"></script>
+<!--<![endif]-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        theme.init();
+    });
+
+    jQuery(document).ready(function () { theme.onResize(); });
+    jQuery(window).load(function(){ theme.onResize(); });
+    jQuery(window).resize(function(){ theme.onResize(); });
+
+</script>
+<script type="text/ng-template" id="template/ngCart/addtocart.html">
+<div ng-hide="attrs.id">
+  <a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
+</div>
+<div ng-show="attrs.id">
+  <div>
+    <span ng-show="quantityMax">
+      <select name="quantity" id="quantity" ng-model="q" ng-options=" v for v in qtyOpt"></select>
+    </span>
+      <a class="btn btn-sm btn-primary" ng-click="ngCart.addItem(id, name, price, q, data)" ng-transclude></a>
+  </div>
+  <span ng-show="inCart()">
+  <br>
+  <p class="alert alert-info">This item is in your cart. <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Remove</a></p>
+  </span>
+</div>
+</script>
+<script type="text/ng-template" id="template/ngCart/summary.html">
+  <span class="">{{ ngCart.getTotalItems() }}
+    <ng-pluralize count="ngCart.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
+    <br />{{ ngCart.totalCost() | currency }}
+  </span>
+</script>
+<script type="text/ng-template" id="template/ngCart/cart.html">
+<div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
+  Your cart is empty
+</div>
+<div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
+  <table class="table table-striped ngCart cart">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>Quantity</th>
+        <th>Amount</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr ng-show="ngCart.getTax()">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Tax ({{ ngCart.getTaxRate() }}%):</td>
+        <td>{{ ngCart.getTax() | currency }}</td>
+      </tr>
+      <tr ng-show="ngCart.getShipping()">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Shipping:</td>
+        <td>{{ ngCart.getShipping() | currency }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total:</td>
+        <td>{{ ngCart.totalCost() | currency }}</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr ng-repeat="item in ngCart.getCart().items track by $index">
+        <td><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span></td>
+
+        <td>{{ item.getName() }}</td>
+        <td><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
+        ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp;
+        {{ item.getQuantity() | number }}&nbsp;&nbsp;
+        <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span></td>
+        <td>{{ item.getPrice() | currency}}</td>
+        <td>{{ item.getTotal() | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</script>
+
+</body>
+</html>

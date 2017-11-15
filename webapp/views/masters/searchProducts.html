@@ -1,0 +1,262 @@
+<div ng-init="initSearchProducts()" ng-controller="masterCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>Search Product</h1>
+                </div>
+                <hr>
+				<!-- Contact login form -->
+				<!--<form id="registration-form" name="registration-form" class="registration-form" action="#" method="post"> -->
+		        <form name="entity-form" id="entity-form" class="af-entity" novalidate>
+			   		
+			   		  <!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">			
+							<div class="col-xs-12">				
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						      
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+						      
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+			   		
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Part No
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="product.partNo" class="form-control" />
+		            	</div>
+		            
+		            	<label class="col-xs-2 control-label">
+		            		SBU Code
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="product.sbu" class="form-control ">
+		            			<!-- <option value="">-Select-</option> -->
+		            			<option ng-repeat="sbu in sbuList" value="{{sbu}}"> {{ sbu }} </option>
+		            		</select>
+		            	</div>
+		            	
+		            </div>
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Type
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="product.type" class="form-control ">
+		            			<option value="">-Select-</option>
+							    <option value="C">Cost Per Flight Hour</option>
+							    <option value="E">Encryption</option>
+							    <option value="FS">Fab to Stock - Valuated</option>
+							    <option value="FPN">Finished product - No Value</option>
+							    <option value="FP">Finished product - Value</option>
+							    <option value="G">Ground Support and Engines</option>
+							    <option value="H">Hardware</option>
+							    <option value="N">Non-valuated material</option>
+							    <option value="O">Other</option>
+							    <option value="R">Raw Materials</option>
+							    <option value="F">Semi-Finished Goods</option>
+							    <option value="S">Services</option>
+							    <option value="W">Software</option>
+							    <option value="D">TD-Software</option>
+							    <option value="T">Technical Data</option>
+							    <option value="Q">Test Equipment</option>
+		            		</select>
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Material Type
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="product.materialType" class="form-control" />
+		            	</div>
+		            </div>
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		SKU no
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="product.skuNo" class="form-control" />
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Model No
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="product.modelNo" class="form-control" />
+		            	</div>
+		            </div>
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Export Classification
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="product.exportClass" class="form-control" />
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Import Classification
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <input ng-model="product.importClass" class="form-control" />
+		            	</div>
+		            </div>
+		            
+		            <div class="row">
+		            
+		            	<label class="col-xs-2 control-label">Part Description</label>
+		            	<div class="col-xs-3">
+		            		<textarea ng-model="product.partDesc" class="form-control" rows="4"></textarea>
+		            	</div>
+		            	
+		            
+		            	<label class="col-xs-2 control-label">
+		            		Hazardous
+		            	</label>
+		            	<div class="col-xs-3">
+		            		 <select ng-model="product.hazmatStr" class="form-control ">
+		            		 	<option value="">Select</option>
+		            		 	<option value="Y">Yes</option>
+		            		 	<option value="N">No</option>
+		            		 </select>
+		            	</div>
+		            </div>
+		            
+		            <BR />
+		            
+		            <div class="row">
+		            	<div class="col-xs-12">
+		            		<fieldset>
+		            			<legend>Manufacturer</legend>
+		            			
+		            			<div class="row">
+		            				<label class="col-xs-2 control-label">
+		            					Manufacture ID
+		            				</label>
+		            				<div class="col-xs-3">
+					            		 <input type="text" ng-model="product.manufacture.manufactureId" class="form-control" />
+					            	</div>
+					            	
+					            	<label class="col-xs-2 control-label">
+		            					Name
+		            				</label>
+		            				<div class="col-xs-3">
+					            		 <input type="text" ng-model="product.manufacture.name" class="form-control" />
+					            	</div>
+					            	
+		            			</div>
+								
+								<div class="row">
+									<label class="col-xs-2 control-label">
+		            					Country
+		            				</label>
+		            					 
+				            		 <div class="col-xs-3 autosuggest">										      	
+							      		<input
+                                               type="text" name="cooName" id="cooName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+                                               data-toggle="tooltip" title="Country is required"
+                                               class="form-control placeholder left-inp" ng-model="product.manufacture.cooName"
+                                               typeahead-template-url="countryTmpl.html"
+                                               typeahead-editable="false" 
+                                               typeahead-min-length="0"
+                                               typeahead-on-select="selectCountryEvent($item, $model, $label, 'cooName', 'cooCode', product.manufacture)" autocomplete="off"/>
+							      	
+							      		<input name="cooCode" ng-model="product.manufacture.cooCode" class="form-control right-inp" readonly="true"/>
+							      	</div>
+					            		 
+					            	
+					            	<label class="col-xs-2">
+		            					Manufacture Contact Name
+		            				</label>
+		            				<div class="col-xs-3">
+					            		 <input type="text" ng-model="product.manufacture.contactName" class="form-control" />
+					            	</div>
+								</div>
+										            			
+		            		</fieldset>
+		            	</div>
+		            </div> 
+		            
+		            
+		            <div class="row">
+		            	<label class="col-xs-2 control-label">
+		            		Sort By
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="product.sortBy" class="form-control ">
+		            			<option value="PART_NO">Part No</option>
+							    <option value="PART_TYPE">Type</option>
+							    <option value="MODEL_NO">Model No</option>
+							    <option value="EXPORT_CLASS">Export Classification</option>
+							    <option value="IMPORT_CLASS">Import Classification</option>
+						    </select>
+		            	</div>
+		            	
+		            	<label class="col-xs-2 control-label">
+		            		Direction
+		            	</label>
+		            	<div class="col-xs-3">
+		            		<select ng-model="product.direction" class="form-control ">
+							    <option value="ASC">Ascending</option>
+							    <option value="DESC">Decending</option>
+						    </select>
+		            	</div>
+		            </div>
+		            
+		            
+		            
+		            <div class="row btn-row-bottom">
+		            	<div class="col-xs-6">
+		            		<button ng-click="searchProducts('search')" class="btn btn-license">Search</button>
+		            		<button ng-click="editProduct(product.partNo, 'New')" class="btn btn-license">Add Product</button>
+		            		<button type="reset" class="btn btn-black">Reset</button>
+		            	</div>
+		            </div>
+			   		
+		        </form> 
+                <!-- /Contact entity form -->
+             </div>                                
+		</div>
+      </div>
+	</div>
+</div>

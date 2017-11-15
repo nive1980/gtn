@@ -1,0 +1,21 @@
+Place these HTML files in on your webserver
+All the links are in place between the menus, HTML, css etc.., so there will not be a need to change any links
+Start with Index.html
+Menu.html is only for information (and is not for production)
+
+HTML includes - 
+1. Login
+2. Sign up
+3. Global Trade Control
+    a. Entity Screening
+    b. License Screening
+4. Landing Page after login
+
+Next set of HTML files that are coming this week are - 
+1. User Management
+   a. Profile
+   b. Security
+   c. Subscription
+   d. Billing
+   e. Payment Method
+   f. User

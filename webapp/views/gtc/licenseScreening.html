@@ -1,0 +1,187 @@
+<div ng-init="init()" ng-controller="licenseScreeningCtlr" class="container-fluid no_pad" id="licenseScreeningCtlr">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>License Screening</h1>
+                </div>
+                <hr>
+                
+                 <!-- Error Messages -->
+				    <div class="row ocr-error" ng-show="errors.length > 0">			
+						<div class="col-xs-12">				
+							<div class="alert fade in alert-danger">
+								<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+								<h4>Error</h4>
+								<ul class="msg-ul">
+									<li ng-repeat="error in errors track by $index">
+				            			{{ error.msg }}
+				            		</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					      
+				      <!-- Warning Messages -->
+				      <div class="row ocr-warning" ng-show="warnings.length > 0">
+				        <div class="col-xs-12">
+				          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+				            <h4>Warning</h4>
+				            <ul class="msg-ul">
+				            	<li ng-repeat="warning in warnings track by $index">
+				            		{{ warning.msg }}
+				            	</li>
+				            </ul>
+				          </div>
+				        </div>
+				      </div>
+					      
+				      <!-- Info Messages -->
+				      <div class="row ocr-info" ng-show="infos.length > 0">
+				        <div class="col-xs-12">
+				          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+				            <h4>Information</h4>
+				            <ul class="msg-ul">
+				            	<li ng-repeat="info in infos track by $index">
+				            		{{ info.msg }}
+				            	</li>
+				            </ul>
+				          </div>
+				        </div>
+				      </div>
+				      
+				<!-- Contact login form -->
+				<!--<form id="registration-form" name="registration-form" class="registration-form" action="#" method="post"> -->
+		        <form name="entity-form" id="entity-form" method="post" action="#entity-form" class="af-entity row" novalidate>
+			       <div class=" ">
+			          <div class="col-sm-12 form-alert"></div>
+			               
+		              <div class="col-sm-12 col-md-12" > 
+		          			<div class="form-group">                
+			                        <div class="col-sm-2">
+			                        	<label for="city_en">Import Country <span class="required">*</span></label> 
+			                        </div>
+			                        <div class="col-sm-4 autosuggest">
+			                        	
+			                        	<input
+                                                type="text" name="impCountryName" id="impCountryName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+                                                data-toggle="tooltip" title="Import Country is required"
+                                                class="form-control placeholder left-inp" ng-model="license.impCountryName"
+                                                typeahead-template-url="countryTmpl.html"
+                                                typeahead-editable="false" 
+                                                typeahead-min-length="0" ng-blur="clearCountry('impCountry', '', '', license.impCountryName, license)"
+                                                typeahead-on-select="selectCountryEvent($item, $model, $label, 'impCountryName', 'impCountry', license)" autocomplete="off" required/>
+								      	
+							      		<input name="impCountry" ng-model="license.impCountry" class="form-control right-inp" readonly="true"/>
+			                        
+			                        
+			                    		<!-- <input
+				                            type="text" ng-model="license.impCountry" id="inpType_en" placeholder="" value="" size="30"
+				                            data-toggle="tooltip" title="Input is required"
+				                            class="form-control placeholder input-city" /> -->
+			                         </div>
+			                </div> 
+		           	  </div>
+			                
+			          <div class="col-sm-12 col-md-12" >
+		           			<div class="form-group">                
+			                        <div class="col-sm-2">
+			                        	<label for="city_en">Export Country <span class="required">*</span></label> 
+			                        </div>
+			                        <div class="col-sm-4 autosuggest">
+			                        
+			                        	<input
+                                                type="text" name="expCountryName" id="expCountryName" uib-typeahead="country as country.countryCode for country in getCountry($viewValue) | limitTo:8"
+                                                data-toggle="tooltip" title="Export Country is required"
+                                                class="form-control placeholder left-inp" ng-model="license.expCountryName"
+                                                typeahead-template-url="countryTmpl.html"
+                                                typeahead-editable="false" 
+                                                typeahead-min-length="0" ng-blur="clearCountry('expCountry', '', '', license.expCountryName, license)"
+                                                typeahead-on-select="selectCountryEvent($item, $model, $label, 'expCountryName', 'expCountry', license)" autocomplete="off" required/>
+								      	
+							      		<input name="expCountry" ng-model="license.expCountry" class="form-control right-inp" readonly="true"/>
+			                        
+			                        
+			                    		<!-- <input
+				                            type="text" ng-model="license.expCountry" id="inpType_en" placeholder="" value="" size="30"
+				                            data-toggle="tooltip" title="Input is required"
+				                            class="form-control placeholder input-city"/>   -->                          
+			                         </div>
+			                </div>             
+			          </div>
+			          
+			       
+			           
+			                        		                            
+			           <div class="col-sm-12 col-md-12" > 
+			           							                   
+				                <div class="form-group ">
+				                    <div class="col-sm-2">                    
+				                   		<label for="org_en" class="control-label" style="margin-top: 10px">Type </label>                    
+				                    </div>                    
+				                    <div class="col-sm-10 radio_mar radio no_pad"> 
+				                         <div class="col-sm-2">
+				                            <div class="form-group af-inner text-center ">
+				                                <input id="org_en" type="radio" ng-model="license.type" ng-change="showInput()" value="product_no" class="entity_role">                                
+				                                <label for="org_en">Product No.</label>                                    
+				                            </div>
+				                         </div>
+				                         <div class="col-sm-2">
+				                            <div class="form-group af-inner text-center">
+				                                    <input id="ind_en" type="radio" ng-model="license.type" ng-change="showInput()" value="eccn" class="entity_role">
+				                                    <label for="ind_en">ECCN </label>
+				                            </div>
+				                         </div>
+				                         <!-- <div class="col-sm-2">
+				                            <div class="form-group af-inner text-center">
+				                                    <input id="ind_en" type="radio" ng-model="license.type" ng-change="showInput()" value="nrc" class="entity_role">
+				                                    <label for="ind_en">NRC</label>
+				                            </div>
+				                         </div>
+				                         <div class="col-sm-2">
+				                            <div class="form-group af-inner text-center">
+				                                    <input id="ind_en" type="radio" ng-model="license.type" ng-change="showInput()" value="usml" class="entity_role">
+				                                    <label for="ind_en">USML</label>
+				                            </div>
+				                         </div>   -->                  
+				                    </div>                    
+				                 </div>            
+				                     
+		                </div>  
+		                
+		                <div class="col-sm-12 col-md-12" > 
+		                		<div class="form-group" ng-show="visible">                
+				                        <div class="col-sm-2">
+				                        	<label for="city_en">
+				                        		<a href="javascript:void(0)" ng-click="searchProductPopup('ls')">{{inputLabel}}</a>				                        		
+				                        	</label> <span class="required">*</span>
+				                        </div>
+				                        <div class="col-sm-4 ">
+				                    		<input name="input"
+					                            type="text" ng-model="license.input" id="inpType_en" placeholder="" value="" size="30"
+					                            data-toggle="tooltip" title="Input is required"
+					                            class="form-control placeholder input-city"/>                            
+				                         </div>
+				                </div> 
+			            </div>
+			            
+			            <!-- <a href="javascript:void(0)" ng-click='deleteEntity(0)'>Delete Test</a> -->
+			                              
+		                <BR /><BR />                              
+			            <BR /><BR />       
+		                <div class="col-sm-12 col-md-12 margin-20b" >
+			                <input type="button" name="screen" value="Screen" ng-click="screenLicense()" class="btn btn-license">
+			                   
+			                <input type="button" name="Reset" value="Reset" ng-click="reset()" class="btn btn-black">
+		                </div>        
+			        </div>
+		        </form> 
+                <!-- /Contact entity form -->
+             </div>                                
+		</div>
+      </div>
+	</div>
+</div>

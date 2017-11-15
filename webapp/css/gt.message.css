@@ -1,0 +1,146 @@
+﻿.tw3-headerV2__actions__item>a .tw3-iconBadge>span, .tw3-headerV2__actions__item>a .tw3-iconBadge:hover>span {
+    position: absolute;
+    top: -5px;
+    right: -3px;
+}
+
+.tw3-headerV2__actions__item>a .tw3-iconBadge>span {
+    font-family: "Segoe UI","Helvetica Neue",Arial,Helvetica,sans-serif;
+    background: #fe3636;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: -3px;
+    z-index: 2;
+}
+.badge--darkRed, .tw3-headerV2--mobile .tw3-tab .tw3-iconBadge>span, .tw3-headerV2__actions__item>a .tw3-iconBadge>span, .tw3-headerV2__actions__item>a .tw3-iconBadge:hover>span {
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 0 0 2px #fff;
+    -moz-box-shadow: 0 0 0 2px #fff;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+    padding: 0;
+    height: 16px;
+    font-size: 11px;
+    border: 0;
+    line-height: 15px;
+    vertical-align: 4px;
+    display: inline-block;
+    padding: 0 5px;
+    margin: -6px 0 0 -8px;
+    position: absolute;
+}
+.badge--darkYellow, .tw3-headerV2--mobile .tw3-tab .tw3-iconBadge>span, .tw3-headerV2__actions__item>a .tw3-iconBadge>span, .tw3-headerV2__actions__item>a .tw3-iconBadge:hover>span {
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 0 0 2px #fff;
+    -moz-box-shadow: 0 0 0 2px #fff;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.5);
+    padding: 0;
+    height: 16px;
+    font-size: 11px;
+    border: 0;
+    line-height: 15px;
+    vertical-align: 4px;
+    display: inline-block;
+    padding: 0 5px;
+    margin: -5px 0 0 -8px;
+    position: absolute;
+}
+
+.bounce {
+    -webkit-animation-name: bounce;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-delay: 0;
+    -webkit-animation-direction: forwards;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: none;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-delay: 0;
+    animation-direction: forwards;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+}
+.tw3-container * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.tw3-headerV2 * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.badge--darkRed {
+    background: #fe3636;
+    color: #fff;
+}
+.badge--darkYellow {
+    background: #ffaf12;
+    color: #fff;
+}
+.bounce {
+    -webkit-animation-name: bounce;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-delay: 0;
+    -webkit-animation-direction: forwards;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: none;
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-delay: 0;
+    animation-direction: forwards;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+}
+Inherited from i.tw3-iconDotsOutline.tw3-iconGrey.tw3-iconBig.tw3-iconBadge
+.tw3-headerV2__actions__item>a .tw3-iconBadge {
+    color: #6d7c85;
+    display: inline-block;
+    zoom: 1;
+    position: relative;
+    vertical-align: middle;
+}
+.tw3-iconBig {
+    font-size: 24px;
+}
+.tw3-iconGrey {
+    color: #6d7c85;
+}
+[class^="tw3-icon"], [class*="tw3-icon"] {
+    font-family: "icons";
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+user agent stylesheet
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}
+Inherited from a.noline.tw3-pointerMenuToggle.jsHeaderPointerMenuActivityToggle
+.noline:visited, .noline:hover, .noline:active, .noline:focus {
+    color: #283740;
+}
+.tw3-pointerMenuToggle {
+    cursor: pointer;
+}
+.noline {
+    color: #283740;
+}

@@ -1,0 +1,263 @@
+@charset "utf-8";
+/* CSS Document */
+.glossymenu{margin:0px 0px 0 0;padding:0 0px 0 0; border-top:0px solid #fff;border-bottom-width: 0; text-align:left;}
+.glossymenu a.menuitem{
+/*background: #ccc url(../img/glossyback.gif) repeat-x bottom left;
+background:rgba(147, 149, 152, 1);*/font-size:13px; color: white;display: block;position: relative;
+/*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;padding:2px 0;padding-left:1px;text-decoration: none; /*text-transform:uppercase;*/}
+.glossymenu a.menuitem i{    padding: 0 4px 2px 3px;font-size: 12px;}
+.glossymenu a.menuitem:visited, .glossymenu .menuitem:active{color: white;}
+.glossymenu a.menuitem .statusicon{ /*CSS for icon image that gets dynamically added to headers*/
+position:relative; top:6px !important; right:3px; border:solid #000 0px; float:right;}
+.glossymenu a.menuitem:hover{/*background-image: url(../img/glossyback2.gif);*/
+background:rgba(248,176,29,1); border-left: 3px solid #fff;}
+.glossymenu div.submenu{ /*DIV that contains each sub menu*/
+background:rgba(255,255,255,0.01);}
+.glossymenu div.submenu ul{ /*UL of each sub menu*/
+list-style-type: none;margin: 0;padding: 0;}
+.glossymenu div.submenu ul li{border-bottom:1px solid rgba(204,204,204,0.001); border-right: 1px solid rgba(204,204,204,0.001);
+border-left: 0px solid #fff;
+background:rgba(0, 0, 0, 0.001); max-height:auto;     padding: 0px 0 0px 10px; font-size: 14px; line-height: 1.6;}
+
+.glossymenu div.submenu ul li:before, .glossymenu div.submenu ul li:before {content: "\f105"; color:#fff;
+font-family: FontAwesome;
+display: inline-block;padding-left: 6px; padding-right: 6px; vertical-align: middle;}
+
+.glossymenu div.submenu ul li.active1{background:rgba(248,176,29,0.6); border-left:0px solid #fff;}
+.glossymenu div.submenu ul li:hover{background:rgba(248,176,29,0.6);; color:#fff;}
+
+.glossymenu div.submenu ul li a{ color:#fff; font-size:12px; text-align:center;
+text-decoration: none;padding:6px 4px 6px 0px; vertical-align:middle;}
+.glossymenu div.submenu ul li a:hover{color:#fff !important; text-decoration:none;}
+
+.glossymenu div.submenu ul li a.active1{color:#fff !important; font-size:12px; text-align:center;
+text-decoration: none;padding:8px 0; vertical-align:middle;}
+.glossymenu div.submenu ul li a.active1:hover{color:fff; text-decoration:none;}
+
+
+.glossymenu div.submenu2 ul .link_li{padding:8px 4px;
+border: 1px solid #ccc !important; margin:6px 0; background:#999; text-transform:uppercase;
+border-radius: 0px 8px 8px 0px  !important;
+-webkit-border-radius: 0px 8px 8px 0px  !important;
+-moz-border-radius: 0px 8px 8px 0px ;
+-ms-border-radius: 0px 8px 8px 0px ;
+-o-border-radius: 0px 8px 8px 0px ;}
+.glossymenu div.submenu2 ul .link_li:hover{background:rgba(0, 0, 0, 0.25);}
+.glossymenu div.submenu2 ul .link_li a{color:#fff !important; text-decoration:none;}
+.glossymenu div.submenu2 ul .link_li a:hover{color:#f06423 !important; text-decoration:none;}
+	
+/*2nd hover*/
+.glossymenu-m{margin:0px 0px 0 0;padding:0 0px 0 0; border-top:0px solid #fff;border-bottom-width: 0; text-align:left;}
+.glossymenu-m a.menuitem-m{
+/*background: #ccc url(../img/glossyback.gif) repeat-x bottom left;
+background:rgba(147, 149, 152, 1);*/font-size:13px; color: white;display: block;position: relative;
+/*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;padding:8px 0;padding-left:8px;text-decoration: none; /*text-transform:uppercase;*/}
+.glossymenu-m a.menuitem-m:visited, .glossymenu-m .menuitem-m:active{color: white;}
+.glossymenu-m a.menuitem-m .statusicon{ /*CSS for icon image that gets dynamically added to headers*/
+position:relative; top:10% !important; right:3px; border:solid #000 0px; float:right;}
+.glossymenu-m a.menuitem-m:hover{/*background-image: url(../img/glossyback2.gif);*/
+background:rgba(248,176,29,1); border-left: 3px solid #fff;}
+.glossymenu-m div.submenu1{ /*DIV that contains each sub menu*/
+background:rgba(255,255,255,0.01);}
+.glossymenu-m div.submenu-m ul{ /*UL of each sub menu*/
+list-style-type: none;margin: 0;padding: 0;}
+.glossymenu-m div.submenu-m ul li{border-bottom:1px solid rgba(204,204,204,0.001); border-right: 1px solid rgba(204,204,204,0.001);
+border-left: 0px solid #fff;
+background:rgba(0, 0, 0, 0.001); max-height:auto; padding:2px 0 2px 6px;}
+.glossymenu-m div.submenu-m ul li:before, .glossymenu-m div.submenu-m ul li:before {content: "\f105"; color:#fff;
+font-family: FontAwesome;
+display: inline-block;padding-left: 10px; padding-right: 10px; vertical-align: middle;}
+
+.glossymenu-m div.submenu-m ul li.active1{background:rgba(248,176,29,0.6); border-left:0px solid #fff;}
+.glossymenu-m div.submenu-m ul li:hover{background:rgba(248,176,29,0.6);; color:#fff;}
+
+.glossymenu-m div.submenu-m ul li a{ color:#fff; font-size:12px; text-align:center;
+text-decoration: none;padding:6px 4px; vertical-align:middle;}
+.glossymenu-m div.submenu-m ul li a:hover{color:#fff !important; text-decoration:none;}
+
+.glossymenu-m div.submenu-m ul li a.active1{color:#fff !important; font-size:12px; text-align:center;
+text-decoration: none;padding:8px 0; vertical-align:middle;}
+.glossymenu-m div.submenu-m ul li a.active1:hover{color:fff; text-decoration:none;}
+
+/*cc-archives div*/
+.glossymenu_archive1{margin:0px 0;padding:0 0 0px 0;width:100% !important;border:0px solid #fff;border-bottom-width: 0;}
+.glossymenu_archive1 a.menuitem1{/*background:rgba(1, 74, 127, 1);*/
+font-size:90%; text-transform:uppercase;
+color: white;display: block;position: relative; letter-spacing:1.5px; font-weight:bold;
+width: auto;padding:6px 0;padding-left:14px;text-decoration: none;}
+.glossymenu_archive1 a.menuitem1:visited, .glossymenu1 .menuitem1:active{color: white;}
+.glossymenu_archive1 a.menuitem1 .statusicon1{position:relative; padding:1% 1%; float:right; border:solid #f00 0px !important; }
+.glossymenu_archive1 a.menuitem1:hover{background:rgba(1, 74, 127, 1);}
+.glossymenu_archive1 div.submenu1{background: white;}
+ 
+.glossymenu_archive1 div.submenu1 ul{margin:10px 0 0 16px; padding: 0;}
+.glossymenu_archive1 div.submenu1 ul li{border-bottom:0px solid #ccc; border-right: 0px solid #ccc;
+background:rgba(0, 0, 0, 0.001); max-height:auto; padding:4px 0; font-size:80% !important;}
+.glossymenu_archive1 div.submenu1 ul li a{display: block; color:#353535; font-size:80% !important; text-align:center;
+text-decoration: none;padding:10px 0; vertical-align:middle;}
+.glossymenu_archive1 div.submenu1 ul li a:hover{ color:000; text-decoration:none;}
+/*/End cc-Archives div*/
+
+/*artists name div*/
+.glossymenu2{margin:0px 0;padding:0 0 0px 0; max-width:100%;border:0px solid #fff;border-bottom-width: 0;}
+.glossymenu2 a.menuitem2{height:30px;
+/*background: #ccc url(../img/glossyback.gif) repeat-x bottom left;*/
+background:rgba(0, 0, 0, 0.5);font-size:95%; text-transform:uppercase;
+color: white;display: block;position: relative;
+/*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;padding:0 0;text-decoration: none;}
+.glossymenu2 a.menuitem2:visited, .glossymenu2 .menuitem2:active{color: white;}
+.glossymenu2 a.menuitem2 .statusicon2{padding:5% 0;  border:solid #f00 0px !important;
+margin-left:45% !important; margin-right:50% !important;
+text-align: center;
+display: table-cell;vertical-align: middle}
+
+.glossymenu2 a.menuitem2:hover{/*background-image: url(../img/glossyback2.gif);*/
+background:rgba(0, 0, 0, 0.6);}
+.glossymenu2 div.submenu2{ /*DIV that contains each sub menu*/
+background: white;}
+
+.glossymenu2 div.submenu2 ul{ /*UL of each sub menu*/
+list-style-type: none;margin: 0;padding: 0;}
+.glossymenu2 div.submenu2 ul li{border-bottom:1px solid #ccc; border-top:1px solid #ccc; border-right: 1px solid #ccc;
+background:rgba(147, 149, 152, 1); max-height:auto;}
+.glossymenu2 div.submenu2 ul li a{display: block; color:#fff; font-size:75%;
+text-align:center; letter-spacing:0.5px; 
+text-decoration: none;padding:6px 0; vertical-align:middle;/* text-transform:uppercase;*/}
+.glossymenu2 div.submenu2 ul li a:hover{ color:000; text-decoration:none;background:rgba(102, 44, 144, 1);}
+
+
+/*curator name div */
+.glossymenu_curator{margin:0px 0;padding:0 0 0px 0;width:100%;border-top:1px solid #fff;border-bottom-width: 0; text-align:center}
+
+.glossymenu_curator a.menuitem_curator{font-size:80%; text-transform:uppercase;
+color: white;display: block;position: relative;
+width: auto;padding:6px 0;padding-left:8px;text-decoration: none;}
+.glossymenu_curator a.menuitem_curator:visited, .glossymenu_curator .menuitem_curator:active{color: white;}
+.glossymenu_curator a.menuitem_curator .statusicon_curator{ /*CSS for icon image that gets dynamically added to headers*/
+position:relative; padding:3% 2%; float:right !important; border:solid #f00 0px !important;}
+.glossymenu_curator a.menuitem_curator:hover{/*background-image: url(../img/glossyback2.gif);
+background:rgba(102, 44, 144, 1);*/}
+.glossymenu_curator div.submenu_curator{ /*DIV that contains each sub menu*/
+background: white;}
+ 
+.glossymenu_curator div.submenu_curator ul{ /*UL of each sub menu*/
+list-style:none;margin:1px 0 0 0px; padding: 0;}
+.glossymenu_curator div.submenu_curator ul li{border-bottom:1px solid #fff; border-right: 0px solid #ccc;
+background:rgba(0, 0, 0, 0.2); max-height:auto; padding:6px 0; font-size:85% !important;}
+.glossymenu_curator div.submenu_curator ul li a{display: block; color:#353535; font-size:85% !important; text-align:center;
+text-decoration: none;padding:0px 0; vertical-align:middle;}
+.glossymenu_curator div.submenu_curator ul li a:hover{ color:#000; text-decoration:none;}
+.glossymenu_curator div.submenu_curator ul li:hover{background:rgba(0, 0, 0, 0.3); clear:#ff852b;}
+.glossymenu_curator div.submenu_curator ul li a.active1{display: block; color:#f06423 !important; font-size:80%; text-align:center;text-decoration: none;padding:0px 0 0px 0; vertical-align:middle;}
+.glossymenu_curator div.submenu_curator ul li a.active1:hover{color:000; text-decoration:none;}
+
+.glossymenu_curator div.submenu_curator ul li a.active2{display: block; color:#f06423 !important; font-size:80%; text-align:center;text-decoration: none;padding:0px 0 0px 0; vertical-align:middle;}
+.glossymenu_curator div.submenu_curator ul li a.active2:hover{color:000; text-decoration:underline;}
+
+.glossymenu_curator div.submenu_curator span{font-size:70% !important;}
+
+/*archive inner*/
+.archive_inner{margin:0px 0;padding:0 0 0px 0;width:100%;border-top:1px solid #fff;border-bottom-width: 0; text-align:center}
+.archive_inner a.menuitem_archive{font-size:80%; text-transform:uppercase;
+color: white;display: block;position: relative;
+width: auto;padding:6px 0;padding-left:8px;text-decoration: none;}
+.glossymenu_curator a.menuitem_archive:visited, .glossymenu_curator .menuitem_archive:active{color: white;}
+.archive_inner a.menuitem_archive .statusicon_archive{ /*CSS for icon image that gets dynamically added to headers*/
+position:relative; padding:3% 2%; float:right !important; border:solid #f00 0px !important;}
+.archive_inner a.menuitem_archive:hover{/*background-image: url(../img/glossyback2.gif);
+background:rgba(102, 44, 144, 1);*/}
+.archive_inner div.submenu_archive{ /*DIV that contains each sub menu*/
+background: white;}
+ 
+.archive_inner div.submenu_archive ul{ /*UL of each sub menu*/
+list-style:none;margin:1px 0 0 0px; padding: 0;}
+.archive_inner div.submenu_archive ul li{border-bottom:1px solid #fff; border:1px solid #ccc;
+ max-height:auto; padding:6px 0; font-size:85% !important;}
+.archive_inner div.submenu_archive ul li a{display: block; color:#353535; font-size:85% !important; text-align:center;
+text-decoration: none;padding:0px 0; vertical-align:middle;}
+.archive_inner div.submenu_archive ul li a:hover{ color:#f06423; text-decoration:none;}
+.archive_inner div.submenu_archive ul li:hover{background:rgba(0, 0, 0, 0.2); clear:#ff852b;}
+.archive_inner div.submenu_archive ul li a.active1{display: block; color:#f06423 !important; font-size:80%; text-align:center;text-decoration: none;padding:0px 0 0px 0; vertical-align:middle;}
+.archive_inner div.submenu_archive ul li a.active1:hover{color:000; text-decoration:none;}
+
+.archive_inner div.submenu_archive ul li a.active2{display: block; color:#f06423 !important; font-size:80%; text-align:center;text-decoration: none;padding:0px 0 0px 0; vertical-align:middle;}
+.archive_inner div.submenu_archive ul li a.active2:hover{color:000; text-decoration:underline;}
+.archive_inner div.submenu_archive span{font-size:70% !important;}
+/*End archive inner*/
+
+/*link menu*/
+a.menuitem_essay1{background:rgba(167, 169, 172, 1);font-size:80%; text-transform:uppercase;
+color: white;display: block;position: relative;  border-bottom:solid #fff 1px;
+width: auto;padding:6.5px 0;text-decoration: none;}
+a.menuitem_essay1:visited, .menuitem_curator1:active{color: white;}
+a.menuitem_essay1:hover{background:rgba(102, 44, 144, 1);}
+
+a.menuitem_essay2{background:rgba(102, 44, 144, 1);font-size:80%; text-transform:uppercase;text-align :center ;
+color: white;display: block;position: relative; border-bottom:solid #fff 1px;
+width: auto;padding:6px 0;padding-left:8px;text-decoration: none;}
+a.menuitem_essay2:visited, .menuitem_essay2:active{color: white;}
+a.menuitem_essay2:hover{background:rgba(102, 44, 144, 1);}
+
+a.menuitem_essay2_signup{ background:rgba(102, 44, 144, 1);font-size:80%; text-transform:uppercase;text-align :center ;
+color: white;display: block;position: relative; border-bottom:solid #fff 1px;
+width: auto;padding:6px 0;padding-left:8px;text-decoration: none;}
+a.menuitem_essay2_signup:visited, .menuitem_essay2_signup:active{color: white;}
+a.menuitem_essay2_signup:hover{background:rgba(102, 44, 144, 1);}
+
+a.menuitem_cc_blue1{background:rgba(167, 169, 172, 1);font-size:80%; text-transform:uppercase;
+color: white;display: block;position: relative;  border-bottom:solid #fff 1px;
+width: auto;padding:6.5px 0;text-decoration: none;}
+a.menuitem_cc_blue1:visited, .menuitem_curator1:active{color: white;}
+a.menuitem_cc_blue1:hover{background:rgba(1, 74, 127, 1);}
+
+a.menuitem_cc_blue2{background:rgba(0, 0, 0, 0.5);font-size:80%; text-transform:capitalize  !important;
+color: white;display: block;position: relative;  border-bottom:solid #fff 1px;
+width: auto;padding:6.5px 0;text-decoration: none;}
+a.menuitem_cc_blue2:visited, .menuitem_curator2:active{color: white;}
+a.menuitem_cc_blue2:hover{background:rgba(1, 74, 127, 1);}
+
+a.menuitem_cc_blue2a{background:rgba(1, 74, 127, 1);font-size:80%; text-transform:capitalize !important;
+color: white;display: block;position: relative;  border-bottom:solid #fff 1px;
+width: auto;padding:6.5px 0;text-decoration: none;}
+a.menuitem_cc_blue2a:visited, .menuitem_curator2a:active{color: white;}
+a.menuitem_cc_blue2a:hover{background:rgba(1, 74, 127, 1);}
+
+
+a.menuitem_cc_gray{background:rgba(0,0,0,0.5);font-size:80%; text-transform:uppercase;
+color: white;display: block;position: relative;  border-bottom:solid #fff 1px;
+width: auto;padding:6.5px 0;text-decoration: none;}
+a.menuitem_cc_gray:visited, .menuitem_curator2:active{color: white;}
+a.menuitem_cc_gray:hover{background:rgba(0,0,0,0.5);}
+
+
+a.menuitem0{
+background:rgba(102, 44, 144, 1) url(../img/minus_sm.png) no-repeat center right;
+font-size:90%; text-transform:uppercase;
+color: white;display: block;position: relative; letter-spacing:1.5px; font-weight:bold;
+/*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;padding:6px 0;padding-left:14px;text-decoration: none;}
+
+a.down{
+background:rgba(102, 44, 144, 1) url(../img/plus_sm.png) no-repeat center right;
+font-size:90%; text-transform:uppercase;
+color: white;display: block;position: relative; letter-spacing:1.5px; font-weight:bold;
+/*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;padding:6px 0;padding-left:14px;text-decoration: none;}
+
+
+a.menuitem3{
+background:rgba(1, 74, 127, 1) url(../img/minus_sm.png) no-repeat center right;
+font-size:90%; text-transform:uppercase;
+color: white;display: block;position: relative; letter-spacing:1.5px; font-weight:bold;
+/*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;padding:6px 0;padding-left:14px;text-decoration: none;}
+
+a.down{
+background:rgba(102, 44, 144, 1) url(../img/plus_sm.png) no-repeat center right;
+font-size:90%; text-transform:uppercase;
+color: white;display: block;position: relative; letter-spacing:1.5px; font-weight:bold;
+/*To help in the anchoring of the ".statusicon" icon image*/
+width: auto;padding:6px 0;padding-left:14px;text-decoration: none;}

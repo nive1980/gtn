@@ -1,0 +1,317 @@
+<div class="panel-grid-cell dashboard-rt">
+	<div class="container" ng-app="restControllers"
+		ng-init="getAllCasesByUser()">
+
+		<div class="row">
+			<div class="col-sm-12 col-md-12 text-left margin-top20">
+				<div class="wel_tt">
+					<span class="head wel_colo strong">Support </span>
+					<hr>
+					<div
+						class="col-sm-12 col-md-12 yello-div user_information bill_info">
+						<div class="clearfix"></div>
+						<div class="col-sm-12 col-md-12 yello-div">
+							<div class="col-sm-12 col-md-12">
+								<!-- <span class="bill_head strong">Support Tickets</span> -->
+								<div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Support Tickets</h4>
+		                        </div>
+
+								<div class="col-sm-12 col-md-12 margin-10b" style="min-height: 240px;">
+									
+											<mdt-table animate-sort-icon="true" ripple-effect="true"
+						            				selectable-rows = "false"
+						            				table-card="{visible: true, title: 'Support Tickets', columnSelector: true}"	
+											        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+											        mdt-row="{
+											        	 data: cases,
+											            'table-row-id-key': 'ticketId',
+											            'column-keys': supportTicketColumns
+												        }">
+											        <mdt-header-row>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Ticket No."><span>Ticket No.</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Date"><span>Date</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Created By"><span>Created By</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Assigned To"><span>Assigned To</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Status"><span>Status</span></mdt-column>
+											            <mdt-column align-rule="left" column-sort="true" column-definition="Description"><span>Description</span></mdt-column>
+											            
+											        </mdt-header-row>
+											        
+											        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+											        <mdt-custom-cell column-key="ticketId">
+											        	<a href ng-click='clientScope.editCase(value)' style="text-decoration: underline;color: blue">{{ value }}</a>
+											        </mdt-custom-cell>
+											       
+									    		</mdt-table>
+								
+									<!-- <table class="payAdd_table_ticket">
+										<thead>
+											<tr>
+												<th class="method-num">Ticket No.</th>
+												<th class="method-num">Date</th>
+												<th class="method-num">Created By</th>
+												<th class="method-num">Assigned To</th>
+												<th class="method-num">Status</th>
+												<th class="method-num">Description</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="paymethod_ticket_item"
+												ng-repeat="caseItem in cases">
+												<td class="method-num"><span class="m-method-t">Ticket
+														No.: </span>
+													<p>
+														<a href ng-click='editCase(caseItem)'>{{
+															caseItem.ticketId }}</a>
+													</p></td>
+												<td class="method-num"><span class="m-method-t">Date:
+												</span>
+													<p>{{ caseItem.createdOn }}</p></td>
+												<td class="method-num"><span class="m-method-t">Created
+														By: </span>
+													<p>{{ caseItem.createdByName }}</p></td>
+												<td class="method-num"><span class="m-method-t">Assigned
+																		To: </span>
+																	<p>{{ caseItem.assignedToName }}</p></td>
+												<td class="method-num"><span class="m-method-t">Status:
+												</span>
+													<p>{{ caseItem.statusDesc }}</p></td>
+												<td class="method-num"><span class="m-method-t">Description:
+												</span>
+													<p>{{ caseItem.description }}</p></td>
+											</tr>
+										</tbody>
+									</table> -->
+								</div>
+
+								<div
+									class="col-sm-12 col-md-12 margin-20tb text-right ticket_tt">
+									Ticket id: <strong>{{caseItem.ticketId }}</strong> | Status: <a
+										ng-class="{'open-t': caseItem.statusDesc === 'Open', 'close-t': caseItem.statusDesc === 'Closed'}">{{caseItem.statusDesc}}</a>
+								</div>
+
+								<div class="col-sm-12 col-md-12 yello-div support_ticket">
+									<div class="open-t" ng-if="message">{{ message }}</div>
+									<div class="row ocr-error" ng-show="errors.length > 0">
+										<div class="col-xs-12">
+											<div class="alert fade in alert-danger">
+												<a class="close close-error" style="font-size: 15px;"
+													href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+												<h4>Error</h4>
+												<ul class="msg-ul">
+													<li ng-repeat="error in errors track by $index">{{
+														error.msg }}</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<!-- Warning Messages -->
+									<div class="row ocr-warning" ng-show="warnings.length > 0">
+										<div class="col-xs-12">
+											<div class="alert fade in">
+												<a class="close" style="font-size: 15px;"
+													href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+												<strong>Warning!</strong>
+												<ul class="msg-ul">
+													<li ng-repeat="warning in warnings track by $index">
+														{{ warning }}</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+									<!-- Info Messages -->
+									<div class="row ocr-info" ng-show="infos.length > 0">
+										<div class="col-xs-12">
+											<div class="alert fade in alert-info">
+												<a class="close" style="font-size: 15px;"
+													href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+												<strong>Information!</strong>
+												<ul class="msg-ul">
+													<li ng-repeat="info in infos track by $index">{{ info
+														}}</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<!-- user form -->
+									<form name="supportTicket" id="supportTicket" method="post"
+										action="#supportTicket" class="af-user row">
+										<div class="col-sm-8 col-md-8 sup_bor">
+										
+										
+											<div class="col-sm-6 col-md-6">
+														
+											<div class=" af-outer af-required clearfix" style="margin-top: 8%">
+												<div class="form-group">
+													<div class="col-sm-4 enti_tt_alig">
+														<label for="description">Description:</label>
+													</div>
+													<div class="col-sm-8">
+														<input ng-model="caseItem.description" type="text"
+															name="description" id="description" placeholder="" value=""
+															size="30" data-toggle="tooltip"
+															title="Description is required"
+															class="form-control placeholder" />
+													</div>
+												</div>
+											</div>
+											<div class=" af-outer af-required clearfix">
+												<div class="form-group">
+													<div class="col-sm-4 enti_tt_alig">
+														<label for="category_tt">Category:</label>
+													</div>
+
+													<div class="col-sm-8 pad_6lr">
+														<div class="form-group selectpicker-wrapper">
+															<select class="form-control" id="card_year"
+																data-live-search="false" data-width="100%"
+																		data-toggle="tooltip" title="Year"
+																		ng-model="caseItem.selectedProduct"
+																		class="form-control placeholder"
+																		ng-options="productitem as productitem.product for productitem in products track by productitem.product">
+																		<option value="" label="Select Product"></option>
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class=" af-outer af-required clearfix">
+														<div class="form-group">
+															<div class="col-sm-4 enti_tt_alig"></div>
+															<div class="col-sm-8 pad_6lr">
+																<div class="form-group selectpicker-wrapper">
+																	<select class="form-control" id="card_year"
+																		data-live-search="false" data-width="100%"
+																		data-toggle="tooltip" title="Year"
+																		ng-model="caseItem.selectedSubProduct"
+																		class="form-control placeholder"
+																		ng-options="subproductitem as subproductitem.displayName for subproductitem in caseItem.selectedProduct.subproduct track by subproductitem.displayName">
+																		<option value="" label="Select Sub-Product"></option>
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class=" af-outer af-required clearfix">
+														<div class="form-group">
+																	<div class="col-sm-4 enti_tt_alig">
+																		<label for="priority">Priority:</label>
+																	</div>
+																	<div class="col-sm-8 pad_6lr">
+																		<div class="form-group selectpicker-wrapper">
+																			<select class="form-control" id="card_year"
+																				data-live-search="false" data-width="100%"
+																				data-toggle="tooltip" title="Year"
+																				ng-model="caseItem.priority" name="priority"
+																				class="form-control placeholder">
+																				<option value="" selected>Select</option>
+																				<option value="H" selected>High</option>
+																				<option value="M" selected>Medium</option>
+																				<option value="L" selected>Low</option>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+															</div>
+											</div>
+											
+											<div class="col-sm-6 col-md-6">
+																								
+										
+
+											<div class=" af-outer af-required clearfix">
+												<div class="form-group">
+														<div class="col-sm-12">
+														<div class="text_cent"><label for="newMessage">Send a Message</label>	</div>
+														
+														<textarea ng-model="caseItem.newMessage" name="newMessage"
+															id="newMessage" rows="4" cols="50" data-toggle="tooltip"
+															title="" class="form-control placeholder"
+															data-original-title="Message is required"></textarea>
+													</div>			
+
+												</div>
+											</div>										
+												</div>
+											
+										
+										
+
+
+											
+
+										</div>
+										
+										<!--  second column -->
+										<div class="col-sm-4 col-md-4">
+											
+											<div class=" af-outer af-required clearfix">
+												<div class="form-group">
+														
+													<div class="col-sm-12">
+													<div class=" text_cent col_orange font_18px">Message Log</div>
+														
+														<div class="msg_log">
+															<ul>
+																<li ng-repeat="messageItem in caseItem.messages"><strong>{{messageItem.messageByName}}
+																		({{messageItem.messageOn}}) </strong>: {{messageItem.message}}
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										
+											
+											<div class="col-sm-12 col-md-12 text-right">
+												<div class="col-sm-3 enti_tt_alig "></div>
+												<div class="col-sm-9 ">
+												
+													<div ng-hide="caseItem.status == 'C'">
+														<input type="button" name="Submit" value="Save"
+															ng-click="saveCase()" id="user_btn" class="btn-sub">
+														<input type="button" name="Checkout" value="Reset"
+															ng-click="reset()" class="btn-sub"> 
+														<input
+															type="button" name="Checkout" value="Close"
+															ng-click="closeCase('C')" class="btn-sub">
+													</div>
+													
+													<div ng-show="caseItem.status == 'C'">														
+														<input
+															type="button" name="Checkout" value="Open"
+															ng-click="closeCase('O')" class="btn-sub">
+													</div>
+												</div>
+											</div>
+										
+										</div>
+
+									</form>
+									<!-- /user form -->
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row margin-top30 clearfix"></div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '70px'}, {index: 2, width: '90px'}, {index: 3, width: '110px'}, {index: 4, width: '110px'}, 
+		                {index: 5, width: '70px'}, {index: 6, width: '170px'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>

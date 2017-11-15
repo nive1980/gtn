@@ -1,0 +1,188 @@
+<div class="row shipment_menu">			
+
+		<div class="hidden_fields">
+			<input type="hidden" name="id" ng-model="shipment.id" />
+		</div>
+
+		<div class="col-xs-10">	
+			<ul class="nav2" style="margin-left: -4px !important;">
+				<li>
+					<a href="#createNewShipment">Shipment</a>
+				</li>
+				<li ng-class="{'hover':hovering}" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false" class="active" id="parties"><a href="javascript:void(0)" class="parent2" style="margin-right: 7px">Parties</a>
+				<!-- <li class="active" uib-dropdown on-toggle="toggled(open)" id="parties">
+					<a href="javascript:void(0)" class="parent2" style="margin-right: 7px" id="simple-dropdown" uib-dropdown-toggle>
+						Parties
+					</a>				
+				 -->
+					<ul class="parent2-content" class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+						<li class="active" ><a href="#/createExporter" >Exporter </a></li>
+						<li><a href="#/utlimateConsignee" >Ultimate Consignee</a></li>
+						<li><a href="#/intermediateConsignee" >Intermediate Consignee</a></li>
+			            <li><a href="#/freightForwarder" >Freight Forwarder</a></li>
+					</ul>
+				</li>
+				<li id="billing" ><a href="#/shipmentBilling">Billing & Terms</a>									
+				</li>
+				
+				<li ng-class="{'hover':itemshovering}" ng-mouseenter="itemshovering=true" ng-mouseleave="itemshovering=false" id="listItemsCartons"><a href="#/listItemCartons" class="parent2" style="margin-right: 7px">Item & Cartons</a>
+					<ul class="parent2-content">
+						<li><a href="javascript:void(0)" ng-click="addItem(shipment, null, null, false, null)">Item</a></li>
+						<li><a href="javascript:void(0)" ng-click="addCarton(shipment, null, null, false, null)">Cartons</a></li>
+					</ul>
+				</li>
+				
+				<li id="bookingCustoms"><a href="#/bookingCustomFiling">Booking/Customs</a></li>				
+				<li id="documents"><a href="#/shipmentDocument" >Documents</a></li>
+					
+			</ul>
+			
+			<div class="col-sm-6 col-md-6 wel_tt wel_colo margin-top10 no_pad" style="margin-top: 20px">
+                <div class="">
+                     <span class="head strong">{{ page_title }}</span>
+                </div>               
+            </div>
+            
+            <div class="col-sm-6 col-md-6 wel_tt margin-top10 text-right bold-text" style="padding-right: 15%;">
+            	<div>
+            		Shipment no : <span class="blue">{{ shipment.shipmentNo }}</span>
+            	</div>
+            	<div>
+            		Status : <span class="blue">{{ shipment.status | shipmentStatusDescription }}</span>
+            	</div>
+            </div>
+            
+		</div>
+		
+		<div class="col-sm-2 col-md-2 text-right" style="margin-top: -20px">
+				
+			    	<div class="shipment-validation-icons" title="WLS validations" ng-click="showWlsScreenPopup(shipment.id, 'ultConsignee')">
+			    			<span ng-if="shipment.screeningStatus == 'A'">
+							    <i class="fa fa-user limegreen" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.screeningStatus == 'O'">
+							    <i class="fa fa-user yellow" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.screeningStatus == 'H'">
+							    <i class="fa fa-user red" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.screeningStatus == 'D'">
+							    <i class="fa fa-user orange" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.screeningStatus != 'A' && shipment.screeningStatus != 'H' 
+										&& shipment.screeningStatus != 'O' && shipment.screeningStatus != 'D' ">
+							    <i class="fa fa-user" aria-hidden="true"></i>
+							</span>
+							
+			    	</div>
+			    	<div class="shipment-validation-icons" title="License Screening validations" ng-click="showLicenseScreenPopup(shipment.id)">
+			    			<span ng-if="shipment.lsStatus == 'N'">
+							    <i class="fa fa-legal limegreen" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.lsStatus == 'Y'">
+							    <i class="fa fa-legal red" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.lsStatus =='NA'">
+							    <i class="fa fa-legal light-yellow" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.lsStatus === null">
+							    <i class="fa fa-legal" aria-hidden="true"></i>
+							</span>
+							<input type="text" ng-model="shipment.screeningStatus" class="hidden" />
+			    	</div>
+			    	<div class="shipment-validation-icons" title="AES validations( {{shipment.easeStatus}} )" ng-click="showAesValidations(shipment.id)">
+			    			<i style="margin-top: 17%" class="fa fa-file-text-o fa-2" aria-hidden="true"></i>
+			    	</div>
+			    	
+			    	<div class="shipment-validation-icons" title="AES response" ng-click="showAesAudit(shipment)">
+			    			<span ng-if="shipment.easeStatus == 'received'">
+							    <i style="margin-top: 17%" class="fa fa-tags fa-2 lightcoral" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.easeStatus == 'pending' || shipment.easeStatus == 'submitted' || shipment.easeStatus == 'viewed'">
+							    <i style="margin-top: 17%" class="fa fa-tags fa-2" aria-hidden="true"></i>
+							</span>
+			    			
+			    	</div>
+			    	
+			    	<div class="shipment-validation-icons" title="Generate Document" ng-click="generateShipmentDocPopup(shipment.id)">
+			    			<i style="margin-top: 17%" class="fa fa-file-pdf-o fa-2" aria-hidden="true"></i>
+			    	</div>
+		</div>
+		
+		<!-- <div class="col-sm-3 col-md-3 text-right">
+				<div class="ship_icon">
+	                      <a href="javascript:void(0)"><span class="ship_big ship_icn_img flt_l" ></span>
+                          	WLS
+                          	<span ng-if="shipment.screeningStatus == 'A' || shipment.screeningStatus == 'O'">
+							    <i class="fa fa-check-circle-o green" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.screeningStatus == 'H'">
+							    <i class="fa fa-exclamation-circle red" aria-hidden="true"></i>
+							</span>
+                          </a>		
+                          <input type="text" ng-model="shipment.screeningStatus" class="hidden" />                            
+			    </div>
+                      <div class="ship_icon" ng-click="showLicenseScreenPopup(shipment.id)">
+	                      <a href="javascript:void(0)"><span class="ship_big ship_icn_img2 flt_l" ></span>
+                          	LS
+                          	<span ng-if="shipment.lsStatus == 'No'">
+							    <i class="fa fa-check-circle-o green" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.lsStatus == 'Yes'">
+							    <i class="fa fa-exclamation-circle red" aria-hidden="true"></i>
+							</span>
+							<span ng-if="shipment.lsStatus === null">
+							    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+							</span>
+                          </a>		                            
+			    	</div>
+			    	<div class="shipment-validation-icons" title="AES validations" ng-click="showAesValidations(shipment.id)">
+			    			<i style="margin-top: 17%" class="fa fa-file-text-o fa-2" aria-hidden="true"></i>
+			    	</div>
+		</div> -->
+</div>
+
+<hr>
+
+    <!-- Error Messages -->
+    <div class="row ocr-error" ng-show="errors.length > 0">			
+		<div class="col-xs-12">				
+			<div class="alert fade in alert-danger">
+				<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+				<h4>Error</h4>
+				<ul class="msg-ul">
+					<li ng-repeat="error in errors track by $index">
+            			{{ error.msg }}
+            		</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	      
+      <!-- Warning Messages -->
+      <div class="row ocr-warning" ng-show="warnings.length > 0">
+        <div class="col-xs-12">
+          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+            <h4>Warning</h4>
+            <ul class="msg-ul">
+            	<li ng-repeat="warning in warnings track by $index">
+            		{{ warning.msg }}
+            	</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+	      
+      <!-- Info Messages -->
+      <div class="row ocr-info" ng-show="infos.length > 0">
+        <div class="col-xs-12">
+          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+            <h4>Information</h4>
+            <ul class="msg-ul">
+            	<li ng-repeat="info in infos track by $index">
+            		{{ info.msg }}
+            	</li>
+            </ul>
+          </div>
+        </div>
+      </div>

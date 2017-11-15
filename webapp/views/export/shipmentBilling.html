@@ -1,0 +1,424 @@
+<div ng-init="parentInit('billing');initBilling()" ng-controller="exportOperationCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+      <!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">						
+		 <div class="box visible">
+			  
+		   <div ng-include src="'views/export/menu.html'"></div>
+		   			   
+            <div class="col-sm-12 col-md-12 margin-bottom no_pad response_info">
+            	    	
+            	 <!-- user form -->
+         	          <form name="billingForm" class="af-user row">
+           	               
+           	               		<div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Biling</h4>
+		                        </div>
+		                        
+		                        <div class="col-sm-5 col-md-5">
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="pay_term">Payment Terms:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="pay_term" id="pay_term" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Payment terms is required"
+		                                                class="form-control placeholder" ng-model="shipment.paymentTerms"/>                            
+		                                             </div>
+		                                    </div>
+		                                </div>
+		                                            
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="inco_term">Inco Terms:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="inco_term" id="inco_term" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Inco terms is required"
+		                                                class="form-control placeholder" ng-model="shipment.incoTerms"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div> 
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="currency">Currency:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7 autosuggest">
+		                                            	
+			                                            <input
+			                                                type="text" name="currency" id="currency" uib-typeahead="currency as currency.description for currency in getCurrency($viewValue)"
+			                                                data-toggle="tooltip" title="Currency is required"
+			                                                class="form-control placeholder" ng-model="shipment.currency"
+			                                                typeahead-template-url="currencyTmpl.html"
+			                                                typeahead-editable="false" 
+			                                                typeahead-min-length="0"
+			                                                typeahead-on-select="onCurrencySelect($item, $model, $label, 'currency',shipment)" autocomplete="off"/>
+		                                                
+		                                             <!-- <md-autocomplete
+												          ng-disabled="false"
+												          md-no-cache="false"
+												          md-selected-item="selectedItem"
+												          md-search-text-change="searchTextChange(searchText)"
+												          md-search-text="searchText"
+												          md-selected-item-change="selectedItemChange(item)"
+												          md-items="item in querySearch(searchText)"
+												          md-item-text="item.display"
+												          md-min-length="0"
+												          placeholder="Currency">
+												        <md-item-template>
+												          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+												        </md-item-template>
+												        <md-not-found>
+												          No currency matching "{{ctrl.searchText}}" were found.
+												          <a ng-click="newState(searchText)">Create a new one!</a>
+												        </md-not-found>
+												        <bind-property name="md-selected-item" ng-model="shipment.currency">
+												      </md-autocomplete> -->   
+		                                                                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="convers">Conversion Rate:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" name="convers" id="convers" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Conversion rate is required" min="0"
+		                                                class="form-control placeholder" ng-model="shipment.conversionRate" step="any" />                            
+		                                             </div>
+		
+		                                     </div>
+		                                </div>
+		                                
+	                                <div class=" af-outer af-required clearfix">
+		                                <div class="form-group">                
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="po_num">PO Number:</label> 
+		                                        </div>
+		                                        <div class="col-sm-7">
+		                                        <input
+		                                            type="text" name="po_num" id="po_num" placeholder="" value="" size="30"
+		                                            data-toggle="tooltip" title="PO number is required"
+		                                            class="form-control placeholder" ng-model="shipment.poNumber"/>                            
+		                                         </div>
+		                                </div>
+		                            </div>
+		                            
+		                            
+		                             <div class=" af-outer af-required clearfix">
+		                                <div class="form-group">                
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="shipment_value">Shipment Value:</label> 
+		                                        </div>
+		                                        <div class="col-sm-7">
+		                                        <input
+		                                            type="number" step="any" name="shipmemntValue" id="shipmemntValue" placeholder="" value="" size="30"
+		                                            data-toggle="tooltip" title="Shipment Value is required"
+		                                            class="form-control placeholder" ng-model="shipment.shipmentValue"/>                            
+		                                         </div>
+		                                </div>
+		                            </div>
+		                                
+		                        </div>
+		                                                    
+		                        <div class="col-sm-7 col-md-7 ">
+		                            <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="drop_ship">Is this a Drop Shipment:</label> 
+		                                            </div>
+		                                            <div class="col-sm-6 radio_mar-ship no_pad"> 
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center ">
+		                                                        <input id="drop_ship" type="radio" name="drop_ship" value="Y" ng-model="shipment.dropShipment">                                
+		                                                        <label for="drop_ship">Yes</label>                                    
+		                                                    </div>
+		                                                 </div>
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center">
+		                                                            <input id="drop_shipno" type="radio" name="drop_ship" value="N" ng-model="shipment.dropShipment">
+		                                                            <label for="drop_shipno">No</label>
+		                                                    </div>
+		                                                 </div>                         
+		                                            </div>
+		                                    </div>
+		                                </div>
+		                            
+		                            <div class=" af-outer af-required clearfix">                
+		                                <div class="form-group ">
+		                                    <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="shipto">Ship to:</label> 
+		                                        </div>
+		                                        <div class="col-sm-6 radio_mar-ship no_pad"> 
+		                                                 <div class="col-sm-12">
+		                                                    <div class="form-group af-inner text-center ">
+		                                                        <input id="shipto" type="radio" name="shipto" value="UC" ng-model="shipment.shipTo">                                
+		                                                        <label for="shipto">Ultimate Consignee</label>                                    
+		                                                    </div>
+		                                                 </div>
+		                                                 <div class="col-sm-12">
+		                                                    <div class="form-group af-inner text-center">
+		                                                            <input id="shipto_ic" type="radio" name="shipto" value="IC" ng-model="shipment.shipTo">
+		                                                            <label for="shipto_ic">Intermediate Consignee</label>
+		                                                    </div>
+		                                                 </div>                         
+		                                            </div>
+		                                 </div>
+		                            </div>              
+		                            <div class=" af-outer af-required clearfix">
+		                                <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="bill_to">Bill to:</label> 
+		                                        </div>
+		                                        <div class="col-sm-6 radio_mar-ship no_pad"> 
+		                                                 <div class="col-sm-12">
+		                                                    <div class="form-group af-inner text-center ">
+		                                                        <input id="bill_to" type="radio" name="bill_to" value="UC" ng-model="shipment.billTo">                                
+		                                                        <label for="bill_to">Ultimate Consignee</label>                                    
+		                                                    </div>
+		                                                 </div>
+		                                                 <div class="col-sm-12">
+		                                                    <div class="form-group af-inner text-center">
+		                                                            <input id="bill_toic" type="radio" name="bill_to" value="IC" ng-model="shipment.billTo">
+		                                                            <label for="bill_toic">Intermediate Consignee</label>
+		                                                    </div>
+		                                                 </div>                         
+		                                            </div>
+		                                </div>
+		                            </div>            
+		                            <div class=" af-outer af-required clearfix">
+		                                <div class="form-group">                
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="mode_trans">Mode of Transportation: </label> 
+		                                        </div>
+		                                        <div class="col-sm-7 autosuggest autosuggest100">
+			                                        <input 
+			                                        	uib-typeahead="mot as mot.motId for mot in getMot($viewValue)"
+			                                            typeahead-template-url="mot.html" 
+			                                            typeahead-editable="false" 
+		                                                typeahead-min-length="0"
+		                                                typeahead-on-select="onMotSelect($item, $model, $label, 'modeOfTransport', 'modeOfTransportCode',shipment)"
+			                                            type="text" name="mode_trans" id="mode_trans" placeholder="" value="" size="30"
+			                                            data-toggle="tooltip" title="Mode of Transportation is required"
+			                                            class="form-control placeholder left-inp" ng-model="shipment.modeOfTransport" autocomplete="off"/>     
+			                                            
+													<input ng-show="true"
+			                                            type="text" size="10" readonly="true" 
+			                                            class="form-control placeholder right-inp" ng-model="shipment.modeOfTransportCode"/>		                                                                   
+		                                                                   
+		                                         </div>
+		                                </div>
+		                            </div>
+		                            
+		                        <!-- /User form Left part -->
+		                        </div>
+		
+		                        <div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Terms</h4>
+		                        </div>
+		
+		                        <div class="col-sm-6 col-md-6">
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="fc_paid">Freight Charges Paid By:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="fc_paid" id="fc_paid" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Freight Charges Paid  is required"
+		                                                class="form-control placeholder" ng-model="shipment.freightChargesPaidBy"/>                            
+		                                             </div>
+		                                    </div>
+		                                </div>
+		                                            
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="fv_paid">Foreign VAT Paid By:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="fv_paid" id="fv_paid" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Foreign VAT Paid  is required"
+		                                                class="form-control placeholder" ng-model="shipment.foreignVatPaidBy"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div> 
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="cd_paid">Customs Duty Paid By:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="cd_paid" id="cd_paid" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Customs Duty Paid is required"
+		                                                class="form-control placeholder" ng-model="shipment.customDutyPaidBy"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                                                
+		                        </div>
+		                                                    
+		                        <div class="col-sm-6 col-md-6 clearfix">
+		                            <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="scpe">Shipment contains Personal Effects:</label> 
+		                                            </div>
+		                                            <div class="col-sm-6 radio_mar-ship no_pad"> 
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center ">
+		                                                        <input id="scpe" type="radio" name="scpe" value="Y" ng-model="shipment.containPersonalEffect">                                
+		                                                        <label for="scpe">Yes</label>                                    
+		                                                    </div>
+		                                                 </div>
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center">
+		                                                            <input id="scpeno" type="radio" name="scpe" value="N" ng-model="shipment.containPersonalEffect">
+		                                                            <label for="scpeno">No</label>
+		                                                    </div>
+		                                                 </div>                         
+		                                            </div>
+		                                    </div>
+		                                </div>
+		                            
+		                            <div class=" af-outer af-required clearfix">                
+		                                <div class="form-group ">
+		                                    <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="ins_req">Insurance Required:</label> 
+		                                        </div>
+		                                        <div class="col-sm-6 radio_mar-ship no_pad"> 
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center ">
+		                                                        <input id="ins_req" type="radio" name="ins_req" value="Y" ng-model="shipment.insuranceRequired">                                
+		                                                        <label for="ins_req">Yes</label>                                    
+		                                                    </div>
+		                                                 </div>
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center">
+		                                                            <input id="ins_reqno" type="radio" name="ins_req" value="N" ng-model="shipment.insuranceRequired">
+		                                                            <label for="ins_reqno">No</label>
+		                                                    </div>
+		                                                 </div>                         
+		                                            </div>
+		                                 </div>
+		                            </div>
+		                            
+		                        <!-- /User form Left part -->
+		                        </div>
+		
+		                        <div class="col-sm-12 col-md-12 clearfix " >
+			                        <h4 class="margin10-top strong">Transaction Charges</h4>
+		                        </div>
+		
+		                        <div class="col-sm-6 col-md-6">
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="charge_des">Charge Description:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="text" name="charge_des" id="charge_des" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Charge description is required"
+		                                                class="form-control placeholder" ng-model="shipment.chargeDesc"/>                            
+		                                             </div>
+		                                    </div>
+		                                </div>
+		                                            
+		                                <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                        <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="amount">Amount:</label> 
+		                                            </div>
+		                                            <div class="col-sm-7">
+		                                            <input
+		                                                type="number" name="amount" id="amount" placeholder="" value="" size="30"
+		                                                data-toggle="tooltip" title="Amount is required" min="0"
+		                                                class="form-control placeholder" ng-model="shipment.chargeAmt" step="any"/>                            
+		                                             </div>
+		                                     </div>
+		                                </div>
+		                                
+		                        </div>
+		                                                    
+		                        <div class="col-sm-6 col-md-6 ">
+		                            <div class=" af-outer af-required clearfix">
+		                                    <div class="form-group">
+		                                            <div class="col-sm-5 enti_tt_alig">
+		                                            <label for="charge_cus">Charge to Customer:</label> 
+		                                            </div>
+		                                            <div class="col-sm-6 radio_mar-ship no_pad"> 
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center ">
+		                                                        <input id="charge_cus" type="radio" name="charge_cus" value="Y" ng-model="shipment.chargeToCustomer">                                
+		                                                        <label for="charge_cus">Yes</label>                                    
+		                                                    </div>
+		                                                 </div>
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center">
+		                                                            <input id="charge_cusno" type="radio" name="charge_cus" value="N" ng-model="shipment.chargeToCustomer">
+		                                                            <label for="charge_cusno">No</label>
+		                                                    </div>
+		                                                 </div>                         
+		                                            </div>
+		                                    </div>
+		                                </div>
+		                            
+		                            <div class=" af-outer af-required clearfix">                
+		                                <div class="form-group ">
+		                                    <div class="col-sm-5 enti_tt_alig">
+		                                        <label for="print_doc">Print on Documents:</label> 
+		                                        </div>
+		                                        <div class="col-sm-6 radio_mar-ship no_pad"> 
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center ">
+		                                                        <input id="print_doc" type="radio" name="print_doc" value="Y" ng-model="shipment.printOnDoc">                                
+		                                                        <label for="print_doc">Yes</label>                                    
+		                                                    </div>
+		                                                 </div>
+		                                                 <div class="col-sm-6">
+		                                                    <div class="form-group af-inner text-center">
+		                                                            <input id="print_docno" type="radio" name="print_doc" value="N" ng-model="shipment.printOnDoc">
+		                                                            <label for="print_docno">No</label>
+		                                                    </div>
+		                                                 </div>                         
+		                                            </div>
+		                                 </div>
+		                            </div> 
+		                        <!-- /User form Left part -->
+		                        </div>
+		
+		
+								<div class="clearfix"></div>
+		
+		                        <div class="col-sm-6 col-md-6 margin-10tb clearfix" >
+		                            <div>		                            	
+		                            	<input type="button" name="Next" value="Next" ng-click="saveShipment('continue', 'shipmentBilling')" id=" " class="btn btn-license">
+		                                <input type="submit" name="Save Shipment" value="Save shipment" ng-click="saveShipment('save', 'shipmentBilling')" id="btn-license" class="btn btn-license">
+		                                <input type="button" name="Cancel" value="Cancel" ng-click="cancelShipment(shipment.id, 'freightForwarder')" id=" " class="btn btn-black">
+		                            </div>
+		                        </div>                             
+                                </form>
+                   <!-- /user form -->
+            	
+            </div>
+       			   
+			   <!-- <div>
+			   		<div ng-view></div>
+			   </div> -->
+			                        
+         </div>         
+       </div>
+     </div>
+</div>

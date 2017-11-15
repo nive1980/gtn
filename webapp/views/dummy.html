@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<style type="text/css">
+table td {
+	padding: 5px;
+}
+
+input[type="radio"] {
+	position: relative;
+	top: 2px;
+}
+
+.form-table tr td:nth-child(odd) {
+	font-weight: bold;
+}
+
+.result-div {
+	max-height: 300px;
+	overflow: auto;
+	border: 1px solid black;
+	padding: 5px;
+	min-height: 250px;
+	border-radius: 4px;
+}
+</style>
+
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script type="text/javascript">
+
+ function loadFile(o)
+       {
+         var fr = new FileReader();
+         fr.onload = function(event)
+           {
+            showDataFile(event, o);
+           };
+          fr.readAsText(o.files[0]);
+           }
+
+    function showDataFile(event, o)
+      {
+      document.getElementById("result-container").innerText = event.target.result;
+      var textByLine = event.target.result.split('\n');
+            console.log(textByLine);
+            console.log(textByLine.length);
+      }
+
+  $(document).ready(function(){
+
+    $('#search').click(function(){
+      var error = "";
+
+      if($('input[name=links]').val() == ''){
+          alert('Please attach file.');
+          return;
+        }
+        if($('input[name=tagName]').val() == ''){
+          alert('Please enter tag name.');
+          return;
+        }
+        if($("input[name='searchType']:checked").length == 0){
+          alert('Please select search type.');
+          return;
+        }
+        if($("input[name='searchType']:checked"). val() == 'attr' && $('input[name=attributeName]').val() == ''){
+          alert('Please enter attribute name.');
+          return;
+        }
+        if($("input[name='searchType']:checked"). val() == 'word' && $('input[name=wordSearch]').val() == ''){
+          alert('Please enter word.');
+          return;
+        }  
+        if(error != ''){
+          alert(error);
+        }
+        else{
+            
+            var tagName = $('input[name=tagName').val();
+            console.log(tagName);
+            var searchType = $("input[name='searchType']:checked"). val();
+            console.log(searchType);
+            var attributeName = $('input[name=attributeName').val();
+            console.log(attributeName);
+            var wordSearch = $('input[name=wordSearch').val();
+            console.log(wordSearch);
+
+          for (var i = 0; i < textByLine.length; i++)
+          
+          {  
+            console.log(textByLine);
+         
+
+            $.ajax({
+              url: textByLine[i],
+              cache: false,
+              type: "GET",
+              dataType: "html",
+              responseType: "html",
+
+              beforeSend: function(){
+                $('#result-container').html('<img src="loader.gif" />');
+              },
+
+              success: function (data) {
+                var wrapped = $("<div>" + data + "</div>");
+                wrapped.find('script').remove();
+                wrapped.find('noscript').remove();
+                wrapped.find('style').remove();
+
+              var filteredHtml = $(wrapped).html();
+              var StrippedString = filteredHtml.replace(/(<([^>]+)>)/ig,"")//remove html tags
+              var wordsArr = StrippedString.split(' ');
+              var found = $(tagName, data);
+              var filtered = $(data).filter(tagName);
+              var result1 = "";
+              var concat = ""; 
+
+               var count = 0;
+
+                if(searchType == 'word'){
+                   //var count=1;
+                  for(var i = 0; i<wordsArr.length; i++){
+                      if(wordsArr[i].toUpperCase()==(wordSearch.toUpperCase())){
+                        count++;
+                          }
+                       }
+                       var a = count;
+                       console.log(a);
+                    // result1 = wordSearch + " - " + concat;
+                     //console.log(result1);
+                   }
+
+                 else if(searchType == 'attr'){
+                    var count=1;
+                    $.each(found, function(i, v){
+                      if($(v).attr(attributeName))
+                         result1 = result1 + "<i>"+ count++ +")  </i>"+$(v).attr(attributeName)+"<BR />";
+                    });
+                    $.each(filtered, function(i, v){
+                     if($(v).attr(attributeName))
+                        result1 = result1 + "<i>"+ count++ +")  </i>"+$(v).attr(attributeName)+"<BR />";  
+                    });
+                  }
+                  
+              else{
+                    var count=1;
+                    $.each(found, function(i, v){
+                        result1 = result1 + "<i>"+ count++ +")  </i>"+$(v).text()+"<BR />";   
+                    });
+                    $.each(filtered, function(i, v){
+                      if($(v).text())
+                         result1 = result1 + "<i>"+ count++ +")  </i>"+$(v).text()+"<BR />";
+                    });
+                  }
+
+              $('#result-container').html(result1);
+                console.log(result1);
+                },
+
+                error: function(error){
+                	$('#result-container').html('Error getting data : '+JSON.stringify(error));  
+                }
+              });//ajax call
+             
+           }//for loop
+
+         }//else if no errors
+    });
+
+   $('input[name="searchType"]').change(function(){
+      if($(this).val() == 'attr'){
+        $('.searchType-tr').show();
+      }
+
+      else if ($(this).val() == 'word') {  
+        $('.searchType-word').show();
+       }
+      else{
+        $('.searchType-tr').hide();
+        $('.searchType-word').hide();
+        }
+    }); 
+      $('.searchType-tr').hide(); 
+      $('.searchType-word').hide();         
+ }); 
+
+</script>
+</head>
+<body>
+	<div style="padding: 5px;">
+		<h2>Search</h2>
+		<hr>
+		<br>
+		<table style="width: 70%" class="form-table">
+
+			<tbody>
+				<tr>
+					<td><input type="file" onchange="loadFile(this)" /></td>
+				</tr>
+				<tr>
+					<td>Tag Name</td>
+					<td><input name="tagName" placeholder="Tag Name" /></td>
+				</tr>
+				<tr>
+					<td>Search Type</td>
+					<td><input type="radio" name="searchType" value="content" />Content
+						| <input type="radio" name="searchType" value="attr" />Attribute
+						| <input type="radio" name="searchType" value="word" />Word</td>
+				</tr>
+				<tr class="searchType-tr">
+					<td>Attribute Name</td>
+					<td><input type="text" name="attributeName"
+						placeholder="Attribute Name" /></td>
+				</tr>
+				<tr class="searchType-word">
+					<td>Word Search</td>
+					<td><input type="text" name="wordSearch" placeholder="Word" /></td>
+				</tr>
+				<tr>
+					<td><button type="button" id="search">SEARCH</button></td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+		<h2>Result1</h2>
+		<hr>
+		<br>
+		<div id="result-container" class="result-div"></div>
+	</div>
+</body>
+</html>

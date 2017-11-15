@@ -1,0 +1,249 @@
+<div ng-init="initResultExporter()" ng-controller="masterCtlr" class="container-fluid no_pad">                   
+    <div class="col-sm-12 col-md-12 margin-bottom no_pad" >                   
+          	<!-- TOVAR INFORMATION -->
+	  <div class="tovar_information">
+						
+		<div class="box visible">
+			<div class="col-sm-12 col-md-12 blue-div" >
+                <div class="" >
+                     <h1>Result Exporter</h1>
+                </div>
+                <hr>
+				<!-- Contact login form -->
+				<!--<form id="registration-form" name="registration-form" class="registration-form" action="#" method="post"> -->
+		        <form name="entity-form" id="entity-form" class="af-entity" novalidate>
+			   		
+			   		<!-- <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editExporter(exporter.expCode, 'New')" class="btn btn-license">Add Exporter</button>
+		            		<button gtn-click="/createSearchExporter" class="btn btn-license">New Search</button>		            		
+		            	</div>
+		            </div> -->
+		            
+		            <div class="row btn-row">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editExporter(exporter.expCode, 'New')" class="btn btn-license">Add Exporter</button>
+		            		<button gtn-click="/createSearchExporter" class="btn btn-license">New Search</button>		            		
+		            	</div>
+		            	<!-- <div class="col-xs-6 records-container">
+		            		Total records : <span class="bold-text">{{ exporters.length }}</span>
+		            	</div> -->
+		            </div>
+		            
+		            <!-- Error Messages -->
+					    <div class="row ocr-error" ng-show="errors.length > 0">			
+							<div class="col-xs-12">				
+								<div class="alert fade in alert-danger">
+									<a class="close close-error" style="font-size: 15px;" href="javascript:void(0)" ng-click="errors.length = 0">x</a>
+									<h4>Error</h4>
+									<ul class="msg-ul">
+										<li ng-repeat="error in errors track by $index">
+					            			{{ error.msg }}
+					            		</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						      
+					      <!-- Warning Messages -->
+					      <div class="row ocr-warning" ng-show="warnings.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="warnings.length = 0">x</a>
+					            <strong>Warning!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="warning in warnings track by $index">
+					            		{{ warning }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+						      
+					      <!-- Info Messages -->
+					      <div class="row ocr-info" ng-show="infos.length > 0">
+					        <div class="col-xs-12">
+					          <div class="alert fade in alert-info"> <a class="close" style="font-size: 15px;" href="javascript:void(0)" ng-click="infos.length = 0">x</a>
+					            <strong>Information!</strong>
+					            <ul class="msg-ul">
+					            	<li ng-repeat="info in infos track by $index">
+					            		{{ info }}
+					            	</li>
+					            </ul>
+					          </div>
+					        </div>
+					      </div>
+		            
+		            
+		            <div class="row">
+		            	<div class="col-xs-12">
+		            		
+		            		<mdt-table animate-sort-icon="true" ripple-effect="true"
+		            				selectable-rows = "false"
+		            				table-card="{visible: true, title: 'Exporters', columnSelector: true}"	
+							        paginated-rows="{isEnabled: true, rowsPerPageValues: [5,10,20,50]}"
+							        mdt-row-paginator="getExporterList(page, pageSize, options)"
+							        mdt-row-paginator-error-message="Error happened during loading exporters."
+							        mdt-row="{
+							            'table-row-id-key': 'exporterCode',
+							            'column-keys': exporterColumns
+							        }">
+						        <mdt-header-row>
+						        
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Exporter Code"><span>Exporter Code</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Exporter Department"><span>Exporter Department</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="State"><span>State</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Country"><span>Country</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="SBU Code"><span>SBU Code</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Status"><span>Status</span></mdt-column>
+						            <mdt-column align-rule="left" column-sort="true" column-definition="Created Date"><span>Created On</span></mdt-column>
+						            <mdt-column column-definition="Delete"><span>Delete</span></mdt-column>
+						        </mdt-header-row>
+						        
+						        <!-- here you have your own, customised cell for every 'consigneeId' column -->
+						        <mdt-custom-cell column-key="createdOn">
+						        	{{ value | date:'dd/MM/yyyy' }}
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="exporterCode">
+						        	<a href="javascript:void(0);" ng-click="clientScope.editExporter(value, 'Edit')" style="text-decoration: underline">{{ value }}</a>
+						        </mdt-custom-cell>
+						        <mdt-custom-cell column-key="status">
+						        	{{ value | dplStatus }}
+						        </mdt-custom-cell>
+						        
+						        <mdt-custom-cell column-key="delete">						            
+						            <a href="javascript:void(0)" ng-click="clientScope.deleteExporter(value, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						        </mdt-custom-cell>
+        
+						    </mdt-table>
+		            		
+		            	</div>
+		            </div>
+		            
+		            <!-- md data table -->
+		            <!-- <div class="row">
+		            	<div class="col-xs-12">
+		            			<md-toolbar class="md-table-toolbar md-default">
+								  <div class="md-toolbar-tools">
+								    <span>Search Results - Exporter</span>
+								  </div>
+								</md-toolbar>
+								
+								exact table from live demo
+								
+								<md-card class="" style="" ng-init="" ng-controller="exporterResultsController">
+									<md-toolbar class="md-table-toolbar md-default" ng-hide="exportersSelected.length || filter.show" aria-hidden="false" style="">
+									
+										<div class="md-toolbar-tools">
+										    <h2 class="md-title">Exporter</h2>
+										    <div flex="" class="flex"></div>
+										    <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" ng-click="filter.show = true" aria-label="filter_list">
+										      <md-icon class="material-icons">filter_list</md-icon>
+										    <div class="md-ripple-container"></div></button>
+										    <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" ng-click="addItem($event)" aria-label="local_dining">
+										      <md-icon class="material-icons">local_dining</md-icon>
+										    </button>
+										  </div>
+										
+									</md-toolbar>
+									
+									<md-table-container>
+									  <table md-table md-row-select multiple ng-model="exportersSelected" md-progress="exporterPromise">
+									    <thead md-head md-order="exporter.sortBy" md-on-reorder="exporterPagination">
+									      <tr md-row>
+									      	<th md-column>Sr. No.</th>
+									        <th md-column md-order-by="expCode" style="width: 18%"><span>Exporter Code</span></th>
+									        <th md-column md-order-by="expName" style="width: 24%"><span>Exporter Department</span></th>
+									        <th md-column md-order-by="expStateName" style="width: 15%">State</th>
+									        <th md-column md-order-by="expCountryName" style="width: 15%">Country</th>
+									        <th md-column md-order-by="sbu" style="width: 8%">SBU Code</th>
+									        <th md-column md-order-by="status" style="width: 8%">Status</th>
+									        <th md-column style="width: 5%">Copy</th>
+									        <th md-column style="width: 5%">Delete</th>
+									      </tr>
+									    </thead>
+									    <tbody md-body>
+									      <tr md-row md-select="exporter" md-select-id="expCode" md-auto-select ng-repeat="exporter in exporters track by $index">
+									        <td md-cell>{{ $index + 1 }}</td>
+									        <td md-cell><a href="javascript:void(0);" ng-click="editExporter(exporter.expCode, 'Edit')" style="text-decoration: underline">{{ exporter.expCode }}</a></td>
+									        <td md-cell>{{ exporter.expName }}</td>
+									        <td md-cell>{{ exporter.expStateName }}</td>
+									        <td md-cell>{{ exporter.expCountryName }}</td>
+									        <td md-cell>{{ exporter.sbu }}</td>
+									        <td md-cell>{{ exporter.status | dplStatus}}</td>
+									        <td md-cell><span class="m-exp_ship_head">Copy: </span> <a href="javascript:void(0)" ng-click="editExporter(exporter.expCode, 'Copy')"><i class="fa fa-copy" aria-hidden="true"></i></a></td>
+									        <td md-cell><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)" ng-click="deleteExporter(exporter.expCode, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+									      </tr>
+									    </tbody>
+									  </table>
+									</md-table-container>
+									
+									<md-table-pagination md-limit="exporter.limit" md-limit-options="[5, 10, 15, 50]" md-page="exporter.page" md-total="{{exporter.totalCount}}" md-on-paginate="exporterPagination" md-page-select></md-table-pagination>
+			            	
+			            			
+		            			</md-card>
+		            	</div>
+		            </div> -->
+		            
+		            
+		            
+		            
+		            
+		            <!-- <div class="row">
+		            	<div class="col-xs-12">
+		            		<table class="exp_ship_table">
+	                                <thead>
+		                                    <tr>
+		                                        <th class="">Sr. No.</th>
+		                                        <th class="">Exporter Code </th>
+		                                        <th class="">Exporter Department </th>
+		                                        <th class="">Country </th>
+		                                        <th class="">SBU Code </th>
+		                                        <th class="">Status </th>
+		                                        <th class="">Copy</th>
+		                                        <th class="">Delete</th>
+		                                    </tr>
+		                                </thead>
+					                                
+		                                <tbody>
+		                                
+		                                	<tr ng-repeat="exporter in exporters track by $index" class="exp_ship_item">
+		                                		<td> {{ $index + 1 }} </td>
+		                                		<td><a href="javascript:void(0);" ng-click="editExporter(exporter.expCode, 'Edit')" style="text-decoration: underline">{{ exporter.expCode }}</a></td>
+		                                		<td>{{ exporter.expName }}</td>
+		                                		<td>{{ exporter.expCountryName }}</td>
+		                                		<td>{{ exporter.sbu }}</td>
+		                                		<td>{{ exporter.status | dplStatus}}</td>
+		                                		<td class=""><span class="m-exp_ship_head">Copy: </span> <a href="javascript:void(0)" ng-click="editExporter(exporter.expCode, 'Copy')"><i class="fa fa-copy" aria-hidden="true"></i></a></td>
+		                                        <td class=""><span class="m-exp_ship_head">Delete: </span> <a href="javascript:void(0)" ng-click="deleteExporter(exporter.expCode, $event)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+		                                	</tr>					                                
+		                                				                                               
+		                                </tbody>
+		                            </table>
+		            	</div>
+		            </div> -->
+		            
+		            <div class="row btn-row-bottom">
+		            	<div class="col-xs-6">
+		            		<button ng-click="editExporter(exporter.expCode, 'New')" class="btn btn-license">Add Exporter</button>
+		            		<button gtn-click="/createSearchExporter" class="btn btn-license">New Search</button>		            		
+		            	</div>
+		            </div>
+			   		
+		        </form> 
+                <!-- /Contact entity form -->
+             </div>                                
+		</div>
+      </div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		
+		var widthArr = [{index: 1, width: '11%'}, {index: 2, width: '13%'}, {index: 3, width: '11%'}, {index: 4, width: '13%'}, 
+		                {index: 5, width: '12%'}, {index: 6, width: '10%'}, {index: 7, width: '10%'}, {index: 8, width: '11%'}
+		                , {index: 9, width: '5%'}];
+		
+		adjustColumns(widthArr);
+	});
+</script>
